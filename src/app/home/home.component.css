@@ -1,0 +1,68 @@
+.container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 270px;
+    border-top: 4px dashed burlywood;
+    border-bottom: 4px dashed burlywood;
+    margin-bottom: 15px;
+    
+    /* padding: 40px; */
+    /* margin: 25px 0px; */
+    /* background-color: gainsboro; */
+    
+}
+h3{
+    color: burlywood;
+    text-align: center;
+    margin: 30px;
+    animation: fadeIn 2s;
+    animation: fadeIn 2s;
+    -webkit-animation: fadeIn 2s;
+    -moz-animation: fadeIn 2s;
+    -o-animation: fadeIn 2s;
+    -ms-animation: fadeIn 2s;
+}
+  
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-moz-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-webkit-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-o-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-ms-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+
+
+
+img{
+    border-radius: 10px;
+    transition: transform .2s;
+    max-width:150px;
+    max-height:150px;
+    margin:0 auto;
+    /* background-color: rgb(173, 173, 237); */
+    /* border-radius: 10px; */
+    /* border: 1px solid black; */
+}
+img:hover{
+    transform:scale(1.5);
+}
+

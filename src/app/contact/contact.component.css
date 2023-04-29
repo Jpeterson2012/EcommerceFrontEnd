@@ -1,0 +1,60 @@
+.container{
+    background-color: burlywood;
+    display: flex;
+    justify-content: space-around;
+    min-width: 100%;
+    padding-bottom: 150px;
+}
+.leftside{
+  display: flex;
+  flex-direction: column;
+  max-width: 530px;
+}
+img{
+  border-radius: 20px;
+}
+h5{
+    margin-top: 20px;
+}
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px; 
+    box-sizing: border-box; 
+    margin-top: 6px; 
+    margin-bottom: 16px;
+    resize: vertical;
+  }
+  input[type=submit] {
+    background-color: darkred;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type=submit]:hover {
+    background-color: red;
+  }
+  .formbox {
+    border-radius: 5px;
+    background-color: burlywood;
+    padding: 20px;
+    /* display: flex;
+    max-width: 950px; */
+  }
+  .lol{
+    display: flex;
+    flex-direction: column;
+    
+  }
+  .name{
+    display: flex;
+    gap: 10px;
+  }
+  .textname label, .textname input{
+    display: block;
+    /* width: 450px; */
+  }

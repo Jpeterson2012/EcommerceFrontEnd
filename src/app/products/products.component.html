@@ -1,0 +1,205 @@
+<!-- Modal pop up -->
+<ng-template #content let-modal class="lol">
+  <div class="modal-header">
+    <h4 class="modal-title">Get notified when this product is back in stock</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+
+    <form class="modalForm">
+      <div class="mb-3">
+        <label for="email">Email address</label>
+        <div class="input-group">
+          <input id="email" class="form-control" placeholder="someone@example.com" name="email" />
+        </div>
+      </div>
+    </form>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Submit</button>
+  </div>
+</ng-template>
+
+
+
+
+
+<!-- <table class='table'>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Author</th>
+      <th>Price</th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let book of books">
+      <td>{{book.id}}</td>
+      <td>{{book.name}}</td>
+      <td>{{book.auth}}</td>
+      <td>{{book.price}}</td>
+      <td>{{book.qty}}</td>
+    </tr>
+  </tbody>
+</table> -->
+
+
+<!-- Main product display -->
+<div class="container">
+  <!-- Highlight filter/search div -->
+  <div class="filtering" [ngClass]="{changeBackground: searchText != ''}">
+    <app-filter [all]="returnAllProd()" [avail]="returnAvailProd()" [unavail]="returnUnavailProd()"
+      (filterRadioButtonSelectionChanged)="onFilterRadioButtonChanged($event)">
+    </app-filter>
+    <app-search (searchTextChanged)="onSearchTextEntered($event)"></app-search>
+  </div>
+
+  <div class="subcontainer">
+    <div class="wrapper" *ngFor="let book of books">
+      <!-- Search function -->
+      <ng-container
+        *ngIf="searchText === '' || (book.name.toLowerCase().includes(searchText) || book.auth.toLowerCase().includes(searchText))">
+        <!-- Radio function display -->
+        <div class="transition"
+          *ngIf="productsCountRadioButton === 'All' || productsCountRadioButton === returnAvail(book)">
+
+          <div class="card-header">
+            <ul class="nav nav-pills card-header-pills">
+              <li class="nav-item">
+                <button class="btn btn-success" *ngIf="book.qty !- 0; else notifyme" (click)="addToCart(book)">Add To
+                  Cart</button>
+                <!-- Modal function call here -->
+                <ng-template #notifyme><button class="btn btn-danger" (click)="openLg(content)">Notify
+                    Me</button></ng-template>
+              </li>
+              <li class="nav-item">
+                <button class="btn btn-dark"  (click)="openScrollableContent(longContent)">Details</button>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card text-white bg-dark" style="width: 20rem;">
+            <div class="zoom">
+              <!-- Custom image mapping function -->
+              <img class="card-img-top" src="{{emitImage(book)}}" alt="Card image cap">
+            </div>
+            <p class="card-text">Current Stock: {{book.qty}}</p>
+            <p class="card-text">${{book.price}}</p>
+          </div>
+
+        </div>
+
+      </ng-container>
+
+
+
+
+
+      <!-- Description Modal -->
+    <ng-template #longContent let-modal class="nope">
+      <div class="modal-header">
+        <h4 class="modal-title">{{ book.name }}</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <div class="modalimage">
+          <img src="{{emitImage(book)}}">
+          <h3><strong>By: {{book.auth}}</strong></h3>
+        </div>
+        
+        <p>
+          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+          Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+        </p>
+        <p>
+          Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet
+          rutrum faucibus dolor auctor.
+        </p>
+        <p>
+          Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur
+          et.
+          Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+        </p>
+        <p>
+          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+          Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+        </p>
+        <p>
+          Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet
+          rutrum faucibus dolor auctor.
+        </p>
+        <p>
+          Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur
+          et.
+          Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+        </p>
+        <p>
+          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+          Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+        </p>
+        <p>
+          Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet
+          rutrum faucibus dolor auctor.
+        </p>
+        <p>
+          Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur
+          et.
+          Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+        </p>
+        <p>
+          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+          Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+        </p>
+        <p>
+          Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet
+          rutrum faucibus dolor auctor.
+        </p>
+        <p>
+          Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur
+          et.
+          Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+        </p>
+        <p>
+          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+          Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+        </p>
+        <p>
+          Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet
+          rutrum faucibus dolor auctor.
+        </p>
+        <p>
+          Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur
+          et.
+          Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+        </p>
+        <p>
+          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+          Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+        </p>
+        <p>
+          Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet
+          rutrum faucibus dolor auctor.
+        </p>
+        <p>
+          Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur
+          et.
+          Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+      </div>
+    </ng-template>
+
+
+
+
+
+    </div>
+  </div>
+
+</div>
+<div class="fas fa-search search-icon"></div>

@@ -1,0 +1,56 @@
+.container{
+    background-color: darkred;
+    min-width: 100%;
+}
+a{
+    text-decoration: none;
+    color: #ddd;
+    margin: 0px 10px;
+}
+.footer {
+    height: 34px; 
+    width: 100%; 
+    background-image: none;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    background-position: 0% 0%;
+    background-color: burlywood;
+    position: fixed;
+    bottom: 0pt;
+    left: 0pt;
+}   
+.footerContents {
+    height:24px; 
+    width: 1000px;
+    margin:auto;
+    color: black;
+    text-align: center;
+}
+form{
+    display: flex;
+    gap: 10px;
+    padding-right: 10px;
+    margin-left: auto;
+}
+.navicon{
+    background-color: red;
+}
+.nav-cart{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.nav-cart.nav-link{
+    padding: 0px;
+    margin: 0px;
+}
+.counter{
+    padding: 0px;
+    margin: 0px;
+    opacity: 70%;
+    color: white;
+}
+.search{
+    display: flex;
+}
+

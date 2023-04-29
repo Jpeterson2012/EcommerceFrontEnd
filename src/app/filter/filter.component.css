@@ -1,0 +1,7 @@
+.filter-container{
+    font-weight: 900;
+    font-size: large;
+    margin-bottom: 20px;    
+    display: flex;
+    justify-content: center;
+}

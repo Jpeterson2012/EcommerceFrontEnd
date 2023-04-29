@@ -1,0 +1,10 @@
+*{
+    margin: 0px px;
+    padding: 0px 0px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.mat-mdc-snack-bar-container {
+    --mat-mdc-snack-bar-button-color: burlywood;
+    --mdc-snackbar-container-color: darkred;
+    --mdc-snackbar-supporting-text-color: burlywood;
+}

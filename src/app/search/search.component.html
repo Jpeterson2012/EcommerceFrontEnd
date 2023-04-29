@@ -1,0 +1,5 @@
+<div class="search-div" [ngClass]="{changeBackground: searchValue != ''}">
+    <!-- <span><strong>Search:</strong></span -->
+    <input class="form-control mr-sm-2" type="search" placeholder="Search name or author" aria-label="Search" [(ngModel)]="searchValue" (input) ="onSearchTextChanged()">
+    <!-- <input type="text" [(ngModel)]="searchValue" (input) ="onSearchTextChanged()"> -->
+</div>

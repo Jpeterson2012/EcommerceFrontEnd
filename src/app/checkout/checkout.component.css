@@ -1,0 +1,67 @@
+.wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-bottom: 500px;
+    align-items: flex-start;
+    
+}
+.formwrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.container, .container2{
+    background-color: burlywood;
+    max-width: 800px;
+    padding: 20px;
+    margin: 0px;
+}
+.applybutton {
+    display: flex;
+    justify-content: center;
+}
+.form-row{
+    display: flex;
+}
+.prodcard{
+    display: flex;
+    margin-bottom: 15px;
+    border-bottom: 4px solid burlywood;
+}
+.middle,.right{
+    display: flex;
+    flex-direction: column;
+}
+.middle h5,h6{
+    font-family: cursive;
+}
+.right{
+    margin-left: auto;
+    align-items: center;
+}
+.right p{
+    font-weight: bold;
+    font-family: cursive;
+}
+.list-group-item{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+/* css for when cart is empty */
+.center{
+    display: flex;
+    flex-direction: column;
+}
+.center img{
+    text-decoration: none;
+    color: inherit;
+    border: none;
+    outline: none;
+    height: 162px;
+    width: 250px;
+    margin: 20px 0px;
+}
