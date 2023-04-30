@@ -15,6 +15,10 @@ export class ProductsComponent implements OnInit, OnDestroy{
 
   constructor(private db: DBService,private modalService: NgbModal,private cartService: CartService,private imageService: ImageService){}
 
+  available?: any;
+  unvailable?: any;
+  
+
   ngOnInit(): void {
     //http get request
     this.db.getBooks().subscribe(v=>{
@@ -62,10 +66,13 @@ export class ProductsComponent implements OnInit, OnDestroy{
     return this.books.length;
   }
   returnAvailProd(){
-    return this.books.filter(book => book.qty != '0').length;
+    return this.books.filter(book => book.qty != 0).length;
   }
   returnUnavailProd(){
-    return this.books.filter(book => book.qty === '0').length;
+    
+    return this.books.filter(book => book.qty === 0).length;
+    
+    
   }
   
   productsCountRadioButton: string = 'All';
@@ -73,8 +80,8 @@ export class ProductsComponent implements OnInit, OnDestroy{
     this.productsCountRadioButton = data;
   }
 
-  returnAvail(book: books){
-    if (book.qty === '0')
+  returnAvail(book: any){
+    if (book.qty === 0)
     {
       return 'UnAvailable';
     }

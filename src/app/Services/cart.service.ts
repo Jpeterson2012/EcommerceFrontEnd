@@ -84,4 +84,14 @@ export class CartService {
         this.currentTotal();   
         this._snackBar.open('1 item removed from cart','Okay',{duration: 3000})
     }
+    availProd(){
+        let val = 0;
+         this.productList.value.map((num: any)=>{
+            console.log(num.qty);
+            if (num.qty === '0'){
+                val++;
+            }
+         });
+        return val;
+    }
 }
