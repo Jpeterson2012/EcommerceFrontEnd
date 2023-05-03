@@ -20,6 +20,7 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
   showModeratorBoard = false;
   user?: any;
   username?: string;
+  status = false;
 
 
 
@@ -45,17 +46,26 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
     })
   }
     ngDoCheck(): void {
+      if (this.isLoggedIn != this.storageService.isLoggedIn()){
+        this.status = false;
+        this.isLoggedIn = this.storageService.isLoggedIn();
+      }
+      
+      if(this.status === false){
+
       if (this.storageService.isLoggedIn() === true)
       {
         this.isLoggedIn = true;
         this.showAdminBoard = this.storageService.getUser().roles.includes('ROLE_ADMIN');
         this.username = this.storageService.getUser().username;
+        this.status = true;
       }
       else{
         this.isLoggedIn = false;
         this.showAdminBoard = false;
         this.username = "";
       }
+    }
     }
 
   logout(): void {
