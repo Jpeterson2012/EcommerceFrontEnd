@@ -7,6 +7,10 @@ import { ContactComponent } from './contact/contact.component';
 import { DetailsComponent } from './details/details.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { LoginComponent } from './authentication/login/login.component';
+import { RegisterComponent } from './authentication/register/register.component';
+import { ProfileComponent } from './authentication/profile/profile.component';
+import { AdminBoardComponent } from './authentication/adminboard/adminboard.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -16,6 +20,10 @@ const routes: Routes = [
   {path: 'details',component: DetailsComponent},
   {path: 'cart', component: CartComponent},
   {path: 'checkout', component: CheckoutComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'profile', component: ProfileComponent},
+  {path: 'admin', component: AdminBoardComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ]
 

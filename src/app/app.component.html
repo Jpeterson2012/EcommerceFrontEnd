@@ -37,6 +37,33 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['contact']">Contact </a>
         </li>
+
+        <!-- Login Info -->
+        <li class="nav-item" *ngIf="showAdminBoard">
+          <a href="/admin"  class="nav-link" [routerLink]="['admin']">Admin Board</a>
+        </li>
+    
+      <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+        <li class="nav-item">
+          <a  href="/register" class="nav-link" [routerLink]="['register']">Sign Up</a>
+        </li>
+        <li class="nav-item">
+          <a  href="/login" class="nav-link" [routerLink]="['login']">Login</a>
+        </li>
+      </ul>
+  
+      <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+        <li class="nav-item">
+          <a href="/profile"  class="nav-link" [routerLink]="['profile']">Logged in as: {{ username }}</a>
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-danger" (click)="logout()">LogOut</button>
+        </li>
+      </ul>
+
+
+
+
       </ul>
       <!-- nav-cart -->
       <form class="form-inline my-2 my-lg-0">

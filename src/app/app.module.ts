@@ -20,6 +20,12 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { CartService } from './Services/cart.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LoginComponent } from './authentication/login/login.component';
+import { RegisterComponent } from './authentication/register/register.component';
+
+import { httpInterceptorProviders } from './authentication/helpers/http.interceptor';
+import { ProfileComponent } from './authentication/profile/profile.component';
+import { AdminBoardComponent } from './authentication/adminboard/adminboard.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +39,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     FilterComponent,
     SearchComponent,
     CartComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    LoginComponent,
+    RegisterComponent,
+    ProfileComponent,
+    AdminBoardComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +56,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     
 
   ],
-  providers: [ImageService,CartService],
+  providers: [ImageService,CartService,httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

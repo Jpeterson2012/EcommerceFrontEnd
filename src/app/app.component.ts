@@ -1,6 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { DBService } from './Services/db.service';
 import { CartService } from './Services/cart.service';
+import { AuthService } from './authentication/Services/auth.service';
+import { StorageService } from './authentication/Services/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +10,18 @@ import { CartService } from './Services/cart.service';
   styleUrls: ['./app.component.css'],
   providers: [DBService]
 })
-export class AppComponent implements OnInit, OnDestroy {
-  constructor(private db: DBService,private cartService: CartService){}
+export class AppComponent implements OnInit, DoCheck, OnDestroy {
+  constructor(private db: DBService,private cartService: CartService,private storageService: StorageService, private authService: AuthService){}
+
+  //Login/Authentication
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  user?: any;
+  username?: string;
+
+
 
   public totalItem: number = 0;
   ngOnInit(): void {
@@ -18,13 +30,55 @@ export class AppComponent implements OnInit, OnDestroy {
     // })
     this.cartService.currQuantity.subscribe(data=>{
       this.totalItem = data;
+
+      this.isLoggedIn = this.storageService.isLoggedIn();
+
+      if (this.isLoggedIn) {
+        const user = this.storageService.getUser();
+        this.roles = user.roles;
+        
+        this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+        // this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+  
+        this.username = user.username;
+      }
     })
   }
+    ngDoCheck(): void {
+      if (this.storageService.isLoggedIn() === true)
+      {
+        this.isLoggedIn = true;
+        this.showAdminBoard = this.storageService.getUser().roles.includes('ROLE_ADMIN');
+        this.username = this.storageService.getUser().username;
+      }
+      else{
+        this.isLoggedIn = false;
+        this.showAdminBoard = false;
+        this.username = "";
+      }
+    }
+
+  logout(): void {
+    this.authService.logout().subscribe({
+      next: res => {
+        console.log(res);
+        this.storageService.clean();
+
+        window.location.reload();
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
+  }
+
+
+
 
   title = 'TheBookShop';
   sitename: string = 'TheBookShop';
 
-  counter: number = 0;
+  // counter: number = 0;
 
   
 
