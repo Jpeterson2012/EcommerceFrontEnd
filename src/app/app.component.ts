@@ -1,17 +1,17 @@
-import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
-import { DBService } from './Services/db.service';
+import { Component, TemplateRef, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { CartService } from './Services/cart.service';
 import { AuthService } from './authentication/Services/auth.service';
 import { StorageService } from './authentication/Services/storage.service';
 
+import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers: [DBService]
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, DoCheck, OnDestroy {
-  constructor(private db: DBService,private cartService: CartService,private storageService: StorageService, private authService: AuthService){}
+  constructor(private offcanvasService: NgbOffcanvas, private cartService: CartService,private storageService: StorageService, private authService: AuthService){}
 
   //Login/Authentication
   private roles: string[] = [];
@@ -91,7 +91,9 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
   // counter: number = 0;
 
   
-
+  openCustomPanelClass(content: TemplateRef<any>) {
+		this.offcanvasService.open(content, { position: 'end', panelClass: 'bg-dark' });
+	}
 
   ngOnDestroy(): void {
     this.cartService.currQuantity.unsubscribe;

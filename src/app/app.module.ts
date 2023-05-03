@@ -15,6 +15,7 @@ import { FilterComponent } from './filter/filter.component';
 import { SearchComponent } from './search/search.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartComponent } from './cart/cart.component';
+import { DBService } from './Services/db.service';
 import { ImageService } from './Services/image.service';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CartService } from './Services/cart.service';
@@ -56,7 +57,7 @@ import { AdminBoardComponent } from './authentication/adminboard/adminboard.comp
     
 
   ],
-  providers: [ImageService,CartService,httpInterceptorProviders],
+  providers: [DBService,ImageService,CartService,httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

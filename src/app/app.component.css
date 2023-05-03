@@ -54,3 +54,6 @@ form{
     display: flex;
 }
 
+.menu a:hover{
+    color: burlywood;
+}
