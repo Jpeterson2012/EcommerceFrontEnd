@@ -65,3 +65,16 @@
     width: 250px;
     margin: 20px 0px;
 }
+@media(max-width: 700px){
+    .wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .container,.container2{
+        padding: 0px;
+    }
+    .card{
+        margin-right: 200px;
+    }
+}

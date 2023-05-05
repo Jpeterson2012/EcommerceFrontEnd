@@ -1,11 +1,14 @@
 <div class="wrapper">
     <h3><strong>Popular Books</strong></h3>
     <div class="container">
-        <div class="zoom-img"  *ngFor="let i of images">
-            <img [src]="i.image" alt="Book Pic">
+        <div class="zoom-img"  *ngFor="let image of images">
+            <img [src]="image.image" alt="Book Pic">
         </div>
     </div>
 
     <app-home2></app-home2>
     <br><br><br><br>
 </div>
+
+
+

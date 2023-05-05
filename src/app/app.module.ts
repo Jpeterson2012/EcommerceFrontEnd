@@ -14,6 +14,7 @@ import { DetailsComponent } from './details/details.component';
 import { FilterComponent } from './filter/filter.component';
 import { SearchComponent } from './search/search.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartComponent } from './cart/cart.component';
 import { DBService } from './Services/db.service';
 import { ImageService } from './Services/image.service';
@@ -54,6 +55,7 @@ import { AdminBoardComponent } from './authentication/adminboard/adminboard.comp
     NgbModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
+    NgbAccordionModule,
     
 
   ],

@@ -1,6 +1,9 @@
-<div class="col-md-12">
-    <div class="card card-container">
+<div class="container">
+  <div class="card" style="width: 30rem;">
+    <img class="card-img-top" src="../../../assets/cupofjoe.jpg" alt="Card image cap">
+    <div class="card-body">
       
+
       <form
         *ngIf="!isSuccessful"
         name="form"
@@ -70,7 +73,7 @@
           </div>
         </div>
         <div class="form-group">
-          <button class="btn btn-primary btn-block">Sign Up</button>
+          <button class="btn btn-danger btn-block">Sign Up</button>
         </div>
   
         <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
@@ -81,5 +84,16 @@
       <div class="alert alert-success" *ngIf="isSuccessful">
         Your registration is successful!
       </div>
+
     </div>
   </div>
+</div>
+
+
+
+<!-- <div class="col-md-12">
+    <div class="card card-container">
+      
+      
+    </div>
+  </div> -->

@@ -84,4 +84,6 @@ export class CartService {
         this.currentTotal();   
         this._snackBar.open('1 item removed from cart','Okay',{duration: 3000})
     }
+
+    
 }

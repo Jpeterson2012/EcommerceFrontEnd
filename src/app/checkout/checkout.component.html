@@ -1,5 +1,49 @@
 <div class="wrapper">
 
+
+    <div>
+        <ng-container *ngIf="products.length ===0">
+            <div class="container2">
+                <div class="center">
+                    <h5 class="card-title">Uh oh...</h5>
+                    <img src="../../assets/emptycart.png" alt="">
+                    <h4>Your cart is empty!</h4>
+                    <h6>Add items please...</h6>
+                    <button [routerLink]="['/products']"  class="btn btn-danger">Shop Now</button>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+
+
+
+    
+    <div class="card" style="width: 38rem;" *ngIf="products.length != 0">
+        <div class="prodcard" *ngFor="let p of products">
+            <img src="{{emitImage(p)}}" style="max-width: 70px; min-width: 70px;">
+            <div class="middle">
+                <h5>{{ p.name }}</h5>
+                <h6>{{ p.auth }}</h6>
+            </div>
+            <div class="right">
+                <p>${{ p.price }}</p>
+                <p>Quantity: {{ p.quantity }}</p>
+                <button  class="btn btn-danger"  (click)="removeItem(p)">Remove</button>
+            </div>
+        </div>
+        <ul class="list-group list-group-flush">
+
+            <li class="list-group-item"><p>Subtotal</p><p>${{ grandTotal }}</p></li>
+            <li class="list-group-item"><p>Tax</p><p>$0.00</p></li>
+            <li class="list-group-item"><p>Shipping</p><p>$0.00</p></li>
+            <li class="list-group-item"><p><strong>Total</strong></p><p>${{ grandTotal }}</p></li>
+        </ul>
+    </div>
+
+
+
+
+
     <div class="formwrapper">
         <form class="container">
             <div class="form-row">
@@ -116,42 +160,10 @@
     </div>
 
     
-    <div>
-        <ng-container *ngIf="products.length ===0">
-            <div class="container2">
-                <div class="center">
-                    <h5 class="card-title">Uh oh...</h5>
-                    <img src="../../assets/emptycart.png" alt="">
-                    <h4>Your cart is empty!</h4>
-                    <h6>Add items please...</h6>
-                    <button [routerLink]="['/products']"  class="btn btn-danger">Shop Now</button>
-                </div>
-            </div>
-        </ng-container>
-    </div>
+    
 
 
-    <div class="card" style="width: 38rem;" *ngIf="products.length != 0">
-        <div class="prodcard" *ngFor="let p of products">
-            <img src="{{emitImage(p)}}" style="max-width: 70px; min-width: 70px;">
-            <div class="middle">
-                <h5>{{ p.name }}</h5>
-                <h6>{{ p.auth }}</h6>
-            </div>
-            <div class="right">
-                <p>${{ p.price }}</p>
-                <p>Quantity: {{ p.quantity }}</p>
-                <button  class="btn btn-danger"  (click)="removeItem(p)">Remove</button>
-            </div>
-        </div>
-        <ul class="list-group list-group-flush">
-
-            <li class="list-group-item"><p>Subtotal</p><p>${{ grandTotal }}</p></li>
-            <li class="list-group-item"><p>Tax</p><p>$0.00</p></li>
-            <li class="list-group-item"><p>Shipping</p><p>$0.00</p></li>
-            <li class="list-group-item"><p><strong>Total</strong></p><p>${{ grandTotal }}</p></li>
-        </ul>
-    </div>
+    
 
 
     

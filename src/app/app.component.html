@@ -11,38 +11,38 @@
       <div class="menu">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" [routerLink]="['home']">Home</a>
+            <a  (click)="offcanvas.close('Close click')" class="nav-link" [routerLink]="['home']">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['about']">About</a>
+            <a (click)="offcanvas.close('Close click')"  class="nav-link" [routerLink]="['about']">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['products']">Products </a>
+            <a (click)="offcanvas.close('Close click')"  class="nav-link" [routerLink]="['products']">Products </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['contact']">Contact </a>
+            <a (click)="offcanvas.close('Close click')"  class="nav-link" [routerLink]="['contact']">Contact </a>
           </li>
 
           <!-- Login Info -->
           <li class="nav-item" *ngIf="showAdminBoard">
-            <a href="/admin" class="nav-link" [routerLink]="['admin']">Admin Board</a>
+            <a (click)="offcanvas.close('Close click')" href="/admin" class="nav-link" [routerLink]="['admin']">Admin Board</a>
           </li>
 
-          <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+          <ul (click)="offcanvas.close('Close click')" class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
             <li class="nav-item">
-              <a href="/register" class="nav-link" [routerLink]="['register']">Sign Up</a>
+              <a (click)="offcanvas.close('Close click')" href="/register" class="nav-link" [routerLink]="['register']">Sign Up</a>
             </li>
             <li class="nav-item">
-              <a href="/login" class="nav-link" [routerLink]="['login']">Login</a>
+              <a (click)="offcanvas.close('Close click')" href="/login" class="nav-link" [routerLink]="['login']">Login</a>
             </li>
           </ul>
 
           <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
             <li class="nav-item">
-              <a href="/profile" class="nav-link" [routerLink]="['profile']">Logged in as: {{ username }}</a>
+              <a (click)="offcanvas.close('Close click')" href="/profile" class="nav-link" [routerLink]="['profile']">Logged in as: {{ username }}</a>
             </li>
             <li class="nav-item">
-              <button class="btn btn-danger" (click)="logout()">LogOut</button>
+              <button (click)="offcanvas.close('Close click')" class="btn btn-danger" (click)="logout()">LogOut</button>
             </li>
           </ul>
 
@@ -53,7 +53,7 @@
         <form class="form-inline my-2 my-lg-0">
           <div class="nav-cart">
             <p class="counter">({{ totalItem }})</p>
-            <a class="nav-link" [routerLink]="['cart']"><img src="../assets/cart.png"
+            <a (click)="offcanvas.close('Close click')" class="nav-link" [routerLink]="['cart']"><img src="../assets/cart.png"
                 style="width: 32px;height: auto;"></a>
           </div>
         </form>

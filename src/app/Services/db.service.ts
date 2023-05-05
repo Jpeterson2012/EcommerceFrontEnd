@@ -15,6 +15,10 @@ export class DBService{
         return this.http.get(this.baseUrl + 'books');
     }
 
+    getUsers(): Observable<any>{
+        return this.http.get(this.baseUrl + 'api/test/users');
+    }
+
     
     
 

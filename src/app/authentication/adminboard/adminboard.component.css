@@ -1,0 +1,22 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    padding-bottom: 500px;
+}
+.wrapper{
+    width: 80%;
+}
+img{
+    width: 200px;
+    
+}
+.form-group button{
+    margin-top: 10px;
+}
+.accordion-button::after{
+    background-color: burlywood;
+}
+

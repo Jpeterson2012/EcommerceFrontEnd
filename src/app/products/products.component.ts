@@ -27,6 +27,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
         Object.assign(a,{quantity:1,total:a.price});
       })
     })
+
   }
 
   //Modal pop up functionality///////////////////////////
@@ -44,14 +45,6 @@ export class ProductsComponent implements OnInit, OnDestroy{
   //Products display functionality///////////////////
   books = new Array<any>();
   
-  // emitImage(book: books){
-  //   for (let pic of this.bookPics){
-  //     if (book.name === pic.name){
-  //       return pic.image;
-  //     }
-  //   }
-  //   return '../../bookcoffee.jpg';
-  // }
   emitImage(book: books){
     return this.imageService.getBook(book.name);
   }
@@ -66,11 +59,11 @@ export class ProductsComponent implements OnInit, OnDestroy{
     return this.books.length;
   }
   returnAvailProd(){
-    return this.books.filter(book => book.qty != 0).length;
+    return this.books.filter(book => book.qty != '0').length;
   }
   returnUnavailProd(){
     
-    return this.books.filter(book => book.qty === 0).length;
+    return this.books.filter(book => book.qty === '0').length;
     
     
   }
@@ -81,7 +74,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
   }
 
   returnAvail(book: any){
-    if (book.qty === 0)
+    if (book.qty === '0')
     {
       return 'UnAvailable';
     }

@@ -12,6 +12,8 @@
 }
 img{
   border-radius: 20px;
+  display: block;
+  width: 100%;
 }
 h5{
     margin-top: 20px;

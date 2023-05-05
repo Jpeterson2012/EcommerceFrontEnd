@@ -40,4 +40,18 @@ export class AuthService {
   logout(): Observable<any> {
     return this.http.post(AUTH_API + 'signout', { }, httpOptions);
   }
+
+
+  newBook(name: string, auth: string, price: string, qty: number): Observable<any>{
+    return this.http.post(
+      'http://localhost:8080/books',
+      {
+        name,
+        auth,
+        price,
+        qty,
+      },
+    
+    )
+  }
 }

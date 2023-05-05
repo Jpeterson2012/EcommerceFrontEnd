@@ -69,7 +69,7 @@
           <div class="card-header">
             <ul class="nav nav-pills card-header-pills">
               <li class="nav-item">
-                <button class="btn btn-success" *ngIf="book.qty !- 0; else notifyme" (click)="addToCart(book)">Add To
+                <button class="btn btn-success" *ngIf="book.qty != 0; else notifyme" (click)="addToCart(book)">Add To
                   Cart</button>
                 <!-- Modal function call here -->
                 <ng-template #notifyme><button class="btn btn-danger" (click)="openLg(content)">Notify
