@@ -1,22 +1,46 @@
-<!-- <div class="container">
-    <header class="jumbotron">
-      <p>{{ content }}</p>
-    </header>
-</div>
-
-<div class="container2">
-  
-</div> -->
-
 
 <div class="container">
   <img src="../../../assets/admin.jpg">
   <div class="wrapper">
 
     
-
+    <!-- Accordion for admin  -->
     <div ngbAccordion>
       <div ngbAccordionItem [collapsed]="true">
+        <h2 ngbAccordionHeader>
+          <button ngbAccordionButton>
+            <span>Get all Users</span>
+          </button>
+        </h2>
+        <div ngbAccordionCollapse>
+          <div ngbAccordionBody>
+            <ng-template>
+              
+              <!-- Reads all users from database into table -->
+              <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Roles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users">
+                        <td>{{ user.username }}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{ user.roles | json }}</td>
+                </tbody>
+            </table>
+
+
+    
+            </ng-template>
+          </div>
+        </div>
+      </div>
+
+      <div ngbAccordionItem>
         <h2 ngbAccordionHeader>
           <button ngbAccordionButton>Add Book</button>
         </h2>
@@ -25,13 +49,9 @@
             <ng-template>
               
     
-              <!-- <div class="card" style="width: 25rem;" *ngIf="!isSuccessful">
-                <img class="card-img-top" src="../../../assets/cupofjoe.jpg" alt="Card image cap">
-                
-              </div> -->
               <div class="card-body" *ngIf="!isSuccessful">
                   
-                  
+                  <!-- Form for addBook post request -->
                 <form
                   *ngIf="!isSuccessful"
                   name="form"
@@ -140,83 +160,255 @@
                     Adding book failed!<br />{{ errorMessage }}
                   </div>
                 </form>
-            
-                <div class="alert alert-success" *ngIf="isSuccessful">
-                  Adding book was successful!
-                  <div class="card" style="width: 25rem;">
-                    <img class="card-img-top" src="../../../assets/cupofjoe.jpg" alt="Card image cap">
-                    <div class="card-body">
-                      <div class="=form-group">
-                        <label for="image">Image URL</label>
-                        <input type="text" name="image" [(ngModel)]="imageurl"> 
-                      </div>
-                      <div class="form-group">
-                        <button class="btn btn-danger btn-block" (click)="addBook(form.name,imageurl)">Add image</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                
+                <!-- Card for adding image for new book -->
+                
           
           
               </div>
-    
+              <div class="alert alert-success" *ngIf="isSuccessful">
+                Adding book was successful!
+                
+              </div>
     
     
             </ng-template>
           </div>
         </div>
       </div>
+
       <div ngbAccordionItem>
         <h2 ngbAccordionHeader>
-          <button ngbAccordionButton>
-            <span>Get all Users</span>
-          </button>
+          <button ngbAccordionButton>Update Book</button>
         </h2>
         <div ngbAccordionCollapse>
           <div ngbAccordionBody>
             <ng-template>
               
-    
+              <!-- Reads user input for book id -->
+              <div class="=form-group">
+                <label for="num">Enter Id of book to update</label>
+                <input  type="number" name="num" [(ngModel)]="idNum"> 
+                <br>
+              </div>
+              <div class="form-group">
+                <button class="btn btn-danger btn-block" (click)="getBookById(idNum)">Get Book</button>
+              </div>
+              
+              <!-- Displays requested book info -->
               <table class="table table-responsive">
                 <thead>
                     <tr>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Roles</th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Author</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let user of users">
-                        <td>{{ user.username }}</td>
-                        <td>{{user.email}}</td>
-                        <td>{{ user.roles | json }}</td>
+                    <tr>
+                        <td>{{ bookData.id }}</td>
+                        <td>{{bookData.name}}</td>
+                        <td>{{ bookData.auth }}</td>
+                        <td>{{ bookData.price }}</td>
+                        <td>{{ bookData.qty }}</td>
                 </tbody>
             </table>
-    
-    
-    
+
+
+            <form
+            *ngIf="!successfulUpdate"
+            name="form"
+            (ngSubmit)="f.form.valid && onSubmitUpdate()"
+            #f="ngForm"
+            novalidate
+          >
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                [(ngModel)]="form.name"
+                value="{{bookData.name}}"
+                required
+                minlength="1"
+                maxlength="40"
+                #name="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && name.errors }"
+              />
+              <div class="invalid-feedback" *ngIf="name.errors && f.submitted">
+                <div *ngIf="name.errors['required']">Name is required</div>
+                <div *ngIf="name.errors['minlength']">
+                  Name must be at least 1 character
+                </div>
+                <div *ngIf="name.errors['maxlength']">
+                  Name must be at most 40 characters
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="auth">Author</label>
+              <input
+                type="text"
+                class="form-control"
+                name="auth"
+                [(ngModel)]="form.auth"
+                value="{{bookData.auth}}"
+                required
+                minlength="1"
+                maxlength="25"
+                #auth="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && auth.errors }"
+              />
+              <div class="invalid-feedback" *ngIf="auth.errors && f.submitted">
+                <div *ngIf="auth.errors['required']">Author is required</div>
+                <div *ngIf="auth.errors['minlength']">
+                  Author must be at least 1 character
+                </div>
+                <div *ngIf="auth.errors['maxlength']">
+                  Author must be at most 25 characters
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="price">Price</label>
+              <input
+                type="number"
+                class="form-control"
+                name="price"
+                [(ngModel)]="form.price"
+                value="{{bookData.price}}"
+                required
+                min="1"
+                max="100"
+                step="0.01"
+                #price="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && price.errors }"
+              />
+              <div class="invalid-feedback" *ngIf="price.errors && f.submitted">
+                <div *ngIf="price.errors['required']">Price is required</div>
+                <div *ngIf="price.errors['min']">
+                  Price must be at least 1 dollar
+                </div>
+                <div *ngIf="price.errors['max']">
+                  Price can't exceed 100 dollars
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="qty">Quantity</label>
+              <input
+                type="text"
+                class="form-control"
+                name="qty"
+                [(ngModel)]="form.qty"
+                value="{{bookData.qty}}"
+                required
+                minlength="1"
+                maxlength="5"
+                #qty="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && qty.errors }"
+              />
+              <div class="invalid-feedback" *ngIf="qty.errors && f.submitted">
+                <div *ngIf="qty.errors['required']">Quantity is required</div>
+                <div *ngIf="qty.errors['minlength']">
+                  Quantity must be at least 1 digit
+                </div>
+                <div *ngIf="qty.errors['maxlength']">
+                  Quantity can't exceed 5 digits
+                </div>
+              </div>
+            </div>
+            <div class="">
+              <button class="btn btn-danger btn-block">Update book</button>
+            </div>
+      
+            <div class="alert alert-warning" *ngIf="f.submitted && notsuccessfulUpdate">
+              Updating book failed!<br />{{ errorMessage }}
+            </div>
+          </form>
+
+          <div class="alert alert-success" *ngIf="successfulUpdate">
+            Adding book was successful!
+            </div>
+
             </ng-template>
           </div>
         </div>
       </div>
-      <div ngbAccordionItem [disabled]="true">
+
+
+      <div ngbAccordionItem>
         <h2 ngbAccordionHeader>
-          <button ngbAccordionButton>Disabled</button>
+          <button ngbAccordionButton>Delete Book</button>
         </h2>
         <div ngbAccordionCollapse>
           <div ngbAccordionBody>
             <ng-template>
-              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
-              officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-              moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim
-              keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur
-              butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably
-              haven't heard of them accusamus labore sustainable VHS.
+              <!-- Reads user input for book id -->
+              <div class="=form-group">
+                <label for="num">Enter Id of book to delete</label>
+                <input  type="number" name="num" [(ngModel)]="idNumDelete"> 
+                <br>
+              </div>
+              <div class="form-group">
+                <button class="btn btn-danger btn-block" (click)="getBookById(idNumDelete)">Get Book</button>
+              </div>
+
+              <!-- Displays requested book info -->
+              <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Author</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ bookData.id }}</td>
+                        <td>{{bookData.name}}</td>
+                        <td>{{ bookData.auth }}</td>
+                        <td>{{ bookData.price }}</td>
+                        <td>{{ bookData.qty }}</td>
+                </tbody>
+            </table>
+  
+  
+              <form
+              *ngIf="!successDelete"
+              name="form"
+              (ngSubmit)="f.form.valid && onSubmitDelete()"
+              #f="ngForm"
+              novalidate
+            >
+              
+              <div class="">
+                <button class="btn btn-danger btn-block">Delete book</button>
+              </div>
+        
+              <div class="alert alert-warning" *ngIf="f.submitted && notsuccessDelete">
+                Deletion of book failed!<br />{{ errorMessage }}
+              </div>
+            </form>
+  
+            <div class="alert alert-success" *ngIf="successDelete">
+              Deletion of book was successful!
+              </div>
+  
+  
             </ng-template>
           </div>
         </div>
       </div>
+
     </div>
+
+    
 
   </div>
 </div>

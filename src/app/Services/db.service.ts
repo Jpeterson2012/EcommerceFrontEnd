@@ -19,6 +19,10 @@ export class DBService{
         return this.http.get(this.baseUrl + 'api/test/users');
     }
 
+    getBookById(id: number): Observable<any>{
+        return this.http.get(this.baseUrl + 'books/'+id);
+    }
+
     
     
 
