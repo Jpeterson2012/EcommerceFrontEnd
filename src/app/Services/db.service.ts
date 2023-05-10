@@ -1,26 +1,24 @@
 import { HttpClient } from "@angular/common/http";
-import { EventEmitter, Injectable } from "@angular/core";
-import { books } from "../Models/books";
+import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { environment } from "src/environment/environment";
 
 
 @Injectable()
 export class DBService{
-
-    baseUrl: string = 'http://localhost:8080/';
     
     constructor(private http: HttpClient) {}
 
     getBooks(): Observable<any>{
-        return this.http.get(this.baseUrl + 'books');
+        return this.http.get(environment.apiURL + 'books');
     }
 
     getUsers(): Observable<any>{
-        return this.http.get(this.baseUrl + 'api/test/users');
+        return this.http.get(environment.apiURL + 'api/test/users');
     }
 
     getBookById(id: number): Observable<any>{
-        return this.http.get(this.baseUrl + 'books/'+id);
+        return this.http.get(environment.apiURL + 'books/'+id);
     }
 
     

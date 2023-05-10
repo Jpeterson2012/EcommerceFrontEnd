@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environment/environment';
 
 const AUTH_API = 'http://localhost:8080/api/auth/';
 
@@ -16,7 +17,7 @@ export class AuthService {
 
   login(username: string, password: string): Observable<any> {
     return this.http.post(
-      AUTH_API + 'signin',
+      environment.apiAUTHURL + 'signin',
       {
         username,
         password,
@@ -27,7 +28,7 @@ export class AuthService {
 
   register(username: string, email: string, password: string): Observable<any> {
     return this.http.post(
-      AUTH_API + 'signup',
+      environment.apiAUTHURL + 'signup',
       {
         username,
         email,
@@ -38,13 +39,13 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    return this.http.post(AUTH_API + 'signout', { }, httpOptions);
+    return this.http.post(environment.apiAUTHURL + 'signout', { }, httpOptions);
   }
 
 
   newBook(name: string, auth: string, price: string, qty: number): Observable<any>{
     return this.http.post(
-      'http://localhost:8080/books',
+      environment.apiURL + 'books',
       {
         name,
         auth,
@@ -57,7 +58,7 @@ export class AuthService {
 
   updateBook(id: number, name: string, auth: string, price: string, qty: number): Observable<any>{
     return this.http.put(
-      'http://localhost:8080/books/'+id,
+      environment.apiURL + 'books/'+id,
       {
         id,
         name,
@@ -68,6 +69,6 @@ export class AuthService {
     )
   }
   deleteBook(id: number): Observable<any>{
-    return this.http.delete('http://localhost:8080/books/'+id)
+    return this.http.delete(environment.apiURL + 'books/'+id)
   }
 }
