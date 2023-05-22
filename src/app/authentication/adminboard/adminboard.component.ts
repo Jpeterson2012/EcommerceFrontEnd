@@ -48,7 +48,6 @@ export class AdminBoardComponent implements OnInit {
     this.dbService.getUsers().subscribe(
       v => {this.users = v;}
     )
-    
   }
   //Method for adding new book 
   onSubmit(): void {

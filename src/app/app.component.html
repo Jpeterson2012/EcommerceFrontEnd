@@ -30,10 +30,11 @@
 
           <ul (click)="offcanvas.close('Close click')" class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
             <li class="nav-item">
-              <a (click)="offcanvas.close('Close click')" href="/register" class="nav-link" [routerLink]="['register']">Sign Up</a>
+               
+              <a (click)="offcanvas.close('Close click')"  class="nav-link"  href="/register" [routerLink]="['register']">Sign Up</a>
             </li>
             <li class="nav-item">
-              <a (click)="offcanvas.close('Close click')" href="/login" class="nav-link" [routerLink]="['login']">Login</a>
+              <a (click)="offcanvas.close('Close click')"  class="nav-link" href="/login" [routerLink]="['login']">Login</a>
             </li>
           </ul>
 
@@ -102,10 +103,12 @@
 
           <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
             <li class="nav-item">
-              <a href="/register" class="nav-link" [routerLink]="['register']">Sign Up</a>
+               
+              <a  class="nav-link" href="/register" [routerLink]="['register']" >Sign Up</a>
             </li>
             <li class="nav-item">
-              <a href="/login" class="nav-link" [routerLink]="['login']">Login</a>
+              <!-- href="/login" [routerLink]="['login']" -->
+              <a  class="nav-link" href="/login" [routerLink]="['login']">Login</a>
             </li>
           </ul>
 
