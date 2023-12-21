@@ -2,6 +2,7 @@ import { Component, TemplateRef, DoCheck, OnDestroy, OnInit } from '@angular/cor
 import { CartService } from './Services/cart.service';
 import { AuthService } from './authentication/Services/auth.service';
 import { StorageService } from './authentication/Services/storage.service';
+import { environment } from 'src/environment/environment';
 
 import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
   user?: any;
   username?: string;
   status = false;
+  url = environment.homeURL;
 
 
 
@@ -74,7 +76,8 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
         console.log(res);
         this.storageService.clean();
 
-        window.location.reload();
+        // window.location.reload();
+        window.location.href = this.url;
       },
       error: err => {
         console.log(err);
