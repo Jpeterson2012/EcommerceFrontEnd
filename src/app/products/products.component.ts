@@ -96,7 +96,13 @@ export class ProductsComponent implements OnInit, OnDestroy{
     this.cartService.addToCart(item);
   }
   ///////////////////////////////////////////////////
-
+  
+  onImageLoad(evt:any) {
+    if (evt && evt.target) {
+      const width = evt.target.naturalWidth;      
+      width < 2 && (evt.target.src = '../../assets/bookcoffee.jpg')     
+    }
+  }
 
   ngOnDestroy(): void {
     

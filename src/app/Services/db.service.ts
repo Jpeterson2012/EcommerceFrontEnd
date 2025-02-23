@@ -10,7 +10,7 @@ export class DBService{
     constructor(private http: HttpClient) {}
 
     getBooks(): Observable<any>{
-        return this.http.get(environment.apiURL + 'books');
+        return this.http.get(environment.apiURL + 'books/p/0');
     }
 
     getUsers(): Observable<any>{

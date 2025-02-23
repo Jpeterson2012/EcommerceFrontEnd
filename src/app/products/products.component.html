@@ -84,7 +84,8 @@
           <div class="card text-white bg-dark" style="width: 20rem;">
             <div class="zoom">
               <!-- Custom image mapping function -->
-              <img class="card-img-top" src="{{emitImage(book)}}" alt="Card image cap">
+              <!-- <img class="card-img-top" src="{{emitImage(book)}}" alt="Card image cap"> -->               
+              <img class="card-img-top" src={{book.image}} alt="Card image cap" (load)="onImageLoad($event)">
             </div>
             <p class="card-text">Current Stock: {{book.qty}}</p>
             <p class="card-text">${{book.price}}</p>
@@ -106,7 +107,7 @@
       </div>
       <div class="modal-body">
         <div class="modalimage">
-          <img src="{{emitImage(book)}}">
+          <img src="{{book.image}}" (load)="onImageLoad($event)">
           <h3><strong>By: {{book.auth}}</strong></h3>
         </div>
         
