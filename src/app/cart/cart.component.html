@@ -17,10 +17,10 @@
                     <tbody>
                         <tr *ngFor="let item of products; let i = index">
                             <td>{{ item.id }}</td>
-                            <td><img src="{{ emitImage(item) }}" style="width: 120px; height:auto"></td>
+                            <td><img src="{{ item.image }}" style="width: 120px; height:140px" (load)="onImageLoad($event)"></td>
                             <td>{{item.name}}</td>
                             <td>{{ item.auth }}</td>
-                            <td>${{ item.price }}</td>
+                            <td>${{ item.price }}</td> 
                             <td class="plusminus"><button (click)="onRemoveQuantity(item)"><h4>-</h4></button>{{ item.quantity }}<button (click)="onAddQuantity(item)"><h4>+</h4></button></td>
                             <td >${{ totalMult(item) }}</td>
                             <td>

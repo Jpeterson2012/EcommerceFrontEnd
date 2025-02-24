@@ -22,14 +22,15 @@
                     <tr>
                         <th>Username</th>
                         <th>Email</th>
-                        <th>Roles</th>
+                        <th>Role</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let user of users">
                         <td>{{ user.username }}</td>
                         <td>{{user.email}}</td>
-                        <td>{{ user.roles | json }}</td>
+                        <!-- <td>{{ user.roles | json }}</td> -->
+                        <td>{{ user.roles[0].name }}</td>
                 </tbody>
             </table>
 

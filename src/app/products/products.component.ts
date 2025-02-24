@@ -36,6 +36,9 @@ export class ProductsComponent implements OnInit, OnDestroy{
       this.db.getBooks((this.currentPage - 1) * this.pageSize,this.pageSize)
       .subscribe(response => {
         this.books = response
+        this.books.forEach((a:any)=>{
+        Object.assign(a,{quantity:1});
+        })
       })
   }
   }

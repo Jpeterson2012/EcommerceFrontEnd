@@ -28,6 +28,7 @@ import { RegisterComponent } from './authentication/register/register.component'
 import { httpInterceptorProviders } from './authentication/helpers/http.interceptor';
 import { ProfileComponent } from './authentication/profile/profile.component';
 import { AdminBoardComponent } from './authentication/adminboard/adminboard.component';
+
 import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
@@ -46,7 +47,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    AdminBoardComponent
+    AdminBoardComponent,    
   ],
   imports: [
     BrowserModule,
@@ -57,8 +58,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     BrowserAnimationsModule,
     MatSnackBarModule,
     NgbAccordionModule,
-    MatPaginatorModule,
-
+    MatPaginatorModule,    
   ],
   providers: [DBService,ImageService,CartService,httpInterceptorProviders],
   bootstrap: [AppComponent]

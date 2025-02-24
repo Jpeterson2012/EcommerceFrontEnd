@@ -28,6 +28,12 @@ export class CartComponent implements OnInit{
   emptyCart(){
     this.cartService.removeAllCart();
   }
+  onImageLoad(evt:any) {
+    if (evt && evt.target) {
+      const width = evt.target.naturalWidth;      
+      width < 2 && (evt.target.src = '../../assets/bookcoffee.jpg')     
+    }
+  }
   emitImage(book: books){
     return this.imageService.getBook(book.name);
   }

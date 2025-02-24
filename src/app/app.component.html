@@ -12,7 +12,7 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             <a  (click)="offcanvas.close('Close click')" class="nav-link" [routerLink]="['home']">Home</a>
-          </li>
+          </li>          
           <li class="nav-item">
             <a (click)="offcanvas.close('Close click')"  class="nav-link" [routerLink]="['about']">About</a>
           </li>
@@ -21,7 +21,9 @@
           </li>
           <li class="nav-item">
             <a (click)="offcanvas.close('Close click')"  class="nav-link" [routerLink]="['contact']">Contact </a>
-          </li>
+          </li>     
+          
+                               
 
           <!-- Login Info -->
           <li class="nav-item" *ngIf="showAdminBoard">
@@ -46,13 +48,12 @@
               <button (click)="offcanvas.close('Close click')" class="btn btn-danger" (click)="logout()">LogOut</button>
             </li>
           </ul>
-
-
+                          
 
         </ul>
         <!-- nav-cart -->
         <form class="form-inline my-2 my-lg-0">
-          <div class="nav-cart">
+          <div class="nav-cart">            
             <p class="counter">({{ totalItem }})</p>
             <a (click)="offcanvas.close('Close click')" class="nav-link" [routerLink]="['cart']"><img src="../assets/cart.png"
                 style="width: 32px;height: auto;"></a>
@@ -94,7 +95,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" [routerLink]="['contact']">Contact </a>
-          </li>
+          </li>          
 
           <!-- Login Info -->
           <li class="nav-item" *ngIf="showAdminBoard">
@@ -120,6 +121,12 @@
               <button class="btn btn-danger" (click)="logout()">LogOut</button>
             </li>
           </ul>
+          <div style="height: 35px;">
+            <input placeholder="Hmm..." type="search" style="width: 280px; height: 35px; background: black !important; color: red;">
+            <button style="background-color: black;">              
+               <img src="../assets/search.png" style="width: 35px; height: auto;" />
+            </button>
+          </div>
 
 
         </ul>

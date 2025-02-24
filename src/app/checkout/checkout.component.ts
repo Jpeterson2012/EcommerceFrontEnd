@@ -20,6 +20,12 @@ export class CheckoutComponent implements OnInit{
       this.grandTotal = this.cartService.getTotalPrice(this.products).toFixed(2);
     })
   }
+  onImageLoad(evt:any) {
+    if (evt && evt.target) {
+      const width = evt.target.naturalWidth;      
+      width < 2 && (evt.target.src = '../../assets/bookcoffee.jpg')     
+    }
+  }
 
   emitImage(book: books){
     return this.imageService.getBook(book.name);
