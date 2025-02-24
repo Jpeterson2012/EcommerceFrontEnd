@@ -14,16 +14,19 @@ export class HomeComponent implements OnInit{
   constructor(private db: DBService, private modalService: NgbModal, private imageService: ImageService){}
   
   books: any = [];
+  books2: any = []
   popbooks: any = [];
   ngOnInit(): void {
     
-    this.db.getBooks().subscribe(
+    this.db.getBooks(0,40).subscribe(
       v => {
-        this.books = v;
+        this.books = v.slice(0,20);
+        this.books2 = v.slice(20,40)
+        // console.log(v)
+        // console.log(this.books)
+        // console.log(this.books2)
       }
-    )
-
-    console.log(this.books)
+    )    
   }
 
   images = [
@@ -43,6 +46,12 @@ export class HomeComponent implements OnInit{
   
   emitImage(book: books){
     return this.imageService.getBook(book.name);
+  }
+  onImageLoad(evt:any) {
+    if (evt && evt.target) {
+      const width = evt.target.naturalWidth;      
+      width < 2 && (evt.target.src = '../../assets/bookcoffee.jpg')     
+    }
   }
   
 

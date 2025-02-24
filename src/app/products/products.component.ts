@@ -17,17 +17,50 @@ export class ProductsComponent implements OnInit, OnDestroy{
 
   available?: any;
   unvailable?: any;
+
+  books: any[] = []
+  currentPage = 1
+  pageSize = 50
+  totalItems = 0
+  cachedData: any[] = []
+
+  loadData(){    
+    if (this.cachedData.length !== 0 && this.cachedData[0].size === this.pageSize && this.cachedData[0].page === this.currentPage){
+      console.log('cached')
+      this.books = this.cachedData[0].books
+      this.currentPage = this.cachedData[0].page
+      this.pageSize = this.cachedData[0].size
+    }
+    else{
+      console.log('not cached')
+      this.db.getBooks((this.currentPage - 1) * this.pageSize,this.pageSize)
+      .subscribe(response => {
+        this.books = response
+      })
+  }
+  }
   
 
   ngOnInit(): void {
+    this.db.getTotalBooks().subscribe(v => {this.totalItems = v,console.log(v)})
+    this.loadData()
     //http get request
-    this.db.getBooks().subscribe(v=>{
-      this.books = v;
-      this.books.forEach((a:any)=>{
-        Object.assign(a,{quantity:1,total:a.price});
-      })
-    })
+    // this.db.getBooks().subscribe(v=>{
+    //   this.books = v;
+    //   this.books.forEach((a:any)=>{
+    //     Object.assign(a,{quantity:1,total:a.price});
+    //   })
+    // })
+    
 
+  }
+  onPageChange(pageNumber: any){    
+    this.cachedData.length === 2 ? this.cachedData.shift() : null
+    this.cachedData.push({"page": this.currentPage, "size": this.pageSize, "books": this.books})    
+
+    this.currentPage = pageNumber.pageIndex + 1
+    this.pageSize = pageNumber.pageSize
+    this.loadData()
   }
 
   //Modal pop up functionality///////////////////////////
@@ -43,7 +76,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
 
 
   //Products display functionality///////////////////
-  books = new Array<any>();
+  // books = new Array<any>();
   
   emitImage(book: books){
     return this.imageService.getBook(book.name);

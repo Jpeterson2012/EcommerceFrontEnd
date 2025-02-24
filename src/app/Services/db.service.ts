@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environment/environment";
@@ -9,8 +9,15 @@ export class DBService{
     
     constructor(private http: HttpClient) {}
 
-    getBooks(): Observable<any>{
-        return this.http.get(environment.apiURL + 'books/p/0');
+    getTotalBooks(): Observable<any>{
+        return this.http.get(environment.apiURL + 'books/total')
+    }
+
+    getBooks(page: number, pageSize: number): Observable<any>{
+        let params =  new HttpParams()
+        .set('page', page)
+        .set('pageSize', pageSize)
+        return this.http.get(environment.apiURL + 'books/p', {params});
     }
 
     getUsers(): Observable<any>{

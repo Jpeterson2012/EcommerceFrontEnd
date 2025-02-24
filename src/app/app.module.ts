@@ -28,6 +28,7 @@ import { RegisterComponent } from './authentication/register/register.component'
 import { httpInterceptorProviders } from './authentication/helpers/http.interceptor';
 import { ProfileComponent } from './authentication/profile/profile.component';
 import { AdminBoardComponent } from './authentication/adminboard/adminboard.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import { AdminBoardComponent } from './authentication/adminboard/adminboard.comp
     BrowserAnimationsModule,
     MatSnackBarModule,
     NgbAccordionModule,
-    
+    MatPaginatorModule,
 
   ],
   providers: [DBService,ImageService,CartService,httpInterceptorProviders],

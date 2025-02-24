@@ -81,7 +81,7 @@
             </ul>
           </div>
 
-          <div class="card text-white bg-dark" style="width: 20rem;">
+          <div class="card text-white bg-dark" style="width: 20rem; height: 28rem">
             <div class="zoom">
               <!-- Custom image mapping function -->
               <!-- <img class="card-img-top" src="{{emitImage(book)}}" alt="Card image cap"> -->               
@@ -201,6 +201,16 @@
 
     </div>
   </div>
+
+  <mat-paginator
+    [length]="totalItems"
+    [pageSize]="pageSize"
+    [pageIndex]="currentPage - 1"
+    [pageSizeOptions]="[10,25,50,100]"
+    (page)="onPageChange($event)"
+    aria-label="Select Page"
+  >
+  </mat-paginator>
 
 </div>
 <div class="fas fa-search search-icon"></div>

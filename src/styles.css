@@ -8,3 +8,11 @@
     --mdc-snackbar-container-color: darkred;
     --mdc-snackbar-supporting-text-color: burlywood;
 }
+html {
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;
+  }
+  ::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+  }

@@ -1,9 +1,27 @@
 <div class="wrapper">
     <h3><strong>Popular Books</strong></h3>
     <div class="container">
-        <div class="zoom-img"  *ngFor="let image of images">
-            <img [src]="image.image" alt="Book Pic">
+        <div class="imageContainer">
+            <div class="subContainer">        
+                <div class="zoom-img"  *ngFor="let image of books">
+                    <img [src]="image.image" alt="Book Pic" (load)="onImageLoad($event)">
+                </div>
+                <div class="zoom-img"  *ngFor="let image of books">
+                    <img [src]="image.image" alt="Book Pic" (load)="onImageLoad($event)">
+                </div>
+            </div>
         </div>
+        <div class="imageContainer2">
+            <div class="subContainer2">        
+                <div class="zoom-img2"  *ngFor="let image of books2">
+                    <img [src]="image.image" alt="Book Pic" (load)="onImageLoad($event)">
+                </div>
+                <div class="zoom-img2"  *ngFor="let image of books2">
+                    <img [src]="image.image" alt="Book Pic" (load)="onImageLoad($event)">
+                </div>
+            </div>
+        </div>
+        
     </div>
 
     <app-home2></app-home2>
