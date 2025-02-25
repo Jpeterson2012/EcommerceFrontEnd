@@ -42,12 +42,16 @@ export class AuthService {
   }
 
 
-  newBook(name: string, auth: string, price: string, qty: number): Observable<any>{
+  newBook(isbn: string, name: string, auth: string, year: number, publisher: string, image: string, price: string, qty: number): Observable<any>{
     return this.http.post(
       environment.apiURL + 'books',
       {
+        isbn,
         name,
         auth,
+        year,
+        publisher,
+        image,
         price,
         qty,
       },
@@ -55,13 +59,16 @@ export class AuthService {
     )
   }
 
-  updateBook(id: number, name: string, auth: string, price: string, qty: number): Observable<any>{
+  updateBook(id: number, isbn: string, name: string, auth: string, year: number, publisher: string, image: string, price: string, qty: number): Observable<any>{
     return this.http.put(
       environment.apiURL + 'books/'+id,
       {
-        id,
+        isbn,
         name,
         auth,
+        year,
+        publisher,
+        image,
         price,
         qty,
       },

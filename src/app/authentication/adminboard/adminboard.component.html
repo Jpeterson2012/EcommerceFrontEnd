@@ -1,7 +1,7 @@
 
 <div class="container">
   <img src="../../../assets/admin.jpg">
-  <div class="wrapper">
+  <div class="wrapper" style="width: 90vw">
 
     
     <!-- Accordion for admin  -->
@@ -9,7 +9,7 @@
       <div ngbAccordionItem [collapsed]="true">
         <h2 ngbAccordionHeader>
           <button ngbAccordionButton>
-            <span>Get all Users</span>
+            <span>Get All Users</span>
           </button>
         </h2>
         <div ngbAccordionCollapse>
@@ -27,10 +27,13 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let user of users">
+                        <!-- <td>{{user.id}}</td> -->
                         <td>{{ user.username }}</td>
                         <td>{{user.email}}</td>
                         <!-- <td>{{ user.roles | json }}</td> -->
-                        <td>{{ user.roles[0].name }}</td>
+                        <td>{{ user.roles[0].name.slice(5,user.roles[0].name.length) }}</td>
+                        <button style="background: red; color: white; border-radius: 20px;">Reset PW</button>
+                        <button style="background: burlywood; color: black; border-radius: 20px;">Change Role</button>
                 </tbody>
             </table>
 
@@ -60,6 +63,31 @@
                   #f="ngForm"
                   novalidate
                 >
+                
+                  <div class="form-group">
+                    <label for="isbn">isbn</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="isbn"
+                      [(ngModel)]="form.isbn"
+                      required
+                      minlength="10"
+                      maxlength="10"
+                      #isbn="ngModel"
+                      [ngClass]="{ 'is-invalid': f.submitted && isbn.errors }"
+                    />
+                    <div class="invalid-feedback" *ngIf="isbn.errors && f.submitted">
+                      <div *ngIf="isbn.errors['required']">ISBN is required</div>
+                      <div *ngIf="isbn.errors['minlength']">
+                        ISBN must be 10 characters
+                      </div>
+                      <div *ngIf="isbn.errors['maxlength']">
+                        ISBN must be 10 characters
+                      </div>
+                    </div>
+                  </div>
+                  
                   <div class="form-group">
                     <label for="name">Name</label>
                     <input
@@ -83,6 +111,7 @@
                       </div>
                     </div>
                   </div>
+
                   <div class="form-group">
                     <label for="auth">Author</label>
                     <input
@@ -106,6 +135,79 @@
                       </div>
                     </div>
                   </div>
+
+                  <div class="form-group">
+                    <label for="year">year</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="year"
+                      [(ngModel)]="form.year"
+                      required
+                      minlength="1"
+                      maxlength="4"
+                      #year="ngModel"
+                      [ngClass]="{ 'is-invalid': f.submitted && year.errors }"
+                    />
+                    <div class="invalid-feedback" *ngIf="year.errors && f.submitted">
+                      <div *ngIf="year.errors['required']">Year is required</div>
+                      <div *ngIf="year.errors['minlength']">
+                        Year must be at least 1 character
+                      </div>
+                      <div *ngIf="year.errors['maxlength']">
+                        Year must be no more than 4 characters
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="publisher">publisher</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="publisher"
+                      [(ngModel)]="form.publisher"
+                      required
+                      minlength="1"
+                      maxlength="100"
+                      #publisher="ngModel"
+                      [ngClass]="{ 'is-invalid': f.submitted && publisher.errors }"
+                    />
+                    <div class="invalid-feedback" *ngIf="publisher.errors && f.submitted">
+                      <div *ngIf="publisher.errors['required']">Publisher is required</div>
+                      <div *ngIf="publisher.errors['minlength']">
+                        Publisher must be at least 1 character
+                      </div>
+                      <div *ngIf="publisher.errors['maxlength']">
+                        Publisher can't be more than 100 characters
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="image">image</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="image"
+                      [(ngModel)]="form.image"
+                      required
+                      minlength="1"
+                      maxlength="100"
+                      #image="ngModel"
+                      [ngClass]="{ 'is-invalid': f.submitted && image.errors }"
+                    />
+                    <div class="invalid-feedback" *ngIf="image.errors && f.submitted">
+                      <div *ngIf="image.errors['required']">Image is required</div>
+                      <div *ngIf="image.errors['minlength']">
+                        Image must be at least 1 character
+                      </div>
+                      <div *ngIf="image.errors['maxlength']">
+                        Image can't be more than 100 characters
+                      </div>
+                    </div>
+                  </div>
+
                   <div class="form-group">
                     <label for="price">Price</label>
                     <input
@@ -129,7 +231,8 @@
                         Price can't exceed 100 dollars
                       </div>
                     </div>
-                  </div>
+                  </div>                  
+
                   <div class="form-group">
                     <label for="qty">Quantity</label>
                     <input
@@ -168,7 +271,7 @@
           
               </div>
               <div class="alert alert-success" *ngIf="isSuccessful">
-                Adding book was successful!
+                Book addition was successful!
                 
               </div>
     
@@ -189,7 +292,7 @@
               <!-- Reads user input for book id -->
               <div class="=form-group">
                 <label for="num">Enter Id of book to update</label>
-                <input  type="number" name="num" [(ngModel)]="idNum"> 
+                <input  type="text" name="num" [(ngModel)]="idNum"> 
                 <br>
               </div>
               <div class="form-group">
@@ -201,8 +304,12 @@
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>ISBN</th>
                         <th>Name</th>
                         <th>Author</th>
+                        <th>Year</th>
+                        <th>Publisher</th>
+                        <th>Image</th>
                         <th>Price</th>
                         <th>Quantity</th>
                     </tr>
@@ -210,10 +317,15 @@
                 <tbody>
                     <tr>
                         <td>{{ bookData.id }}</td>
+                        <td>{{ bookData.isbn }}</td>
                         <td>{{bookData.name}}</td>
                         <td>{{ bookData.auth }}</td>
+                        <td>{{ bookData.year }}</td>
+                        <td>{{ bookData.publisher }}</td>
+                        <td>{{ bookData.image }}</td>
                         <td>{{ bookData.price }}</td>
                         <td>{{ bookData.qty }}</td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -225,103 +337,200 @@
             #f="ngForm"
             novalidate
           >
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input
-                type="text"
-                class="form-control"
-                name="name"
-                [(ngModel)]="form.name"
-                value="{{bookData.name}}"
-                required
-                minlength="1"
-                maxlength="40"
-                #name="ngModel"
-                [ngClass]="{ 'is-invalid': f.submitted && name.errors }"
-              />
-              <div class="invalid-feedback" *ngIf="name.errors && f.submitted">
-                <div *ngIf="name.errors['required']">Name is required</div>
-                <div *ngIf="name.errors['minlength']">
-                  Name must be at least 1 character
-                </div>
-                <div *ngIf="name.errors['maxlength']">
-                  Name must be at most 40 characters
-                </div>
+          <div class="form-group">
+            <label for="isbn">isbn</label>
+            <input              
+              type="text"
+              value="hello"
+              class="form-control"
+              name="isbn"
+              [(ngModel)]="form.isbn"
+              required
+              minlength="10"
+              maxlength="10"
+              #isbn="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && isbn.errors }"
+            />
+            <div class="invalid-feedback" *ngIf="isbn.errors && f.submitted">
+              <div *ngIf="isbn.errors['required']">ISBN is required</div>
+              <div *ngIf="isbn.errors['minlength']">
+                ISBN must be 10 characters
+              </div>
+              <div *ngIf="isbn.errors['maxlength']">
+                ISBN must be 10 characters
               </div>
             </div>
-            <div class="form-group">
-              <label for="auth">Author</label>
-              <input
-                type="text"
-                class="form-control"
-                name="auth"
-                [(ngModel)]="form.auth"
-                value="{{bookData.auth}}"
-                required
-                minlength="1"
-                maxlength="25"
-                #auth="ngModel"
-                [ngClass]="{ 'is-invalid': f.submitted && auth.errors }"
-              />
-              <div class="invalid-feedback" *ngIf="auth.errors && f.submitted">
-                <div *ngIf="auth.errors['required']">Author is required</div>
-                <div *ngIf="auth.errors['minlength']">
-                  Author must be at least 1 character
-                </div>
-                <div *ngIf="auth.errors['maxlength']">
-                  Author must be at most 25 characters
-                </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              [(ngModel)]="form.name"
+              required
+              minlength="1"
+              maxlength="30"
+              #name="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && name.errors }"
+            />
+            <div class="invalid-feedback" *ngIf="name.errors && f.submitted">
+              <div *ngIf="name.errors['required']">Name is required</div>
+              <div *ngIf="name.errors['minlength']">
+                Name must be at least 1 character
+              </div>
+              <div *ngIf="name.errors['maxlength']">
+                Name must be at most 30 characters
               </div>
             </div>
-            <div class="form-group">
-              <label for="price">Price</label>
-              <input
-                type="number"
-                class="form-control"
-                name="price"
-                [(ngModel)]="form.price"
-                value="{{bookData.price}}"
-                required
-                min="1"
-                max="100"
-                step="0.01"
-                #price="ngModel"
-                [ngClass]="{ 'is-invalid': f.submitted && price.errors }"
-              />
-              <div class="invalid-feedback" *ngIf="price.errors && f.submitted">
-                <div *ngIf="price.errors['required']">Price is required</div>
-                <div *ngIf="price.errors['min']">
-                  Price must be at least 1 dollar
-                </div>
-                <div *ngIf="price.errors['max']">
-                  Price can't exceed 100 dollars
-                </div>
+          </div>
+
+          <div class="form-group">
+            <label for="auth">Author</label>
+            <input
+              type="text"
+              class="form-control"
+              name="auth"
+              [(ngModel)]="form.auth"
+              required
+              minlength="1"
+              maxlength="25"
+              #auth="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && auth.errors }"
+            />
+            <div class="invalid-feedback" *ngIf="auth.errors && f.submitted">
+              <div *ngIf="auth.errors['required']">Author is required</div>
+              <div *ngIf="auth.errors['minlength']">
+                Author must be at least 1 character
+              </div>
+              <div *ngIf="auth.errors['maxlength']">
+                Author must be at most 25 characters
               </div>
             </div>
-            <div class="form-group">
-              <label for="qty">Quantity</label>
-              <input
-                type="text"
-                class="form-control"
-                name="qty"
-                [(ngModel)]="form.qty"
-                value="{{bookData.qty}}"
-                required
-                minlength="1"
-                maxlength="5"
-                #qty="ngModel"
-                [ngClass]="{ 'is-invalid': f.submitted && qty.errors }"
-              />
-              <div class="invalid-feedback" *ngIf="qty.errors && f.submitted">
-                <div *ngIf="qty.errors['required']">Quantity is required</div>
-                <div *ngIf="qty.errors['minlength']">
-                  Quantity must be at least 1 digit
-                </div>
-                <div *ngIf="qty.errors['maxlength']">
-                  Quantity can't exceed 5 digits
-                </div>
+          </div>
+
+          <div class="form-group">
+            <label for="year">year</label>
+            <input
+              type="number"
+              class="form-control"
+              name="year"
+              [(ngModel)]="form.year"
+              required
+              minlength="1"
+              maxlength="4"
+              #year="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && year.errors }"
+            />
+            <div class="invalid-feedback" *ngIf="year.errors && f.submitted">
+              <div *ngIf="year.errors['required']">Year is required</div>
+              <div *ngIf="year.errors['minlength']">
+                Year must be at least 1 character
+              </div>
+              <div *ngIf="year.errors['maxlength']">
+                Year must be no more than 4 characters
               </div>
             </div>
+          </div>
+
+          <div class="form-group">
+            <label for="publisher">publisher</label>
+            <input
+              type="text"
+              class="form-control"
+              name="publisher"
+              [(ngModel)]="form.publisher"
+              required
+              minlength="1"
+              maxlength="100"
+              #publisher="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && publisher.errors }"
+            />
+            <div class="invalid-feedback" *ngIf="publisher.errors && f.submitted">
+              <div *ngIf="publisher.errors['required']">Publisher is required</div>
+              <div *ngIf="publisher.errors['minlength']">
+                Publisher must be at least 1 character
+              </div>
+              <div *ngIf="publisher.errors['maxlength']">
+                Publisher can't be more than 100 characters
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="image">image</label>
+            <input
+              type="text"
+              class="form-control"
+              name="image"
+              [(ngModel)]="form.image"
+              required
+              minlength="1"
+              maxlength="100"
+              #image="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && image.errors }"
+            />
+            <div class="invalid-feedback" *ngIf="image.errors && f.submitted">
+              <div *ngIf="image.errors['required']">Image is required</div>
+              <div *ngIf="image.errors['minlength']">
+                Image must be at least 1 character
+              </div>
+              <div *ngIf="image.errors['maxlength']">
+                Image can't be more than 100 characters
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input
+              type="number"
+              class="form-control"
+              name="price"
+              [(ngModel)]="form.price"
+              required
+              min="1"
+              max="100"
+              step="0.01"
+              #price="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && price.errors }"
+            />
+            <div class="invalid-feedback" *ngIf="price.errors && f.submitted">
+              <div *ngIf="price.errors['required']">Price is required</div>
+              <div *ngIf="price.errors['min']">
+                Price must be at least 1 dollar
+              </div>
+              <div *ngIf="price.errors['max']">
+                Price can't exceed 100 dollars
+              </div>
+            </div>
+          </div>                  
+
+          <div class="form-group">
+            <label for="qty">Quantity</label>
+            <input
+              type="text"
+              class="form-control"
+              name="qty"
+              [(ngModel)]="form.qty"
+              required
+              minlength="1"
+              maxlength="5"
+              #qty="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && qty.errors }"
+            />
+            <div class="invalid-feedback" *ngIf="qty.errors && f.submitted">
+              <div *ngIf="qty.errors['required']">Quantity is required</div>
+              <div *ngIf="qty.errors['minlength']">
+                Quantity must be at least 1 digit
+              </div>
+              <div *ngIf="qty.errors['maxlength']">
+                Quantity can't exceed 5 digits
+              </div>
+            </div>
+          </div>
+
             <div class="">
               <button class="btn btn-danger btn-block">Update book</button>
             </div>
@@ -351,7 +560,7 @@
               <!-- Reads user input for book id -->
               <div class="=form-group">
                 <label for="num">Enter Id of book to delete</label>
-                <input  type="number" name="num" [(ngModel)]="idNumDelete"> 
+                <input  type="text" name="num" [(ngModel)]="idNumDelete"> 
                 <br>
               </div>
               <div class="form-group">
@@ -361,21 +570,30 @@
               <!-- Displays requested book info -->
               <table class="table table-responsive">
                 <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Author</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                    </tr>
+                  <tr>
+                    <th>ID</th>
+                    <th>ISBN</th>
+                    <th>Name</th>
+                    <th>Author</th>
+                    <th>Year</th>
+                    <th>Publisher</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>{{ bookData.id }}</td>
-                        <td>{{bookData.name}}</td>
-                        <td>{{ bookData.auth }}</td>
-                        <td>{{ bookData.price }}</td>
-                        <td>{{ bookData.qty }}</td>
+                  <tr>
+                    <td>{{ bookData.id }}</td>
+                    <td>{{ bookData.isbn }}</td>
+                    <td>{{bookData.name}}</td>
+                    <td>{{ bookData.auth }}</td>
+                    <td>{{ bookData.year }}</td>
+                    <td>{{ bookData.publisher }}</td>
+                    <td>{{ bookData.image }}</td>
+                    <td>{{ bookData.price }}</td>
+                    <td>{{ bookData.qty }}</td>
+                </tr>
                 </tbody>
             </table>
   

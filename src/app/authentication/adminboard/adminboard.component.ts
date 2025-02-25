@@ -14,8 +14,12 @@ import { DBService } from 'src/app/Services/db.service';
 export class AdminBoardComponent implements OnInit {
   content?: string;
   form: any = {
+    isbn: null,
     name: null,
     auth: null,
+    year: null,
+    publisher: null,
+    image: null,
     price: null,
     qty: null
   };
@@ -46,15 +50,15 @@ export class AdminBoardComponent implements OnInit {
     });
 
     this.dbService.getUsers().subscribe(
-      v => {this.users = v;}
+      v => {this.users = v; console.log(v)}
     )
   }
   //Method for adding new book 
   onSubmit(): void {
-    const { name, auth, price, qty } = this.form;
+    const { isbn, name, auth, year, publisher, image, price, qty } = this.form;
 
 
-    this.authService.newBook(name, auth, price, qty).subscribe({
+    this.authService.newBook(isbn, name, auth, year, publisher, image, price, qty).subscribe({
       next: data => {
         console.log(data);
         this.isSuccessful = true;
@@ -89,9 +93,10 @@ export class AdminBoardComponent implements OnInit {
 
   //Method for post request to books entity
   onSubmitUpdate(): void {
-    const { name, auth, price, qty } = this.form;
+    const { isbn, name, auth, year, publisher, image, price, qty } = this.form;
+    console.log(this.form.isbn)
 
-    this.authService.updateBook(this.idNum, name, auth, price, qty).subscribe({
+    this.authService.updateBook(this.idNum, isbn, name, auth, year, publisher, image, price, qty).subscribe({
       next: data => {
         console.log(data);
         this.successfulUpdate = true;
