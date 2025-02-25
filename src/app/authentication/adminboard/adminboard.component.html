@@ -66,6 +66,7 @@
                         <td>{{ user.username }}</td>
                         <td>{{user.email}}</td>
                         <!-- <td>{{ user.roles | json }}</td> -->
+                        <!-- <td>{{ user.roles }}</td> -->
                         <td>{{ user.roles[0].name.slice(5,user.roles[0].name.length) }}</td>                        
                         <button style="background: burlywood; color: black; border-radius: 20px;" (click)="openLg(content2, user)">User Settings</button>
                 </tbody>
@@ -353,7 +354,7 @@
                     <tr>
                         <td>{{ bookData.id }}</td>
                         <td>{{ bookData.isbn }}</td>
-                        <td>{{bookData.name}}</td>
+                        <td>{{ bookData.name }}</td>
                         <td>{{ bookData.auth }}</td>
                         <td>{{ bookData.year }}</td>
                         <td>{{ bookData.publisher }}</td>

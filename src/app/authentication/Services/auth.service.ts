@@ -63,6 +63,7 @@ export class AuthService {
     return this.http.put(
       environment.apiURL + 'books/'+id,
       {
+        id,
         isbn,
         name,
         auth,

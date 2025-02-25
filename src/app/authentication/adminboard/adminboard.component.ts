@@ -135,7 +135,7 @@ export class AdminBoardComponent implements OnInit {
 
     this.authService.updateBook(this.idNum, isbn, name, auth, year, publisher, image, price, qty).subscribe({
       next: data => {
-        console.log(data);
+        // console.log(data);
         this.successfulUpdate = true;
         this.notsuccessfulUpdate = false;
       },
