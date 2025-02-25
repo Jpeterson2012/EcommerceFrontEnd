@@ -1,3 +1,38 @@
+<ng-template #content2 let-modal class="lol">
+  <div class="modal-header">
+    <h4 class="modal-title" style="font-size: 20px;" >{{currentUser}}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+
+    <form class="modalForm">
+      <div class="mb-3">
+        <label for="password">Change Password</label>
+        <div class="input-group">
+          <input [(ngModel)]="this.newPW" id="password" class="form-control" placeholder="Changing passwords? Uh oh..." name="password" />
+        </div>
+      </div>
+    </form>
+    <form class="modalForm">
+      <div class="mb-3">
+        <label for="role">Change Role</label>
+        <div class="input-group">
+          <select id="role" name="role" class="form-control" [(ngModel)]="selectedOption">
+            <option *ngFor="let option of options" [value]="option.value">
+              {{ option.label }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </form>            
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="closeModal()">Submit</button>
+  </div>
+</ng-template>
+
+
 
 <div class="container">
   <img src="../../../assets/admin.jpg">
@@ -31,9 +66,8 @@
                         <td>{{ user.username }}</td>
                         <td>{{user.email}}</td>
                         <!-- <td>{{ user.roles | json }}</td> -->
-                        <td>{{ user.roles[0].name.slice(5,user.roles[0].name.length) }}</td>
-                        <button style="background: red; color: white; border-radius: 20px;">Reset PW</button>
-                        <button style="background: burlywood; color: black; border-radius: 20px;">Change Role</button>
+                        <td>{{ user.roles[0].name.slice(5,user.roles[0].name.length) }}</td>                        
+                        <button style="background: burlywood; color: black; border-radius: 20px;" (click)="openLg(content2, user)">User Settings</button>
                 </tbody>
             </table>
 
@@ -297,6 +331,7 @@
               </div>
               <div class="form-group">
                 <button class="btn btn-danger btn-block" (click)="getBookById(idNum)">Get Book</button>
+                <button class="btn btn-danger btn-block" style="margin-left: 15px;" (click)="clear()">Clear</button>
               </div>
               
               <!-- Displays requested book info -->
@@ -565,6 +600,7 @@
               </div>
               <div class="form-group">
                 <button class="btn btn-danger btn-block" (click)="getBookById(idNumDelete)">Get Book</button>
+                <button class="btn btn-danger btn-block" style="margin-left: 15px;" (click)="clear()">Clear</button>
               </div>
 
               <!-- Displays requested book info -->

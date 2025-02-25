@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ContentChild, ElementRef } from '@angular/core';
 import { UserService } from '../Services/user.service';
 import { AuthService } from '../Services/auth.service';
 import { ImageService } from 'src/app/Services/image.service';
 import { DBService } from 'src/app/Services/db.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -26,10 +27,10 @@ export class AdminBoardComponent implements OnInit {
   imageurl: string ="";
   isSuccessful = false;
   isNotSuccessful = false;
-  errorMessage = '';
+  errorMessage = '';  
 
 
-  constructor(private userService: UserService, private authService: AuthService, private imageService: ImageService, private dbService: DBService) { }
+  constructor(private modalService: NgbModal,private userService: UserService, private authService: AuthService, private imageService: ImageService, private dbService: DBService) { }
 
   //User variable used with DBService getUsers method
   users: any = [];
@@ -53,6 +54,28 @@ export class AdminBoardComponent implements OnInit {
       v => {this.users = v; console.log(v)}
     )
   }
+  
+  currentUser = '';
+  modalRef: any
+  newPW: string = ''
+  selectedOption: any;
+  options = [
+      { value: 'User', label: 'User' },
+      { value: 'Mod', label: 'Mod' },
+      { value: 'Admin', label: 'Admin' }
+  ];
+  @ContentChild('content') content2?: ElementRef;
+    openLg(content: any, user: any) {
+      this.newPW = ''
+      this.selectedOption = ''
+      this.modalRef = this.modalService.open(content, { size: 'lg' });
+      this.currentUser = `${user.username}  |  ${user.email}  |  ${user.roles[0].name.slice(5,user.roles[0].name.length)}`
+    }
+    closeModal() {
+      console.log(this.newPW)
+      console.log(this.selectedOption)
+      this.modalRef.close();
+    }
   //Method for adding new book 
   onSubmit(): void {
     const { isbn, name, auth, year, publisher, image, price, qty } = this.form;
@@ -80,16 +103,30 @@ export class AdminBoardComponent implements OnInit {
   
 
   //Gets book id number from user, binds it, and passes it to DBService getBookbyId method
-  idNum!: number;
+  idNum!: any;
   bookData: any = [];
   successfulUpdate = false;
   notsuccessfulUpdate = false;
   getBookById(id: number){
     this.dbService.getBookById(id).subscribe((v) =>{
       this.bookData = v;
+      this.form = v;
     });
     this.successfulUpdate = false;
   }
+  clear(){
+    this.idNum = null
+    this.form.isbn = null
+    this.form.name = null
+    this.form.auth = null
+    this.form.year = null
+    this.form.publisher = null
+    this.form.image = null
+    this.form.price = null
+    this.form.qty = null
+    this.bookData = []  
+  }
+
 
   //Method for post request to books entity
   onSubmitUpdate(): void {

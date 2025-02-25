@@ -19,4 +19,7 @@ img{
 .accordion-button::after{
     background-color: burlywood;
 }
+.modalForm, .modal-header{
+    background-color: burlywood;
+  }
 
