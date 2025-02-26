@@ -1,10 +1,11 @@
-import { Component, TemplateRef, DoCheck, OnDestroy, OnInit } from '@angular/core';
+import { Component, TemplateRef, DoCheck, OnDestroy, OnInit, ContentChild, ElementRef } from '@angular/core';
 import { CartService } from './Services/cart.service';
 import { AuthService } from './authentication/Services/auth.service';
 import { StorageService } from './authentication/Services/storage.service';
 import { environment } from 'src/environment/environment';
 
 import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, DoCheck, OnDestroy {
-  constructor(private offcanvasService: NgbOffcanvas, private cartService: CartService,private storageService: StorageService, private authService: AuthService){}
+  constructor(private offcanvasService: NgbOffcanvas, private modalService: NgbModal,  private cartService: CartService,private storageService: StorageService, private authService: AuthService){}
 
   //Login/Authentication
   private roles: string[] = [];
@@ -98,6 +99,13 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
   openCustomPanelClass(content: TemplateRef<any>) {
 		this.offcanvasService.open(content, { position: 'end', panelClass: 'bg-dark' });
 	}
+
+  @ContentChild('content') content2?: ElementRef;
+    openLg(content: any) {
+      console.log('fuck')
+      this.modalService.open(content, { size: 'lg' });
+    }
+    
 
   ngOnDestroy(): void {
     this.cartService.currQuantity.unsubscribe;

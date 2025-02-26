@@ -69,6 +69,33 @@
   </ng-template>
 
 
+  <ng-template #content2 let-modal class="lol">
+  <div class="modal-header">
+    <h4 class="modal-title" style="font-size: 20px;" >Search</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+
+    <form class="modalForm">
+      <div class="mb-3">
+        <label for="search">Search for books</label>
+        <div class="input-group">
+          <input id="search" name="search" placeholder="Hmm..." type="search" style="width: 280px; height: 35px; background: black !important; color: red;">
+            <button style="background-color: black;">              
+               <img src="../assets/search.png" style="width: 35px; height: auto;" />
+            </button>
+        </div>
+      </div>
+    </form>
+                
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')">Go</button>
+  </div>
+</ng-template>
+
+
 
 
 
@@ -122,10 +149,11 @@
             </li>
           </ul>
           <div style="height: 35px;">
-            <input placeholder="Hmm..." type="search" style="width: 280px; height: 35px; background: black !important; color: red;">
-            <button style="background-color: black;">              
+            <!-- <input placeholder="Hmm..." type="search" style="width: 280px; height: 35px; background: black !important; color: red;"> -->
+            <button style="background-color: black;" (click)="openLg(content2)">              
                <img src="../assets/search.png" style="width: 35px; height: auto;" />
             </button>
+            <!-- <img src="../assets/search.png" style="width: 35px; height: auto;" (onclick)="openLg(content2)" /> -->
           </div>
 
 

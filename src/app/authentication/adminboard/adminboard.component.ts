@@ -56,24 +56,30 @@ export class AdminBoardComponent implements OnInit {
   }
   
   currentUser = '';
+  currentUserId: number = 0;
   modalRef: any
   newPW: string = ''
   selectedOption: any;
   options = [
-      { value: 'User', label: 'User' },
-      { value: 'Mod', label: 'Mod' },
-      { value: 'Admin', label: 'Admin' }
+      { value: 'User', label: 'User', db: 1 },
+      { value: 'Mod', label: 'Mod', db: 2 },
+      { value: 'Admin', label: 'Admin', db: 3 }
   ];
   @ContentChild('content') content2?: ElementRef;
     openLg(content: any, user: any) {
       this.newPW = ''
       this.selectedOption = ''
       this.modalRef = this.modalService.open(content, { size: 'lg' });
+      this.currentUserId = user.id
       this.currentUser = `${user.username}  |  ${user.email}  |  ${user.roles[0].name.slice(5,user.roles[0].name.length)}`
     }
     closeModal() {
       console.log(this.newPW)
-      console.log(this.selectedOption)
+      // console.log(this.options.indexOf(this.options.find(a => a.value === this.selectedOption)!))
+      let temp = this.options.filter(a => a.value === this.selectedOption)
+      console.log(temp[0].db)
+      console.log(this.currentUserId)
+      this.userService.updateRole(this.currentUserId, temp[0].db).subscribe()
       this.modalRef.close();
     }
   //Method for adding new book 

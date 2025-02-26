@@ -69,6 +69,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
   //Modal pop up functionality///////////////////////////
   @ContentChild('content') content?: ElementRef;
   openLg(content: any) {
+    console.log('hello')
 		this.modalService.open(content, { size: 'lg' });
 	}
   @ContentChild('longContent') longContent?: ElementRef

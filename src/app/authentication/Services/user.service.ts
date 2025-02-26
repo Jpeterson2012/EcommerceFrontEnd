@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environment/environment';
 
@@ -25,5 +25,13 @@ export class UserService {
 
   getAdminBoard(): Observable<any> {
     return this.http.get(API_URL + 'admin', { responseType: 'text' });
+  }
+  updateRole(userid: number, roleid: number): Observable<any> {
+    console.log(userid)
+    console.log(roleid)
+    let params =  new HttpParams()
+            .set('userid', userid)
+            .set('roleid', roleid)
+    return this.http.put(API_URL + 'role', {params});
   }
 }
