@@ -79,7 +79,17 @@ export class AdminBoardComponent implements OnInit {
       let temp = this.options.filter(a => a.value === this.selectedOption)
       console.log(temp[0].db)
       console.log(this.currentUserId)
-      this.userService.updateRole(this.currentUserId, temp[0].db).subscribe()
+      this.userService.updateRole(this.currentUserId, temp[0].db).subscribe({
+        next: data => {
+          // console.log(data);
+          this.successfulUpdate = true;
+          this.notsuccessfulUpdate = false;
+        },
+        error: err => {
+          this.errorMessage = err.error.message;
+          this.notsuccessfulUpdate = true;
+        }
+      })
       this.modalRef.close();
     }
   //Method for adding new book 
