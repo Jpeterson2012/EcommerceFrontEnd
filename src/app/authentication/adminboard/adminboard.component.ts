@@ -1,8 +1,8 @@
 import { Component, OnInit, ContentChild, ElementRef } from '@angular/core';
 import { UserService } from '../Services/user.service';
 import { AuthService } from '../Services/auth.service';
-import { ImageService } from 'src/app/Services/image.service';
 import { DBService } from 'src/app/Services/db.service';
+import { StorageService } from '../Services/storage.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -29,16 +29,22 @@ export class AdminBoardComponent implements OnInit {
   isNotSuccessful = false;
   errorMessage = '';  
 
+  roles: any;
+  AdminBoard = false;
 
-  constructor(private modalService: NgbModal,private userService: UserService, private authService: AuthService, private imageService: ImageService, private dbService: DBService) { }
+
+  constructor(private storageService: StorageService, private modalService: NgbModal,private userService: UserService, private authService: AuthService, private dbService: DBService) { }
 
   //User variable used with DBService getUsers method
   users: any = [];
 
   ngOnInit(): void {
+    const user = this.storageService.getUser();
+    this.roles = user.roles;
+    this.AdminBoard = this.roles.includes('ROLE_ADMIN');
+
     this.userService.getAdminBoard().subscribe({
-      next: data => {
-        this.content = data;
+      next: data => {       
       },
       error: err => {
         console.log(err)
@@ -51,7 +57,7 @@ export class AdminBoardComponent implements OnInit {
     });
 
     this.dbService.getUsers().subscribe(
-      v => {this.users = v; console.log(v)}
+      v => this.users = v
     )
   }
   
@@ -61,9 +67,9 @@ export class AdminBoardComponent implements OnInit {
   newPW: string = ''
   selectedOption: any;
   options = [
-      { value: 'User', label: 'User', db: 1 },
-      { value: 'Mod', label: 'Mod', db: 2 },
-      { value: 'Admin', label: 'Admin', db: 3 }
+      { value: 'USER', label: 'USER', db: 1 },
+      { value: 'MODERATOR', label: 'MODERATOR', db: 2 },
+      { value: 'ADMIN', label: 'ADMIN', db: 3 }
   ];
   @ContentChild('content') content2?: ElementRef;
     openLg(content: any, user: any) {
@@ -73,15 +79,14 @@ export class AdminBoardComponent implements OnInit {
       this.currentUserId = user.id
       this.currentUser = `${user.username}  |  ${user.email}  |  ${user.roles[0].name.slice(5,user.roles[0].name.length)}`
     }
-    closeModal() {
-      console.log(this.newPW)
-      // console.log(this.options.indexOf(this.options.find(a => a.value === this.selectedOption)!))
-      let temp = this.options.filter(a => a.value === this.selectedOption)
-      console.log(temp[0].db)
-      console.log(this.currentUserId)
+    closeModal() {            
+      let temp = this.options.filter(a => a.value === this.selectedOption)            
+
       this.userService.updateRole(this.currentUserId, temp[0].db).subscribe({
         next: data => {
-          // console.log(data);
+          let temp2 = this.users.findIndex((a:any) => a.id = this.currentUserId)    
+          this.users[temp2].roles = [{"id": temp[0].db, "name": "ROLE_" + temp[0].value}]
+                    
           this.successfulUpdate = true;
           this.notsuccessfulUpdate = false;
         },
@@ -96,7 +101,6 @@ export class AdminBoardComponent implements OnInit {
   onSubmit(): void {
     const { isbn, name, auth, year, publisher, image, price, qty } = this.form;
 
-
     this.authService.newBook(isbn, name, auth, year, publisher, image, price, qty).subscribe({
       next: data => {
         console.log(data);
@@ -109,14 +113,6 @@ export class AdminBoardComponent implements OnInit {
       }
     });
   }
-
-  //Adds name and image to imageService array
-  addBook(name: any, image: any){
-    this.imageService.addBook(name,image);
-    alert('Image was add successfully!');
-  }
-
-  
 
   //Gets book id number from user, binds it, and passes it to DBService getBookbyId method
   idNum!: any;
@@ -143,7 +139,6 @@ export class AdminBoardComponent implements OnInit {
     this.bookData = []  
   }
 
-
   //Method for post request to books entity
   onSubmitUpdate(): void {
     const { isbn, name, auth, year, publisher, image, price, qty } = this.form;
@@ -168,7 +163,6 @@ export class AdminBoardComponent implements OnInit {
   //Method for deleting book
   onSubmitDelete(): void {
     
-
     this.authService.deleteBook(this.idNum).subscribe({
       next: data => {
         console.log(data);
@@ -180,6 +174,5 @@ export class AdminBoardComponent implements OnInit {
         this.notsuccessDelete = true;
       }
     });
-  }
-  
+  }  
 }

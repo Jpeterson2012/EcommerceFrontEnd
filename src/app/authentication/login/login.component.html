@@ -64,7 +64,7 @@
         
   
         <div class="alert alert-success" *ngIf="isLoggedIn">
-          Logged with permission(s) {{ roles }}.
+          Logged with permission(s) {{ roles[0].slice(5,roles[0].length) }}.
         </div>
   
       </div>

@@ -28,6 +28,10 @@ export class DBService{
         return this.http.get(environment.apiURL + 'books/'+id);
     }
 
+    searchBooks(query: string): Observable<any>{
+        return this.http.get(environment.apiURL + 'books/search/'+query);
+    }
+
     
     
 

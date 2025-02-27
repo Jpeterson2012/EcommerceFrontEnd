@@ -2,6 +2,7 @@ import { Component, TemplateRef, DoCheck, OnDestroy, OnInit, ContentChild, Eleme
 import { CartService } from './Services/cart.service';
 import { AuthService } from './authentication/Services/auth.service';
 import { StorageService } from './authentication/Services/storage.service';
+import { DBService } from './Services/db.service';
 import { environment } from 'src/environment/environment';
 
 import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
@@ -14,13 +15,14 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, DoCheck, OnDestroy {
-  constructor(private offcanvasService: NgbOffcanvas, private modalService: NgbModal,  private cartService: CartService,private storageService: StorageService, private authService: AuthService){}
+  constructor(private dbService: DBService, private offcanvasService: NgbOffcanvas, private modalService: NgbModal,  private cartService: CartService,private storageService: StorageService, private authService: AuthService){}
 
   //Login/Authentication
   private roles: string[] = [];
   isLoggedIn = false;
   showAdminBoard = false;
   showModeratorBoard = false;
+  boardName?: string;
   user?: any;
   username?: string;
   status = false;
@@ -59,8 +61,10 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
 
       if (this.storageService.isLoggedIn() === true)
       {
+        this.storageService.getUser().roles.includes('ROLE_ADMIN') && (this.boardName = 'Admin Board')
+        this.storageService.getUser().roles.includes('ROLE_MODERATOR') && (this.boardName = 'Mod Board')
         this.isLoggedIn = true;
-        this.showAdminBoard = this.storageService.getUser().roles.includes('ROLE_ADMIN');
+        this.showAdminBoard = (this.storageService.getUser().roles.includes('ROLE_ADMIN') || this.storageService.getUser().roles.includes('ROLE_MODERATOR'));
         this.username = this.storageService.getUser().username;
         this.status = true;
       }
@@ -99,12 +103,36 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
   openCustomPanelClass(content: TemplateRef<any>) {
 		this.offcanvasService.open(content, { position: 'end', panelClass: 'bg-dark' });
 	}
+  modalRef: any;
+  query: string = '';
+  searchBooks: any[] = []
+  searched = false;
 
   @ContentChild('content') content2?: ElementRef;
-    openLg(content: any) {
-      console.log('fuck')
-      this.modalService.open(content, { size: 'lg' });
+    openLg(content: any) {      
+      this.modalRef = this.modalService.open(content, { windowClass: 'modalXL' });
+      this.modalRef.result.then(
+        this.searchBooks = [],
+        this.query = '',        
+        this.searched = false
+      )
     }
+  searchDB(){
+    this.dbService.searchBooks(this.query).subscribe(
+      v => {this.searchBooks = v, console.log(v),this.searched = true;}
+    )    
+  }
+
+  closeModal() {      
+    // this.searchBooks = []
+    this.modalRef.close();
+  }
+  onImageLoad(evt:any) {
+    if (evt && evt.target) {
+      const width = evt.target.naturalWidth;      
+      width < 2 && (evt.target.src = '../../assets/bookcoffee.jpg')     
+    }
+  }
     
 
   ngOnDestroy(): void {

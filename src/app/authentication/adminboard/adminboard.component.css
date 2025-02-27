@@ -10,7 +10,9 @@
     width: 80%;
 }
 img{
-    width: 200px;
+    width: 250px;
+    height: auto;
+    border-radius: 16px;
     
 }
 .form-group button{
