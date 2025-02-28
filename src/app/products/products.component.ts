@@ -73,22 +73,19 @@ export class ProductsComponent implements OnInit, OnDestroy{
 
   bookDes = ''
   bookLink = ''
-  //https://openlibrary.org/isbn/01951534481.json
-  async fetchDesc(isbn: string){
-    try{
-      const resp = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`)
-      const data = await resp.json()
-      return data
-    }
-    catch (error) {console.error(error)}
-  }
+  bookLink2 = ''
+  
   @ContentChild('longContent') longContent?: ElementRef
   async openScrollableContent(longContent: any,isbn: string) {
 		this.modalService.open(longContent, { scrollable: true });           
-    let temp = await this.fetchDesc(isbn)
-    console.log(temp)
-    this.bookLink = temp.totalItems === 0 ? '' : temp.items[0]!.volumeInfo.canonicalVolumeLink
-    this.bookDes = temp.totalItems === 0 ? 'Sorry, No Description Found' :temp.items[0]!.volumeInfo.description
+
+    let bookMetaData = await this.db.bookDesc(isbn)
+    let temp: any
+
+    bookMetaData.subscribe(v => {temp = v})        
+    this.bookLink2 = temp.openLibrary.key === undefined ? '' : "https://openlibrary.org/" + temp.openLibrary.key
+    this.bookLink = temp.google.totalItems === 0 ? '' : temp.google.items[0]!.volumeInfo.canonicalVolumeLink
+    this.bookDes = temp.google.totalItems === 0 ? 'Sorry, No Description Found' :temp.google.items[0]!.volumeInfo.description
 	}
   ////////////////////////////////////////////////////
 

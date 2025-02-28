@@ -102,7 +102,7 @@
       <!-- Description Modal -->
     <ng-template #longContent let-modal class="nope">
       <div class="modal-header">
-        <h2 class="modal-title">{{ book.name }}</h2>
+        <h3 class="modal-title">{{ book.name }}</h3>
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
       </div>
       <div class="modal-body">
@@ -112,6 +112,7 @@
           <h3>ISBN: {{book.isbn}}</h3>
         </div>
         <div class="descContainer">
+          <a [href]="bookLink2" target=”_blank”><p>{{bookLink2}}</p></a>
           <a [href]="bookLink" target=”_blank”><p>{{bookLink}}</p></a>
           <p>{{bookDes}}</p>
           <hr>
