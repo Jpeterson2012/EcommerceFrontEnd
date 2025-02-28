@@ -32,7 +32,9 @@ export class DBService{
         return this.http.get(environment.apiURL + 'books/search/'+query);
     }
 
-    
+    bookDesc(): Observable<any>{
+        return this.http.get(environment.apiURL + 'books/desc');
+    }
     
 
     

@@ -108,13 +108,23 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
   searchBooks: any[] = []
   searched = false;
 
+  selectedOption = '';
+  a = 'isbn'
+  options = [
+    { value: 'isbn', label: 'ISBN' },
+    { value: 'name', label: 'Name' },
+    { value: 'auth', label: 'Author' }
+];
+
   @ContentChild('content') content2?: ElementRef;
     openLg(content: any) {      
-      this.modalRef = this.modalService.open(content, { windowClass: 'modalXL' });
+      this.selectedOption = ''
+      this.modalRef = this.modalService.open(content, { windowClass: 'modalXL' });      
       this.modalRef.result.then(
         this.searchBooks = [],
         this.query = '',        
-        this.searched = false
+        this.searched = false,
+        console.log(this.selectedOption)
       )
     }
   searchDB(){
@@ -125,6 +135,7 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
 
   closeModal() {      
     // this.searchBooks = []
+    console.log(this.selectedOption)
     this.modalRef.close();
   }
   onImageLoad(evt:any) {
@@ -133,6 +144,8 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
       width < 2 && (evt.target.src = '../../assets/bookcoffee.jpg')     
     }
   }
+
+  
     
 
   ngOnDestroy(): void {
