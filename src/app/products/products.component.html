@@ -21,6 +21,8 @@
   </div>
 </ng-template>
 
+<button id="scrollButton" (click)="jumpToTop()">Top</button>
+
 
 
 
@@ -114,8 +116,9 @@
         <div class="descContainer">
           <a [href]="bookLink2" target=”_blank”><p>{{bookLink2}}</p></a>
           <a [href]="bookLink" target=”_blank”><p>{{bookLink}}</p></a>
+          <hr style="color: darkred; border: 2px solid;">
           <p>{{bookDes}}</p>
-          <hr>
+          <hr style="color: darkred; border: 2px solid;">
         </div>        
         
       </div>

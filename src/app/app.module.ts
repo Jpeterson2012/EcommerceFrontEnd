@@ -60,7 +60,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     NgbAccordionModule,
     MatPaginatorModule,    
   ],
-  providers: [DBService,ImageService,CartService,httpInterceptorProviders],
+  providers: [DBService,ImageService,CartService,httpInterceptorProviders,{provide: 'Window', useValue: window}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

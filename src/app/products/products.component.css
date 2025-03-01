@@ -16,9 +16,13 @@
     white-space: -pre-wrap; /* Opera 4-6 */    
     white-space: -o-pre-wrap; /* Opera 7 */    
     word-wrap: break-word; /* Internet Explorer 5.5+ */
+    font-family: cursive;
 }
 .descContainer a{
   color: darkred;
+}
+.descContainer p{
+  font-family: cursive;
 }
 img{
     max-height: 500px;
@@ -91,13 +95,39 @@ img{
   .modalForm, .modal-header{
     background-color: burlywood;
   }
+  .modal-title{
+    font-size: 21px;
+  }
   .modalimage{
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin-bottom: 10px;
+    margin-bottom: 10px;    
   }
   h4,.modalimage h3{
     font-family: cursive;
     background-color: burlywood;
   }
+  #scrollButton{
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 10vh; /* Place the button at the bottom of the page */
+  left: 2vw; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: burlywood; /* Set a background color */
+  color: black; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+  width: 80px;
+  height: 40px;
+  line-height: 0px;
+}
+#scrollButton:hover{
+    background: black;
+    color: darkred;
+}
+

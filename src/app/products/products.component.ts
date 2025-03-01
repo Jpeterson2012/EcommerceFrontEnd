@@ -1,4 +1,4 @@
-import { Component, ContentChild, ElementRef, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ContentChild, ElementRef, OnDestroy, OnInit, Inject } from '@angular/core';
 import { books } from '../Models/books';
 import { DBService } from '../Services/db.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -13,7 +13,21 @@ import { ImageService } from '../Services/image.service';
 })
 export class ProductsComponent implements OnInit, OnDestroy{
 
-  constructor(private db: DBService,private modalService: NgbModal,private cartService: CartService,private imageService: ImageService){}
+  constructor(private db: DBService,
+    private modalService: NgbModal,
+    private cartService: CartService,
+    private imageService: ImageService,
+     @Inject('Window') window: Window){
+      window.addEventListener('scroll', function(){
+        let mybutton = document.getElementById('scrollButton')!
+  
+        if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
+          mybutton ? mybutton.style.display = "block" : null
+        } else {
+          mybutton ? mybutton.style.display = "none" : null
+        }
+      })
+    }
 
   available?: any;
   unvailable?: any;
@@ -141,8 +155,25 @@ export class ProductsComponent implements OnInit, OnDestroy{
     if (evt && evt.target) {
       const width = evt.target.naturalWidth;      
       width < 2 && (evt.target.src = '../../assets/bookcoffee.jpg')     
-    }
+    }    
   }
+
+  scrollFunction(){
+    let mybutton = document.getElementById('scrollButton')!
+  
+    if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
+      mybutton ? mybutton.style.display = "block" : null
+    } else {
+      mybutton ? mybutton.style.display = "none" : null
+    }
+    console.log(window)
+  }
+  jumpToTop(){
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+  
+  
 
   ngOnDestroy(): void {}
 }
