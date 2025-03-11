@@ -4,21 +4,77 @@
         <div class="imageContainer">
             <div class="subContainer">        
                 <div class="zoom-img"  *ngFor="let image of books">
-                    <img [src]="image.image" alt="Book Pic" (load)="onImageLoad($event)">
+                    <img [src]="image.image" alt="Book Pic" (load)="onImageLoad($event)" (click)="openScrollableContent2(longContent2, image.isbn)">
+                    <!-- ////////////////////////////////////////////////////////////////// -->
+                    <ng-template #longContent2 let-modal class="nope">
+                        <div class="modal-header">
+                          <h3 class="modal-title" id="modal-title">{{ image.name }}</h3>
+                          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="modalimage">
+                            <img src="{{image.image}}" (load)="onImageLoad($event)">
+                            <h3>By: {{image.auth}}</h3>
+                            <h3>ISBN: {{image.isbn}}</h3>
+                          </div>
+                          <div class="descContainer">
+                            <a [href]="bookLink2" target=”_blank”><p>{{bookLink2}}</p></a>
+                            <a [href]="bookLink" target=”_blank”><p>{{bookLink}}</p></a>
+                            <hr style="color: darkred; border: 2px solid;">
+                            <p>{{bookDes}}</p>
+                            <hr style="color: darkred; border: 2px solid;">
+                          </div>        
+                          
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+                        </div>
+                      </ng-template>
+                      <!-- ////////////////////////////////////////////////////////////////// -->
                 </div>
-                <div class="zoom-img"  *ngFor="let image of books">
+                <!-- <div class="zoom-img"  *ngFor="let image of books">
                     <img [src]="image.image" alt="Book Pic" (load)="onImageLoad($event)">
-                </div>
+                </div> -->
             </div>
         </div>
+
+
+
+
         <div class="imageContainer2">
             <div class="subContainer2">        
                 <div class="zoom-img2"  *ngFor="let image of books2">
-                    <img [src]="image.image" alt="Book Pic" (load)="onImageLoad($event)">
+                    <img [src]="image.image" alt="Book Pic" (load)="onImageLoad($event)" (click)="openScrollableContent3(longContent3, image.isbn)">
+                    <!-- ///////////////////////////////////////////////////////////////// -->
+                    <ng-template #longContent3 let-modal class="nope">
+                        <div class="modal-header">
+                          <h3 class="modal-title">{{ image.name }}</h3>
+                          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="modalimage">
+                            <img src="{{image.image}}" (load)="onImageLoad($event)">
+                            <h3>By: {{image.auth}}</h3>
+                            <h3>ISBN: {{image.isbn}}</h3>
+                          </div>
+                          <div class="descContainer">
+                            <a [href]="bookLink2" target=”_blank”><p>{{bookLink2}}</p></a>
+                            <a [href]="bookLink" target=”_blank”><p>{{bookLink}}</p></a>
+                            <hr style="color: darkred; border: 2px solid;">
+                            <p>{{bookDes}}</p>
+                            <hr style="color: darkred; border: 2px solid;">
+                          </div>        
+                          
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+                        </div>
+                      </ng-template>
+                      <!-- ////////////////////////////////////////////////////////////////// -->
                 </div>
-                <div class="zoom-img2"  *ngFor="let image of books2">
+                <!-- <div class="zoom-img2"  *ngFor="let image of books2">
                     <img [src]="image.image" alt="Book Pic" (load)="onImageLoad($event)">
-                </div>
+                </div> -->
             </div>
         </div>
         
@@ -27,6 +83,3 @@
     <app-home2></app-home2>
     <br><br><br><br>
 </div>
-
-
-
