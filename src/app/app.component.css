@@ -19,6 +19,7 @@ a{
     position: fixed;
     bottom: 0pt;
     left: 0pt;
+    z-index: 3;
 }   
 .footerContents {
     height:24px; 

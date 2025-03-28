@@ -60,7 +60,7 @@
   </div>
 
   <div class="subcontainer">
-    <div class="wrapper" *ngFor="let book of books">
+    <div class="wrapper" *ngFor="let book of books; let i = index">
       <!-- Search function -->
       <ng-container
         *ngIf="searchText === '' || (book.name.toLowerCase().includes(searchText) || book.auth.toLowerCase().includes(searchText))">
@@ -85,7 +85,7 @@
 
           <div class="card text-white bg-dark" style="width: 20rem; height: 28rem">
             <div class="stage">
-              <div class="heart"></div>
+              <div class="heart" id="{{'heart' + i}}" (click)="heartAnimation('heart' + i)"></div>
             </div>
             <div class="zoom">
               <!-- Custom image mapping function -->

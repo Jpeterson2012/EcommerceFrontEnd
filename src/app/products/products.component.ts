@@ -37,6 +37,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
   pageSize = 50
   totalItems = 0
   cachedData: any[] = []
+  heart = document.getElementById('heart')!
 
   loadData(){    
     if (this.cachedData.length !== 0 && this.cachedData[0].size === this.pageSize && this.cachedData[0].page === this.currentPage){
@@ -61,6 +62,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.db.getTotalBooks().subscribe(v => {this.totalItems = v,console.log(v)})
     this.loadData()
+    
     //http get request
     // this.db.getBooks().subscribe(v=>{
     //   this.books = v;
@@ -158,19 +160,17 @@ export class ProductsComponent implements OnInit, OnDestroy{
     }    
   }
 
-  scrollFunction(){
-    let mybutton = document.getElementById('scrollButton')!
-  
-    if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
-      mybutton ? mybutton.style.display = "block" : null
-    } else {
-      mybutton ? mybutton.style.display = "none" : null
-    }
-    console.log(window)
-  }
+ 
   jumpToTop(){
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
+  }
+
+  heartAnimation(id: any){
+    console.log(id)
+    document.getElementById(id)!.classList.toggle("is-active")
+    console.log(document.getElementById(id)!.classList)
+    //this.heart.classList.toggle('is-active')
   }
   
   
