@@ -1,9 +1,10 @@
-import { Component, ContentChild, ElementRef, OnDestroy, OnInit, Inject } from '@angular/core';
+import { Component, ContentChild, ElementRef, OnDestroy, OnInit, Inject, Output, ViewChild, EventEmitter } from '@angular/core';
 import { books } from '../Models/books';
 import { DBService } from '../Services/db.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CartService } from '../Services/cart.service';
 import { ImageService } from '../Services/image.service';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-products',
@@ -12,7 +13,7 @@ import { ImageService } from '../Services/image.service';
   // encapsulation: ViewEncapsulation.None
 })
 export class ProductsComponent implements OnInit, OnDestroy{
-
+  
   constructor(private db: DBService,
     private modalService: NgbModal,
     private cartService: CartService,
@@ -27,8 +28,15 @@ export class ProductsComponent implements OnInit, OnDestroy{
           mybutton ? mybutton.style.display = "none" : null
         }
       })
-    }
-
+    }    
+  //Mat select variables
+  pageIndex: number = 0;    
+  goTo: number = 0;
+  pageNumbers: number[] = [];
+  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+  @Output() page = new EventEmitter<PageEvent>();
+  /////////////////////
+    
   available?: any;
   unvailable?: any;
 
@@ -36,8 +44,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
   currentPage = 1
   pageSize = 50
   totalItems = 0
-  cachedData: any[] = []
-  heart = document.getElementById('heart')!
+  cachedData: any[] = []  
 
   loadData(){    
     if (this.cachedData.length !== 0 && this.cachedData[0].size === this.pageSize && this.cachedData[0].page === this.currentPage){
@@ -58,27 +65,10 @@ export class ProductsComponent implements OnInit, OnDestroy{
     }
   }
   
-
   ngOnInit(): void {
-    this.db.getTotalBooks().subscribe(v => {this.totalItems = v,console.log(v)})
-    this.loadData()
-    
-    //http get request
-    // this.db.getBooks().subscribe(v=>{
-    //   this.books = v;
-    //   this.books.forEach((a:any)=>{
-    //     Object.assign(a,{quantity:1,total:a.price});
-    //   })
-    // })
-  }
-  onPageChange(pageNumber: any){    
-    this.cachedData.length === 2 ? this.cachedData.shift() : null
-    this.cachedData.push({"page": this.currentPage, "size": this.pageSize, "books": this.books})    
-
-    this.currentPage = pageNumber.pageIndex + 1
-    this.pageSize = pageNumber.pageSize
-    this.loadData()
-  }
+    this.db.getTotalBooks().subscribe(v => {this.totalItems = v,console.log(v),this.updateGoto()})
+    this.loadData()    
+  }  
 
   //Modal pop up functionality///////////////////////////
   @ContentChild('content') content?: ElementRef;
@@ -160,23 +150,92 @@ export class ProductsComponent implements OnInit, OnDestroy{
     }    
   }
 
- 
+ //Function thats called when top button is clicked
   jumpToTop(){
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   }
+  //Function thats called when favoriting a book
+  heartAnimation(heartID: any,bookID: any){
+    // console.log(id)
+    // console.log(book)
+    let temp = sessionStorage.getItem("favorites") ? JSON.parse(sessionStorage.getItem("favorites")!) : {}
+    temp[bookID] ? delete temp[bookID] : temp[bookID] = true
+    sessionStorage.setItem("favorites",JSON.stringify(temp))
+    document.getElementById(heartID)!.classList.toggle("is-active")        
+  }
+  //Get favorites from session storage
+  getFavorites(bookID: any){
+    let temp = JSON.parse(sessionStorage.getItem("favorites")!)
+    if (!temp) return false
 
-  heartAnimation(id: any){
-    console.log(id)
-    document.getElementById(id)!.classList.toggle("is-active")
-    console.log(document.getElementById(id)!.classList)
-    //this.heart.classList.toggle('is-active')
+    if (temp[bookID]) return true
+    else return false
+  }
+
+  //Page change event using arrows
+  onPageChange(pageNumber: any){    
+    this.cachedData.length === 2 ? this.cachedData.shift() : null
+    this.cachedData.push({"page": this.currentPage, "size": this.pageSize, "books": this.books})    
+
+    this.currentPage = pageNumber.pageIndex + 1
+    this.updateGoto()
+    this.pageSize = pageNumber.pageSize
+    this.loadData()
+    this.jumpToTop()
   }
   
-  
+  //Page change events using mat select field
+  updateGoto() {
+    this.goTo = this.currentPage;
+    this.pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(this.totalItems / this.pageSize); i++) {
+      this.pageNumbers.push(i);
+    }    
+  }
+
+  paginationChange(pageEvt: PageEvent) {
+    this.totalItems = pageEvt.length;
+    this.pageIndex = pageEvt.pageIndex;
+    this.pageSize = pageEvt.pageSize;
+    this.updateGoto();
+    this.emitPageEvent(pageEvt);
+  }
+
+  goToChange() {
+    this.paginator!.pageIndex = this.goTo - 1;
+    const event: PageEvent = {
+      length: this.paginator!.length,
+      pageIndex: this.paginator!.pageIndex,
+      pageSize: this.paginator!.pageSize
+    };
+    this.paginator!.page.next(event);
+    this.emitPageEvent(event);
+  }
+
+  emitPageEvent(pageEvent: PageEvent) {
+    this.page.next(pageEvent);
+  }
+  /////////////////////////////////////////
 
   ngOnDestroy(): void {}
 }
 
+
+
+// ngOnInit(): void {
+//   this.db.getTotalBooks().subscribe(v => {this.totalItems = v,console.log(v),this.updateGoto()})
+//   this.loadData()    
   
+//   //http get request
+//   // this.db.getBooks().subscribe(v=>{
+//   //   this.books = v;
+//   //   this.books.forEach((a:any)=>{
+//   //     Object.assign(a,{quantity:1,total:a.price});
+//   //   })
+//   // })
+// }
+  
+
+
 

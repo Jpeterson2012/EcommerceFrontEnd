@@ -85,7 +85,7 @@
 
           <div class="card text-white bg-dark" style="width: 20rem; height: 28rem">
             <div class="stage">
-              <div class="heart" id="{{'heart' + i}}" (click)="heartAnimation('heart' + i)"></div>
+              <div [ngClass]="getFavorites(book.id) ? 'heart is-active' : 'heart'" id="{{'heart' + i}}" (click)="heartAnimation('heart' + i,book.id)"></div>
             </div>
             <div class="zoom">
               <!-- Custom image mapping function -->
@@ -136,16 +136,21 @@
 
     </div>
   </div>
-
+  <div class="go-to-container" style="display: flex; justify-content: end; align-items: start;">
+    <mat-form-field style="width: 90px">
+			<mat-select [(ngModel)]="goTo" (selectionChange)="goToChange()">
+				<mat-option *ngFor="let pageNumber of pageNumbers" [value]="pageNumber">{{pageNumber}}</mat-option>
+			</mat-select>
+		</mat-form-field>
   <mat-paginator
     [length]="totalItems"
     [pageSize]="pageSize"
     [pageIndex]="currentPage - 1"
-    [pageSizeOptions]="[10,25,50,100]"
+    [pageSizeOptions]="[25,50,100,250]"
     (page)="onPageChange($event)"
     aria-label="Select Page"
-  >
-  </mat-paginator>
-
+    showFirstLastButtons="true"
+  >  
+  </mat-paginator>    			    
 </div>
 <div class="fas fa-search search-icon"></div>

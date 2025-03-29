@@ -117,19 +117,19 @@ img{
   z-index: 99; /* Make sure it does not overlap */
   border: none; /* Remove borders */
   outline: none; /* Remove outline */
-  background-color: burlywood; /* Set a background color */
-  color: black; /* Text color */
+  background-color: black; /* Set a background color */
+  color: burlywood; /* Text color */
   cursor: pointer; /* Add a mouse pointer on hover */
   padding: 15px; /* Some padding */
   border-radius: 10px; /* Rounded corners */
   font-size: 18px; /* Increase font size */
+  font-weight: bolder;
   width: 80px;
   height: 40px;
   line-height: 0px;
 }
-#scrollButton:hover{
-    background: black;
-    color: darkred;
+#scrollButton:hover{    
+    color: rgb(128, 107, 78);
 }
 
 
@@ -141,8 +141,8 @@ img{
   background-position: 0 0;
   cursor: pointer;
   transition: background-position 1s steps(28);
-  transition-duration: 0s;
-  
+  transition-duration: 0s;  
+
   &.is-active {
     transition-duration: 1s;
     background-position: -2800px 0;
@@ -150,16 +150,9 @@ img{
 }
 
 .stage {
-  /* position: fixed;
-  top: 50%;
-  left: 50%;
-  */
-  position: relative;
   transform: translate(-50%, -50%);
-  margin-top: 25px;
+  bottom: -65px;
   margin-left: 80%;
   position: absolute;
-  z-index: 2;
-  max-width: 100px;
-  max-height: 100px;
+  z-index: 2;  
 }

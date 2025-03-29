@@ -30,6 +30,8 @@ import { ProfileComponent } from './authentication/profile/profile.component';
 import { AdminBoardComponent } from './authentication/adminboard/adminboard.component';
 
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     BrowserAnimationsModule,
     MatSnackBarModule,
     NgbAccordionModule,
-    MatPaginatorModule,    
+    MatPaginatorModule,
+    MatInputModule,    
+    MatSelectModule,
   ],
   providers: [DBService,ImageService,CartService,httpInterceptorProviders,{provide: 'Window', useValue: window}],
   bootstrap: [AppComponent]
