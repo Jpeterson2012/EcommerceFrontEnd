@@ -68,6 +68,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.db.getTotalBooks().subscribe(v => {this.totalItems = v,console.log(v),this.updateGoto()})
     this.loadData()    
+    this.db.getTotalSearch('calculus').subscribe(v => {console.log(v)})
   }  
 
   //Modal pop up functionality///////////////////////////

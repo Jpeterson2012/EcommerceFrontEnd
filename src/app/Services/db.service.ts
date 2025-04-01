@@ -12,6 +12,9 @@ export class DBService{
     getTotalBooks(): Observable<any>{
         return this.http.get(environment.apiURL + 'books/total')
     }
+    getTotalSearch(query: string): Observable<any>{
+        return this.http.get(environment.apiURL + 'books/total/'+query)
+    }
 
     getBooks(page: number, pageSize: number): Observable<any>{
         let params =  new HttpParams()
