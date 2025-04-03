@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CartService } from '../Services/cart.service';
 import { ImageService } from '../Services/image.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { DetailsComponent } from '../details/details.component';
 
 @Component({
   selector: 'app-products',
@@ -29,6 +30,11 @@ export class ProductsComponent implements OnInit, OnDestroy{
         }
       })
     }    
+    @ViewChild('details') private detailsComponent: DetailsComponent | undefined
+    async openModal(){
+      return await this.detailsComponent!.openScrollableContent()
+    }
+
   //Mat select variables
   pageIndex: number = 0;    
   goTo: number = 0;

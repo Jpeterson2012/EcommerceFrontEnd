@@ -1,0 +1,16 @@
+.modalForm, .modal-header{
+    background-color: burlywood;
+  }
+  .modal-title{
+    font-size: 21px;
+  }
+  .modalimage{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 10px;    
+  }
+  h4,.modalimage h3{
+    font-family: cursive;
+    background-color: burlywood;
+  }

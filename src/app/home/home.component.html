@@ -1,15 +1,8 @@
 <div class="wrapper">
 
   <ng-template #bookLoader>
-    <div class="loader book">
-      <figure class="page"></figure>
-      <figure class="page"></figure>
-      <figure class="page"></figure>
-    </div>
+    <app-loader></app-loader>
   </ng-template>
-
-
-
 
     <h3><strong>Popular Books</strong></h3>
     <div class="container" *ngIf="books.length > 0; else bookLoader">

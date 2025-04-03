@@ -1,0 +1,24 @@
+<ng-template #details>
+    <div class="modal-header">
+      <h3 class="modal-title">{{ book.name }}</h3>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <div class="modalimage">
+        <img src="{{book.image}}" (load)="onImageLoad($event)">
+        <h3>By: {{book.auth}}</h3>
+        <h3>ISBN: {{book.isbn}}</h3>
+      </div>
+      <div class="descContainer">
+        <a [href]="bookLink2" target=”_blank”><p>{{bookLink2}}</p></a>
+        <a [href]="bookLink" target=”_blank”><p>{{bookLink}}</p></a>
+        <hr style="color: darkred; border: 2px solid;">
+        <p>{{bookDes}}</p>
+        <hr style="color: darkred; border: 2px solid;">
+      </div>        
+      
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>

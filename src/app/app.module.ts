@@ -32,6 +32,7 @@ import { AdminBoardComponent } from './authentication/adminboard/adminboard.comp
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { MatSelectModule } from '@angular/material/select';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    AdminBoardComponent,    
+    AdminBoardComponent,
+    LoaderComponent,    
   ],
   imports: [
     BrowserModule,
