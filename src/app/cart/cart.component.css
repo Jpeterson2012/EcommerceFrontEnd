@@ -60,13 +60,17 @@ th,td{
     display: flex;
     justify-content: center;
     /* align-items: flex-start */
-    gap: 30px;
+    gap: 30px;    
+}
+.plusminus p{
+    font-size: 17px;
+    padding-top: 10px;
 }
 .plusminus button{
     background: none;
     border: none;
-    padding-top: none;
+    padding-top: none;    
 }
-.plusminus h4{
-    font-size: 30px;
+.plusminus h4{    
+    height: fit-content;
 }

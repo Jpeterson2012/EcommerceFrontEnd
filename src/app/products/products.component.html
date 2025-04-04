@@ -47,7 +47,7 @@
           *ngIf="productsCountRadioButton === 'All' || productsCountRadioButton === returnAvail(book)">
 
           <div class="card-header">
-            <ul class="nav nav-pills card-header-pills">
+            <ul class="nav nav-pills card-header-pills" style="display: flex; justify-content: center;">
               <li class="nav-item">
                 <button class="btn btn-success" *ngIf="book.qty != 0; else notifyme" (click)="addToCart(book)">Add To
                   Cart</button>
@@ -56,8 +56,8 @@
                     Me</button></ng-template>
               </li>
               <li class="nav-item">
-                <button class="btn btn-dark"  (click)="openModal()">Details</button>
-                <details #details [book]="book"></details>
+                <button class="btn btn-dark"  (click)="openModal(book)">Details</button>
+                <details hidden #details></details>
               </li>
             </ul>
           </div>

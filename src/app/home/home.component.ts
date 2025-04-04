@@ -1,9 +1,9 @@
-import { Component, ContentChild, ElementRef, OnInit } from '@angular/core';
+import { Component, ContentChild, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DBService } from '../Services/db.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageService } from '../Services/image.service';
 import { books } from '../Models/books';
-
+import { DetailsComponent } from '../details/details.component';
 
 @Component({
   selector: 'app-home',
@@ -33,6 +33,10 @@ export class HomeComponent implements OnInit{
       }
     )    
   } 
+  @ViewChild('details') private detailsComponent: DetailsComponent | undefined
+      async openModal(book: any){
+        return await this.detailsComponent!.openScrollableContent(book)
+      }
 
   @ContentChild('longContent') longContent?: ElementRef
   openScrollableContent(longContent: any) {

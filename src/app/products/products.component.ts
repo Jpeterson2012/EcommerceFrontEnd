@@ -31,8 +31,8 @@ export class ProductsComponent implements OnInit, OnDestroy{
       })
     }    
     @ViewChild('details') private detailsComponent: DetailsComponent | undefined
-    async openModal(){
-      return await this.detailsComponent!.openScrollableContent()
+    async openModal(book: any){
+      return await this.detailsComponent!.openScrollableContent(book)
     }
 
   //Mat select variables
