@@ -28,7 +28,7 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
   status = false;
   url = environment.homeURL;
 
-
+  public slink: string = "https://www.buymeacoffee.com/BooksnCrannies"
 
   public totalItem: number = 0;
   ngOnInit(): void {

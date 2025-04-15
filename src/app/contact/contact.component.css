@@ -60,3 +60,8 @@ input[type=text], select, textarea {
     display: block;
     /* width: 450px; */
   }
+  @media (min-height: 1000px){
+    .container{
+        height: 100vh;
+    }
+  }

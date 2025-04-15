@@ -32,8 +32,8 @@
 
           <ul (click)="offcanvas.close('Close click')" class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
             <li class="nav-item">
-               
-              <a (click)="offcanvas.close('Close click')"  class="nav-link"  href="/register" [routerLink]="['register']">Sign Up</a>
+               <!-- href="/register" [routerLink]="['register']" -->
+              <a (click)="offcanvas.close('Close click')"  class="nav-link"  >Sign Up</a>
             </li>
             <li class="nav-item">
               <a (click)="offcanvas.close('Close click')"  class="nav-link" href="/login" [routerLink]="['login']">Login</a>
@@ -179,8 +179,8 @@
 
           <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
             <li class="nav-item">
-               
-              <a  class="nav-link" href="/register" [routerLink]="['register']" >Sign Up</a>
+               <!--href="/register" [routerLink]="['register']"  -->
+              <a  class="nav-link"  >Sign Up</a>
             </li>
             <li class="nav-item">
               <!-- href="/login" [routerLink]="['login']" -->
@@ -227,33 +227,32 @@
   <router-outlet></router-outlet>
   
   <div class="footer">
-    <div class="footerContents">Follow us @BooksAndCrannies:
-      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer"><img
+    <div class="footerContents">
+      <a class="firstSocial">Follow us @BooksnCrannies:</a>
+      <a [href]=slink target="_blank" rel="noopener noreferrer"><img
           class="social" src="../assets/footer/myspace.png"></a>
-      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer"><img
+      <a [href]=slink target="_blank" rel="noopener noreferrer"><img
           class="social" src="../assets/footer/facebook.png"></a>
-      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer"><img
+      <a [href]=slink target="_blank" rel="noopener noreferrer"><img
           class="social" src="../assets/footer/twitter.png"></a>
-      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer"><img
+      <a [href]=slink target="_blank" rel="noopener noreferrer"><img
           class="social" src="../assets/footer/instagram.png"></a>
-      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer"><img
+      <a [href]=slink target="_blank" rel="noopener noreferrer"><img
           class="social" src="../assets/footer/reddit.png"></a>
-      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer"><img
+      <a [href]=slink target="_blank" rel="noopener noreferrer"><img
           class="social" src="../assets/footer/tumblr.png"></a>
-      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer"><img
+      <a [href]=slink target="_blank" rel="noopener noreferrer"><img
           class="social" src="../assets/footer/snapchat.png"></a>
-      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer"><img
+      <a [href]=slink target="_blank" rel="noopener noreferrer"><img
           class="social" src="../assets/footer/vine.png"></a>
-      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer"><img
+      <a [href]=slink target="_blank" rel="noopener noreferrer"><img
           class="social" src="../assets/footer/youtube.png"></a>
-      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer"><img
+      <a [href]=slink target="_blank" rel="noopener noreferrer"><img
           class="social" src="../assets/footer/twitch.png"></a>
-      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer"><img
+      <a [href]=slink target="_blank" rel="noopener noreferrer"><img
           class="social" src="../assets/footer/pinterest.png"></a>
-      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer"><img
+      <a [href]=slink target="_blank" rel="noopener noreferrer"><img
           class="social" src="../assets/footer/tiktok.png"></a>
-      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer"><img
-          class="social" src="../assets/footer/spotify.png"></a>
     </div>
 
   </div>

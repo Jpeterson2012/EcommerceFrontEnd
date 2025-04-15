@@ -23,7 +23,7 @@ export class SearchComponent implements OnInit {
   searchTextChanged: EventEmitter<string> = new EventEmitter<string>();
 
   onSearchTextChanged(){
-    this.searchTextChanged.emit(this.searchValue);
+    this.searchTextChanged.emit(this.searchValue.toLowerCase());
   }
 
 }

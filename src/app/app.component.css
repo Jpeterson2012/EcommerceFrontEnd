@@ -21,6 +21,9 @@ a{
     left: 0pt;
     z-index: 3;
 }   
+.firstSocial{
+    color: black;
+}
 .footerContents {
     height:24px; 
     width: 1000px;
@@ -61,6 +64,22 @@ form{
 }
 .modalForm, .modal-header, .modal-body, .modal-footer{
     background-color: burlywood;
-  }
+}
+
+@media(max-width: 700px) or (max-height: 500px){
+    .footer{
+        height: 100px;
+    }
+    .firstSocial{
+        width: 100%;
+    }
+    .footerContents{
+        height: 100px;
+        width: 100vw;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
 
 
