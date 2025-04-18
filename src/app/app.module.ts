@@ -33,6 +33,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { LoaderComponent } from './loader/loader.component';
+import { BookComponent } from './book/book.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { LoaderComponent } from './loader/loader.component';
     RegisterComponent,
     ProfileComponent,
     AdminBoardComponent,
-    LoaderComponent,    
+    LoaderComponent,
+    BookComponent,    
   ],
   imports: [
     BrowserModule,

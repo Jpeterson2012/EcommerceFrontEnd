@@ -1,0 +1,31 @@
+<div class="bookContainer">
+
+          <div class="card-header">
+            <ul class="nav nav-pills card-header-pills" style="display: flex; justify-content: center;">
+              <li class="nav-item">
+                <button id="bookButton" class="btn btn-success" *ngIf="book.qty != 0; else notifyme" (click)="addToCart(book)">Add To
+                  Cart</button>
+                <!-- Modal function call here -->
+                <ng-template #notifyme><button id="bookButton" class="btn btn-danger" (click)="openLg(content)">Notify
+                    Me</button></ng-template>
+              </li>
+              <li class="nav-item">
+                <button id="bookButton" class="btn btn-dark"  (click)="openModal(book)">Details</button>
+                <details hidden #details></details>
+              </li>
+            </ul>
+          </div>
+          <div class="card text-white bg-dark" style="width: 20rem; height: 28rem">
+            <div class="stage">
+              <div [ngClass]="getFavorites(book.id) ? 'heart is-active' : 'heart'" id="{{'heart' + i}}" (click)="heartAnimation('heart' + i,book.id)"></div>
+            </div>
+            <div class="zoom">
+              <!-- Custom image mapping function -->
+              <!-- <img class="card-img-top" src="{{emitImage(book)}}" alt="Card image cap"> -->               
+              <img class="card-img-top" src={{book.image}} alt="Card image cap" (load)="onImageLoad($event)">
+            </div>
+            <p class="card-text">Current Stock: {{book.qty}}</p>
+            <p class="card-text">${{book.price}}</p>
+          </div>
+
+</div>

@@ -1,24 +1,28 @@
 .container{
     background-color: burlywood;
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     min-width: 100%;
     padding-bottom: 150px;
 }
-.leftside{
-  display: flex;
-  flex-direction: column;
-  max-width: 530px;
+.page{
+  font-size: 30px;
+  font-family: fantasy;
+  margin-top: 20px;
 }
 img{
   border-radius: 20px;
   display: block;
-  width: 100%;
+  width: 50%;
+  height: 100vh;
 }
-h5{
-    margin-top: 20px;
+label{
+  font-size: 20px;
+  font-family: fantasy;
 }
-input[type=text], select, textarea {
+input[type=text], input[type=email], select, textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -44,24 +48,39 @@ input[type=text], select, textarea {
     border-radius: 5px;
     background-color: burlywood;
     padding: 20px;
-    /* display: flex;
-    max-width: 950px; */
+    display: flex;
+    justify-content: space-around;
+    gap: 5px;
   }
   .lol{
+    width: 40%;
     display: flex;
     flex-direction: column;
-    
   }
-  .name{
-    display: flex;
-    gap: 10px;
+  @media(max-width: 700px) or (max-height: 500px){
+    .formbox{
+      flex-direction: column;
+    }
+    img{
+      width: 100%;
+      height: 250px;
+    }
+    .lol{
+      width: 100%;
+    }
   }
-  .textname label, .textname input{
-    display: block;
-    /* width: 450px; */
-  }
+  
+  
   @media (min-height: 1000px){
+    .formbox{
+      width: 100%;
+      gap: 10px;
+    }
+    img{
+      width: 50%;
+      height: 60vh;
+    }
     .container{
-        height: 100vh;
+      height: 92vh;
     }
   }

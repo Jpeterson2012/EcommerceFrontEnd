@@ -5,3 +5,27 @@
     display: flex;
     justify-content: center;
 }
+.wrapper{
+    display: flex;
+}
+@media(max-width: 700px) or (max-height: 500px){
+    
+    .filter-container{        
+        flex-direction: column;
+        align-items: center;
+    }    
+    .wrapper{
+        flex-direction: column;        
+    }
+    .filterClass{
+        display: flex;        
+        min-width: 40vw;
+    }
+    .filterClass span{
+        margin-right: auto;
+    }
+    .spanHeader{
+        display: flex;
+        justify-content: center;
+    }
+  }

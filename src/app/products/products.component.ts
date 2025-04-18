@@ -51,6 +51,9 @@ export class ProductsComponent implements OnInit, OnDestroy{
   pageSize = 50
   totalItems = 0
   cachedData: any[] = []  
+  getViewWidth(){
+    return window.innerWidth
+  }
 
   loadData(){    
     if (this.cachedData.length !== 0 && this.cachedData[0].size === this.pageSize && this.cachedData[0].page === this.currentPage){
@@ -90,6 +93,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
   
   @ContentChild('longContent') longContent?: ElementRef
   async openScrollableContent(longContent: any,isbn: string) {
+    console.log(this.getViewWidth())
 		this.modalService.open(longContent, { scrollable: true });           
 
     let bookMetaData = await this.db.bookDesc(isbn)
@@ -125,6 +129,9 @@ export class ProductsComponent implements OnInit, OnDestroy{
   onFilterRadioButtonChanged(data: string){
     this.productsCountRadioButton = data;
   }
+  productsCount(){
+    return this.productsCountRadioButton
+  }
 
   returnAvail(book: any){
     if (book.qty === '0')
@@ -140,6 +147,9 @@ export class ProductsComponent implements OnInit, OnDestroy{
   searchText: string = '';
   onSearchTextEntered(data: string){
     this.searchText = data;
+  }
+  onSearch(){
+    return this.searchText
   }
   ////////////////////////////////////////////////////
 

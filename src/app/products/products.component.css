@@ -36,17 +36,28 @@ img{
 }
 /* Product card zoom */
 
-.subcontainer{    
+.mobileBookView{    
     display: flex;
+    justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
     border-top: 6px solid darkred;
-    border-bottom: 6px solid darkred;
+    border-bottom: 6px solid darkred;    
+    margin-bottom: 20px;
+    gap: 10px;
+    
     
 }  
 .wrapper{
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: max-content;
+  margin-top: 20px;
+}
+.wrapper2{
+  margin-top: 20px;
+  width: 100%;
 }
 .filtering{
     display: flex;
@@ -155,4 +166,13 @@ img{
   margin-left: 80%;
   position: absolute;
   z-index: 2;  
+}
+@media(max-width: 700px) or (max-height: 500px){
+  .container{
+    padding-bottom: 150px;
+  }  
+  .filtering{
+    display: flex;
+    flex-direction: column;
+  }
 }

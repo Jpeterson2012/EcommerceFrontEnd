@@ -16,7 +16,7 @@
     margin-bottom: 20px;
     
     align-items: center;
-    gap: 50px;
+    
     width: 70%;
 }
 .bottom{
@@ -53,7 +53,7 @@ img{
         width: 100%;
     }
     .top{
-        max-width: 100%;
+        width: 90%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -61,7 +61,7 @@ img{
         
     }
     .top img{
-        width: 300px;
+        width: 100%;
         height: auto;
     }
     
@@ -72,19 +72,15 @@ img{
         /* max-width: 100px; */
         flex-wrap: wrap;
     }
-    .bottom{
-        
-        max-width: 70%;
-        align-items: center;
-        justify-content: center;
-        /* flex-wrap: wrap; */
+    .bottom{        
+        width: 95%;    
     }
 }
 @media (min-height: 1000px){
-    .container{
-        height: 100vh;
+    .bottom{
+        font-size: 27px;
     }
-    .container2{
-        height: 100vh;
+    .bottomHeader{
+        font-size: 30px !important;
     }
 }

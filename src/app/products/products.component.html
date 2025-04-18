@@ -25,6 +25,26 @@
   <app-loader></app-loader>
 </ng-template>
 
+<ng-template #mobileProd>
+  <div class="wrapper2" *ngFor="let book of books; let i = index">    
+    
+    
+
+        <div *ngIf="i % 10 == 0" class="row" style="display: flex; flex-wrap: nowrap; overflow-x: auto;">
+          <div *ngFor="let subBook of books.slice(i, i + 10)" class="col">
+            <ng-container *ngIf="searchText === '' || (subBook.name.toLowerCase().includes(searchText) || subBook.auth.toLowerCase().includes(searchText))">
+              <div class="transition" *ngIf="productsCountRadioButton === 'All' || productsCountRadioButton === returnAvail(subBook)">
+            <app-book [book]="subBook" [i]="i" ></app-book>
+            </div>          
+    </ng-container>
+          </div>
+        </div>
+
+      
+
+  </div>
+</ng-template>
+
 <button id="scrollButton" (click)="jumpToTop()">Top</button>
 
 <!-- Main product display -->
@@ -38,79 +58,21 @@
   </div>
 
   <div class="subcontainer" *ngIf="books.length > 0; else bookLoader">
-    <div class="wrapper" *ngFor="let book of books; let i = index">
-      <!-- Search function -->
-      <ng-container
-        *ngIf="searchText === '' || (book.name.toLowerCase().includes(searchText) || book.auth.toLowerCase().includes(searchText))">
-        <!-- Radio function display -->
-        <div class="transition"
-          *ngIf="productsCountRadioButton === 'All' || productsCountRadioButton === returnAvail(book)">
+    <div class="mobileBookView" *ngIf="getViewWidth() > 500; else mobileProd">
+      <div class="wrapper" *ngFor="let book of books; let i = index">
 
-          <div class="card-header">
-            <ul class="nav nav-pills card-header-pills" style="display: flex; justify-content: center;">
-              <li class="nav-item">
-                <button class="btn btn-success" *ngIf="book.qty != 0; else notifyme" (click)="addToCart(book)">Add To
-                  Cart</button>
-                <!-- Modal function call here -->
-                <ng-template #notifyme><button class="btn btn-danger" (click)="openLg(content)">Notify
-                    Me</button></ng-template>
-              </li>
-              <li class="nav-item">
-                <button class="btn btn-dark"  (click)="openModal(book)">Details</button>
-                <details hidden #details></details>
-              </li>
-            </ul>
-          </div>
+        <ng-container *ngIf="searchText === '' || (book.name.toLowerCase().includes(searchText) || book.auth.toLowerCase().includes(searchText))">
+          <div class="transition" *ngIf="productsCountRadioButton === 'All' || productsCountRadioButton === returnAvail(book)">
+          
+            <app-book [book]="book" [i]="i"></app-book>
 
-          <div class="card text-white bg-dark" style="width: 20rem; height: 28rem">
-            <div class="stage">
-              <div [ngClass]="getFavorites(book.id) ? 'heart is-active' : 'heart'" id="{{'heart' + i}}" (click)="heartAnimation('heart' + i,book.id)"></div>
-            </div>
-            <div class="zoom">
-              <!-- Custom image mapping function -->
-              <!-- <img class="card-img-top" src="{{emitImage(book)}}" alt="Card image cap"> -->               
-              <img class="card-img-top" src={{book.image}} alt="Card image cap" (load)="onImageLoad($event)">
-            </div>
-            <p class="card-text">Current Stock: {{book.qty}}</p>
-            <p class="card-text">${{book.price}}</p>
-          </div>
+          </div>          
+        </ng-container>
 
-        </div>
-
-      </ng-container>
-
-
-
-
-
-      <!-- Description Modal -->
-    <ng-template #longContent let-modal class="nope">
-      <div class="modal-header">
-        <h3 class="modal-title">{{ book.name }}</h3>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
       </div>
-      <div class="modal-body">
-        <div class="modalimage">
-          <img src="{{book.image}}" (load)="onImageLoad($event)">
-          <h3>By: {{book.auth}}</h3>
-          <h3>ISBN: {{book.isbn}}</h3>
-        </div>
-        <div class="descContainer">
-          <a [href]="bookLink2" target=”_blank”><p>{{bookLink2}}</p></a>
-          <a [href]="bookLink" target=”_blank”><p>{{bookLink}}</p></a>
-          <hr style="color: darkred; border: 2px solid;">
-          <p>{{bookDes}}</p>
-          <hr style="color: darkred; border: 2px solid;">
-        </div>        
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
-      </div>
-    </ng-template>
-
     </div>
   </div>
+  
   <div class="go-to-container" style="display: flex; justify-content: end; align-items: start;">
     <mat-form-field style="width: 90px">
 			<mat-select [(ngModel)]="goTo" (selectionChange)="goToChange()">

@@ -1,0 +1,59 @@
+.bookContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 20px;    
+}
+img{
+    max-height: 500px;
+    min-height: 500px;
+    transition: transform .4s;
+}
+.zoom:hover img{
+    transform: scale(1.1);
+    transform-origin: 50% 50%;
+}
+.zoom{
+    position: relative;
+    overflow: hidden;
+}
+.heart {
+    width: 100px;
+    height: 100px;
+    background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+    background-position: 0 0;
+    cursor: pointer;
+    transition: background-position 1s steps(28);
+    transition-duration: 0s;  
+  
+    &.is-active {
+      transition-duration: 1s;
+      background-position: -2800px 0;
+    }
+}
+  
+.stage {
+  transform: translate(-50%, -50%);
+  bottom: -65px;
+  margin-left: 80%;
+  position: absolute;
+  z-index: 2;  
+}
+
+@media(max-width: 700px) or (max-height: 500px){
+  .card{
+    width: 12rem !important;
+    height: 20rem !important;
+  }
+  #bookButton{
+    width: fit-content;
+    height: 30px;
+    font-size: 13px;
+  }
+  .card.text.white.bg-dark{
+    height: 20rem !important;
+  }
+  .stage{
+      margin-left: 85%;
+  }
+}

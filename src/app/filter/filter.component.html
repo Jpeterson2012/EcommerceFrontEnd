@@ -1,18 +1,21 @@
 <div class="filter-container">
     <div class="wrapper">
-        <span>Filter: </span>
+        <span class="spanHeader">Filter: </span>
 
+        <div class="filterClass">
         <input type="radio" name="filter" value="All" [(ngModel)]="selectedRadioButtonValue"
             (change)="onRadioButtonSelectionChanged()" />
-        <span>{{ 'All Products('+all+')' }}</span>
-
+        <span>{{ 'All Books ('+all+')' }}</span>
+        </div>
+        <div class="filterClass">
         <input type="radio" name="filter" value="Available" [(ngModel)]="selectedRadioButtonValue"
             (change)="onRadioButtonSelectionChanged()" />
-        <span>{{ 'Available('+avail+')' }}</span>
-
+        <span>{{ 'Available ('+avail+')' }}</span>
+        </div>
+        <div class="filterClass">
         <input type="radio" name="filter" value="UnAvailable" [(ngModel)]="selectedRadioButtonValue"
             (change)="onRadioButtonSelectionChanged()" />
-        <span>{{ 'Unavailable('+unavail+')' }}</span>
-    </div>
+        <span>{{ 'Unavailable ('+unavail+')' }}</span>
+    </div> </div>
 
 </div>
