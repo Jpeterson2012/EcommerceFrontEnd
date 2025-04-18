@@ -31,10 +31,10 @@
     
 
         <div *ngIf="i % 10 == 0" class="row" style="display: flex; flex-wrap: nowrap; overflow-x: auto;">
-          <div *ngFor="let subBook of books.slice(i, i + 10)" class="col">
+          <div *ngFor="let subBook of books.slice(i, i + 10); let j = index" class="col">
             <ng-container *ngIf="searchText === '' || (subBook.name.toLowerCase().includes(searchText) || subBook.auth.toLowerCase().includes(searchText))">
               <div class="transition" *ngIf="productsCountRadioButton === 'All' || productsCountRadioButton === returnAvail(subBook)">
-            <app-book [book]="subBook" [i]="i" ></app-book>
+            <app-book [book]="subBook" [i]="i + j" ></app-book>
             </div>          
     </ng-container>
           </div>
