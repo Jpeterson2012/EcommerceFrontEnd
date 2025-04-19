@@ -92,6 +92,10 @@ form{
         display: flex;
         overflow-x: auto;
     }
+    #tableContainer{
+        overflow-x: auto;
+    }
+    
 }
 
 

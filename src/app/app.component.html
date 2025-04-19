@@ -1,6 +1,7 @@
 <div class="container">
   <!-- When page shrinks in size -->
   <ng-template #content let-offcanvas>
+    
     <div class="offcanvas-header">
       <h4 class="offcanvas-title"><img class="navicon" src="/assets/booklogo.png"></h4>
       <button type="button" class="btn-close btn-close-white" aria-label="Close"
@@ -10,6 +11,15 @@
 
       <div class="menu">
         <ul class="navbar-nav mr-auto">
+
+          <div style="height: 35px; margin-left: 10px;">
+            <!-- <input placeholder="Hmm..." type="search" style="width: 280px; height: 35px; background: black !important; color: red;"> -->
+            <button style="background-color: black; border-radius: 50%;" (click)="openLg(content2)">              
+               <img src="../assets/search.png" style="width: 35px; height: auto;" />
+            </button>
+            <!-- <img src="../assets/search.png" style="width: 35px; height: auto;" (onclick)="openLg(content2)" /> -->
+          </div>
+          
           <li class="nav-item active">
             <a  (click)="offcanvas.close('Close click')" class="nav-link" [routerLink]="['home']">Home</a>
           </li>          
@@ -100,7 +110,7 @@
       </div>
     </form>
 
-    <div *ngIf="searched">    
+    <div *ngIf="searched" id="tableContainer">    
       <table class="table table-responsive" *ngIf="searchBooks.length > 0; else other_content">
         <thead>
             <tr style="font-weight: bolder; font-size: 23px;">
