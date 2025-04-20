@@ -12,8 +12,10 @@ export class DBService{
     getTotalBooks(): Observable<any>{
         return this.http.get(environment.apiURL + 'books/total')
     }
-    getTotalSearch(query: string): Observable<any>{
-        return this.http.get(environment.apiURL + 'books/total/'+query)
+    getTotalSearch(type: string, query: string): Observable<any>{
+        let params = new HttpParams()
+        .set('query', query)
+        return this.http.get(environment.apiURL + 'books/total/'+type, {params})
     }
 
     getBooks(page: number, pageSize: number): Observable<any>{
@@ -31,8 +33,10 @@ export class DBService{
         return this.http.get(environment.apiURL + 'books/'+id);
     }
 
-    searchBooks(query: string): Observable<any>{
-        return this.http.get(environment.apiURL + 'books/search/'+query);
+    searchBooks(type: string, query: string): Observable<any>{
+        let params = new HttpParams()        
+        .set('query', query)
+        return this.http.get(environment.apiURL + 'books/search/' +type, {params});
     }
     async fetchDesc(isbn: string){
         try{

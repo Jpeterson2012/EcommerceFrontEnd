@@ -105,12 +105,13 @@
           </div>
           
           
-          <button type="button" class="btn btn-success" (click)="searchDB()" style="width: 100%; font-weight: bolder; font-size: 15px; margin-top: 5px;">Go</button>       
+          <button [disabled]="selectedOption == ''" type="button" id="searchButton" class="btn btn-success" (click)="searchDB()" >Go</button>       
         </div>
       </div>
     </form>
 
-    <div *ngIf="searched" id="tableContainer">    
+    <div *ngIf="searched" id="tableContainer">   
+      <h3>{{ totalSearch + " Book(s) Found" }}</h3>
       <table class="table table-responsive" *ngIf="searchBooks.length > 0; else other_content">
         <thead>
             <tr style="font-weight: bolder; font-size: 23px;">
@@ -135,6 +136,7 @@
                 <td>{{ b.publisher }}</td>              
                 <td>{{ b.price }}</td>
                 <td>{{ b.qty }}</td>
+                <td><button style="font-size: 12px;" id="bookButton" class="btn btn-success" *ngIf="b.qty != 0;" (click)="addToCart(b)">Add To Cart</button></td>
             </tr>
         </tbody>
       </table>

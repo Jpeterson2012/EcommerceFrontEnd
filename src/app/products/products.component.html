@@ -64,7 +64,7 @@
         <ng-container *ngIf="searchText === '' || (book.name.toLowerCase().includes(searchText) || book.auth.toLowerCase().includes(searchText))">
           <div class="transition" *ngIf="productsCountRadioButton === 'All' || productsCountRadioButton === returnAvail(book)">
           
-            <app-book [book]="book" [i]="i"></app-book>
+            <app-book [book]="book" [i]="i"></app-book>            
 
           </div>          
         </ng-container>

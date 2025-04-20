@@ -1,6 +1,6 @@
 .container{
     background-color: burlywood;
-    min-width: 100%;
+    min-width: 97vw;
     color: black;
     display: flex;
     flex-direction: column;

@@ -76,8 +76,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
   
   ngOnInit(): void {
     this.db.getTotalBooks().subscribe(v => {this.totalItems = v,console.log(v),this.updateGoto()})
-    this.loadData()    
-    this.db.getTotalSearch('calculus').subscribe(v => {console.log(v)})
+    this.loadData()        
   }  
 
   //Modal pop up functionality///////////////////////////
@@ -154,41 +153,12 @@ export class ProductsComponent implements OnInit, OnDestroy{
   ////////////////////////////////////////////////////
 
 
-  //Cart Functionality///////////////////////////////
-  addToCart(item: any){
-    this.cartService.addToCart(item);
-  }
-  ///////////////////////////////////////////////////
-  
-  onImageLoad(evt:any) {
-    if (evt && evt.target) {
-      const width = evt.target.naturalWidth;      
-      width < 2 && (evt.target.src = '../../assets/bookcoffee.jpg')     
-    }    
-  }
-
  //Function thats called when top button is clicked
   jumpToTop(){
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   }
-  //Function thats called when favoriting a book
-  heartAnimation(heartID: any,bookID: any){
-    // console.log(id)
-    // console.log(book)
-    let temp = sessionStorage.getItem("favorites") ? JSON.parse(sessionStorage.getItem("favorites")!) : {}
-    temp[bookID] ? delete temp[bookID] : temp[bookID] = true
-    sessionStorage.setItem("favorites",JSON.stringify(temp))
-    document.getElementById(heartID)!.classList.toggle("is-active")        
-  }
-  //Get favorites from session storage
-  getFavorites(bookID: any){
-    let temp = JSON.parse(sessionStorage.getItem("favorites")!)
-    if (!temp) return false
-
-    if (temp[bookID]) return true
-    else return false
-  }
+  
 
   //Page change event using arrows
   onPageChange(pageNumber: any){    

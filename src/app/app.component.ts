@@ -94,8 +94,8 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
 
 
 
-  title = 'TheBookShop';
-  sitename: string = 'TheBookShop';
+  title = 'BooksnCrannies';
+  sitename: string = 'BooksnCrannies';
 
   // counter: number = 0;
 
@@ -107,9 +107,9 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
   query: string = '';
   searchBooks: any[] = []
   searched = false;
+  totalSearch = 0
 
-  selectedOption = '';
-  a = 'isbn'
+  selectedOption = '';  
   options = [
     { value: 'isbn', label: 'ISBN' },
     { value: 'name', label: 'Name' },
@@ -124,13 +124,25 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
         this.searchBooks = [],
         this.query = '',        
         this.searched = false,
+        this.totalSearch = 0,
         console.log(this.selectedOption)
       )
     }
   searchDB(){
-    this.dbService.searchBooks(this.query).subscribe(
-      v => {this.searchBooks = v, console.log(v),this.searched = true;}
+    // console.log(`${this.selectedOption}, ${this.query}`)
+    this.dbService.getTotalSearch(this.selectedOption, this.query).subscribe(v => {this.totalSearch = v})
+    
+    this.dbService.searchBooks(this.selectedOption,this.query).subscribe(
+      v => {this.searchBooks = v,
+        this.searchBooks.forEach((a:any)=>{
+          Object.assign(a,{quantity:1});
+          })
+         console.log(v),this.searched = true;}
     )    
+  }
+
+  addToCart(item: any){    
+    this.cartService.addToCart(item);
   }
 
   closeModal() {      

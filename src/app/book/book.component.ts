@@ -36,7 +36,7 @@ export class BookComponent {
 
   
   //Cart Functionality///////////////////////////////
-  addToCart(item: any){
+  addToCart(item: any){    
     this.cartService.addToCart(item);
   }
   ///////////////////////////////////////////////////

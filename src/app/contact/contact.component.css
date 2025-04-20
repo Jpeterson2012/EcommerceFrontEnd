@@ -4,8 +4,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-width: 100%;
-    padding-bottom: 150px;
+    min-width: 97vw;
+    padding-bottom: 100px;
 }
 .page{
   font-size: 30px;

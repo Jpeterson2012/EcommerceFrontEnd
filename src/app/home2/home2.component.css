@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: center;
     margin-top: 50px;
+    width: 100vw;
 }
 img{
     /* border-radius: 30px; */

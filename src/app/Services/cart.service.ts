@@ -1,15 +1,20 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import { BehaviorSubject } from "rxjs";
+import { Router } from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
 })
 export class CartService {
+    jumpToTop(){
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+      }
 
     public productList = new BehaviorSubject<any>([]);
 
-    constructor(private _snackBar: MatSnackBar){}
+    constructor(private _snackBar: MatSnackBar, private router: Router){}
 
     getProducts(){
         return this.productList.asObservable();
@@ -32,7 +37,9 @@ export class CartService {
         }
         this.productList.next(items);    
         this.currentTotal();
-        this._snackBar.open('1 item added to cart','Okay',{duration: 3000}); //first param: message displayed in popup, 2nd message in button, 3rd duration of popup
+        this._snackBar.open('1 item added to cart','Checkout',{duration: 4000})
+        .onAction()
+        .subscribe(() => {this.router.navigateByUrl('/cart'),this.jumpToTop()}); //first param: message displayed in popup, 2nd message in button, 3rd duration of popup
     }
     
     getTotalPrice(items: Array<any>): number{

@@ -19,6 +19,7 @@
       
     </div>
     <div class="modal-footer">
+      <button style="position: relative; left: 0" class="btn btn-success" *ngIf="book.qty != 0;" (click)="addToCart(book)">Add To Cart</button>
       <button type="button" class="btn btn-danger" (click)="close()">Close</button>
     </div>
 </ng-template>

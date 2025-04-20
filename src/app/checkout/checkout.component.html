@@ -3,7 +3,7 @@
 
     <div>
         <ng-container *ngIf="products.length ===0">
-            <div class="container2">
+            <div class="container3">
                 <div class="center">
                     <h5 class="card-title">Uh oh...</h5>
                     <img src="../../assets/emptycart.png" alt="">
@@ -172,7 +172,7 @@
     </div>
 
 
-        <div style="display: flex; flex-direction: column; width: 100%">
+        <div style="display: flex; flex-direction: column; width: 100%;">
             <p style="color: white; font-size: 20px; font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bolder;">Payment</p>
             <form class="container2">
             
@@ -191,11 +191,11 @@
             </div>            
 
             <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="exp" style="min-width: 50%;">Expiration Date*</label>
+                <div id="expCode" class="form-group col-md-6">
+                    <label for="exp">Expiration Date*</label>
                     <input type="month" class="form-control" id="exp">
                 </div>
-                <div class="form-group col-md-6">
+                <div id="secCode" class="form-group col-md-6">
                     <label for="code">Security Code*</label>
                     <input type="number" class="form-control" id="code">
                 </div>

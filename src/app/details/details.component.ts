@@ -1,5 +1,6 @@
-import { Component, ContentChild, ElementRef, Input, Injectable, ViewChild, TemplateRef, OnInit } from '@angular/core';
+import { Component, Injectable, ViewChild, TemplateRef, OnInit } from '@angular/core';
 import { DBService } from '../Services/db.service';
+import { CartService } from '../Services/cart.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -10,7 +11,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 @Injectable()
 export class DetailsComponent implements OnInit {
 
-  constructor(private db: DBService,private modalService: NgbModal){}
+  constructor(private db: DBService,private modalService: NgbModal, private cartService: CartService){}
 
   ngOnInit(): void { }
 
@@ -24,8 +25,10 @@ export class DetailsComponent implements OnInit {
   bookLink2 = ''
     
   async openScrollableContent(book: any) {
-    this.modalRef = this.modalService.open(this.detailsContent, { scrollable: true });               
+    this.modalRef = this.modalService.open(this.detailsContent, { scrollable: true });             
     this.book = book    
+    this.book.quantity = 1
+    console.log(this.book)
 
     let bookMetaData = await this.db.bookDesc(book.isbn)
     let temp: any
@@ -52,5 +55,9 @@ export class DetailsComponent implements OnInit {
       const width = evt.target.naturalWidth;      
       width < 2 && (evt.target.src = '../../assets/bookcoffee.jpg')     
     }    
+  }
+  addToCart(item: any){
+    console.log(item)
+    this.cartService.addToCart(item);
   }
 }
