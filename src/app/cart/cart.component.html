@@ -5,8 +5,8 @@
                 <table class="table table-responsive">
                     <thead>
                         <tr>                            
-                            <th>Image</th>
-                            <th>Name</th>
+                            <th></th>
+                            <th>Title</th>
                             <th>Author</th>
                             <th>Price</th>
                             <th>Quantity</th>
@@ -26,11 +26,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="3"></td>
-                            <td><button (click)="emptyCart()" class="btn btn-danger">Empty Cart</button></td>
-                            <td><button [routerLink]="['/products']" class="btn btn-primary">Continue Shopping</button></td>
-                            <td><button [routerLink]="['/checkout']"  class="btn btn-success">Checkout</button></td>
-                            <td><strong>Grand Total: ${{ grandTotal }}</strong></td>
+                            <td colspan="4" style="text-align: center; vertical-align: middle; font-size: 20px;"><strong>Grand Total: ${{ grandTotal }}</strong></td>                            
+                            <td ><button id="bottomButtons" (click)="emptyCart()" class="btn btn-danger">Empty Cart</button></td>
+                            <td ><button id="bottomButtons" [routerLink]="['/products']" class="btn btn-primary">Continue Shopping</button></td>
+                            <td ><button id="bottomButtons" [routerLink]="['/checkout']"  class="btn btn-success">Checkout</button></td>
+                            
+                            
                         </tr>
                     </tbody>
                 </table>

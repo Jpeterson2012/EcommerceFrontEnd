@@ -30,7 +30,7 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
 
   public slink: string = "https://www.buymeacoffee.com/BooksnCrannies"
 
-  public totalItem: number = 0;
+  public totalItem: number = sessionStorage.getItem("cart") ? JSON.parse(sessionStorage.getItem("cart")!).map((item:any)=>item.quantity).reduce((prev:any ,current:any )=>prev + current, 0) : 0;
   ngOnInit(): void {
     // this.cartService.getProducts().subscribe(res=>{
     //   this.totalItem = res.length;
@@ -153,7 +153,7 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
   onImageLoad(evt:any) {
     if (evt && evt.target) {
       const width = evt.target.naturalWidth;      
-      width < 2 && (evt.target.src = '../../assets/bookcoffee.jpg')     
+      width < 2 && (evt.target.src = '../../assets/stock.jpg')     
     }
   }
 

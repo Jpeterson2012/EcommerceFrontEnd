@@ -1,4 +1,4 @@
-import { Component, ContentChild, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { CartService } from '../Services/cart.service';
 import { ImageService } from '../Services/image.service';
 import { books } from '../Models/books';
@@ -9,17 +9,21 @@ import { books } from '../Models/books';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit{
-  constructor(public cartService: CartService,private imageService: ImageService){}
+  constructor(public cartService: CartService,private imageService: ImageService,@Inject('Window') window: Window){}
 
   public products: any = [];
   public grandTotal!: string;
   
 
   ngOnInit(): void {
-    this.cartService.getProducts().subscribe(v=>{
+    this.cartService.getProducts().subscribe(v=>{      
       this.products = v;
       this.grandTotal = this.cartService.getTotalPrice(this.products).toFixed(2);
     })
+  }
+  getViewWidth(){
+    console.log(window.innerWidth)
+    return window.innerWidth
   }
 
   removeItem(item:any){
@@ -31,7 +35,7 @@ export class CartComponent implements OnInit{
   onImageLoad(evt:any) {
     if (evt && evt.target) {
       const width = evt.target.naturalWidth;      
-      width < 2 && (evt.target.src = '../../assets/bookcoffee.jpg')     
+      width < 2 && (evt.target.src = '../../assets/stock.jpg')     
     }
   }
   emitImage(book: books){

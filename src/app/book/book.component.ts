@@ -26,6 +26,8 @@ export class BookComponent {
         return await this.detailsComponent!.openScrollableContent(book)
     }      
 
+  
+
   returnAvail(book: any){
     if (book.qty === '0')
     {
@@ -44,7 +46,7 @@ export class BookComponent {
   onImageLoad(evt:any) {
     if (evt && evt.target) {
       const width = evt.target.naturalWidth;      
-      width < 2 && (evt.target.src = '../../assets/bookcoffee.jpg')     
+      width < 2 && (evt.target.src = '../../assets/stock.jpg')     
     }    
   }
 

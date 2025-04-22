@@ -11,10 +11,10 @@ export class CartService {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
       }
+    // public productList = new BehaviorSubject<any>([])
+    public productList = sessionStorage.getItem("cart") ? new BehaviorSubject<any>([...JSON.parse(sessionStorage.getItem("cart")!)]) : new BehaviorSubject<any>([]);
 
-    public productList = new BehaviorSubject<any>([]);
-
-    constructor(private _snackBar: MatSnackBar, private router: Router){}
+    constructor(private _snackBar: MatSnackBar, private router: Router){this.currentTotal()}
 
     getProducts(){
         return this.productList.asObservable();
@@ -35,6 +35,7 @@ export class CartService {
         else {
             items.push(product);
         }
+        sessionStorage.setItem("cart",JSON.stringify(items))
         this.productList.next(items);    
         this.currentTotal();
         this._snackBar.open('1 item added to cart','Checkout',{duration: 4000})
@@ -52,6 +53,7 @@ export class CartService {
         
         if(update){
         this.productList.next(filteredItems);
+        sessionStorage.setItem("cart",JSON.stringify(filteredItems))
         this.currentTotal();
         this._snackBar.open('1 item removed from cart','Okay',{duration: 3000})
         }
@@ -61,6 +63,7 @@ export class CartService {
 
     removeAllCart(){
         this.productList.next([]);
+        sessionStorage.setItem("cart",JSON.stringify([]))
         this.currentTotal();
         this._snackBar.open('Cart is cleared', 'Okay', {duration: 3000})
     }
@@ -88,6 +91,7 @@ export class CartService {
             this.currentTotal();
         }
         this.productList.next(filteredItems);
+        sessionStorage.setItem("cart",JSON.stringify(filteredItems))
         this.currentTotal();   
         this._snackBar.open('1 item removed from cart','Okay',{duration: 3000})
     }

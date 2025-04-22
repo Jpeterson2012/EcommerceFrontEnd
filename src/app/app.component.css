@@ -48,7 +48,12 @@ a{
     color: black;
     text-align: center;
     display: flex;
-    align-items: start;
+    align-items: center;
+    padding-top: 10px;
+}
+.footer img{
+    width: 25px;
+    height: auto;
 }
 form{
     display: flex;
@@ -97,6 +102,7 @@ form{
         height: 60px;
         width: 100vw;
         display: block;
+        padding-top: 5px;
         
         /* display: flex;
         flex-wrap: wrap;

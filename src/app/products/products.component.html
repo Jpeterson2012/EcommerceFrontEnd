@@ -1,26 +1,3 @@
-<!-- Modal pop up -->
-<ng-template #content let-modal class="lol">
-  <div class="modal-header">
-    <h4 class="modal-title">Get notified when this product is back in stock</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-  </div>
-  <div class="modal-body">
-
-    <form class="modalForm">
-      <div class="mb-3">
-        <label for="email">Email address</label>
-        <div class="input-group">
-          <input id="email" class="form-control" placeholder="someone@example.com" name="email" />
-        </div>
-      </div>
-    </form>
-
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Submit</button>
-  </div>
-</ng-template>
-
 <ng-template #bookLoader>
   <app-loader></app-loader>
 </ng-template>

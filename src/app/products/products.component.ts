@@ -5,7 +5,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CartService } from '../Services/cart.service';
 import { ImageService } from '../Services/image.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { DetailsComponent } from '../details/details.component';
 
 @Component({
   selector: 'app-products',
@@ -29,11 +28,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
           mybutton ? mybutton.style.display = "none" : null
         }
       })
-    }    
-    @ViewChild('details') private detailsComponent: DetailsComponent | undefined
-    async openModal(book: any){
-      return await this.detailsComponent!.openScrollableContent(book)
-    }
+    }       
 
   //Mat select variables
   pageIndex: number = 0;    
@@ -57,13 +52,13 @@ export class ProductsComponent implements OnInit, OnDestroy{
 
   loadData(){    
     if (this.cachedData.length !== 0 && this.cachedData[0].size === this.pageSize && this.cachedData[0].page === this.currentPage){
-      console.log('cached')
+      // console.log('cached')
       this.books = this.cachedData[0].books
       this.currentPage = this.cachedData[0].page
       this.pageSize = this.cachedData[0].size
     }
     else{
-      console.log('not cached')
+      // console.log('not cached')
       this.db.getBooks((this.currentPage - 1) * this.pageSize,this.pageSize)
       .subscribe(response => {
         this.books = response
@@ -75,16 +70,11 @@ export class ProductsComponent implements OnInit, OnDestroy{
   }
   
   ngOnInit(): void {
-    this.db.getTotalBooks().subscribe(v => {this.totalItems = v,console.log(v),this.updateGoto()})
+    this.db.getTotalBooks().subscribe(v => {this.totalItems = v,this.updateGoto()})
     this.loadData()        
   }  
 
-  //Modal pop up functionality///////////////////////////
-  @ContentChild('content') content?: ElementRef;
-  openLg(content: any) {
-    console.log('hello')
-		this.modalService.open(content, { size: 'lg' });
-	}
+  
 
   bookDes = ''
   bookLink = ''

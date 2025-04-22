@@ -77,7 +77,7 @@ export class HomeComponent implements OnInit{
   onImageLoad(evt:any) {
     if (evt && evt.target) {
       const width = evt.target.naturalWidth;      
-      width < 2 && (evt.target.src = '../../assets/bookcoffee.jpg')     
+      width < 2 && (evt.target.src = '../../assets/stock.jpg')     
     }
   }
   

@@ -4,6 +4,7 @@
     align-items: center;
     margin-top: 20px;
     padding-bottom: 150px;
+    width: 100vw;
 }
 .form-group button{
     display: block;
@@ -19,4 +20,15 @@ label{
 }
 input{
     border: 2px solid burlywood;
+}
+@media(min-height: 1200px){
+    .card{
+        width: 60rem !important;
+        position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    }
+    
 }
