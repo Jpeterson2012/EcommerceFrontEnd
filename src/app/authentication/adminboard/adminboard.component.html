@@ -48,7 +48,7 @@
           </button>
         </h2>
         <div ngbAccordionCollapse>
-          <div ngbAccordionBody>
+          <div ngbAccordionBody id="accBody">
             <ng-template>
               
               <!-- Reads all users from database into table -->
@@ -68,7 +68,7 @@
                         <!-- <td>{{ user.roles | json }}</td> -->
                         <!-- <td>{{ user.roles }}</td> -->
                         <td>{{ user.roles[0].name.slice(5,user.roles[0].name.length) }}</td>                        
-                        <button style="background: burlywood; color: black; border-radius: 20px;" (click)="openLg(content2, user)" *ngIf="AdminBoard">User Settings</button>
+                        <button style="background: burlywood; color: black; border-radius: 20px;" (click)="openLg(content2, user)" *ngIf="AdminBoard && user.roles[0].name.slice(5,user.roles[0].name.length) !== 'ADMIN'">User Settings</button>
                 </tbody>
             </table>
 
@@ -132,7 +132,7 @@
                       [(ngModel)]="form.name"
                       required
                       minlength="1"
-                      maxlength="30"
+                      maxlength="100"
                       #name="ngModel"
                       [ngClass]="{ 'is-invalid': f.submitted && name.errors }"
                     />
@@ -156,7 +156,7 @@
                       [(ngModel)]="form.auth"
                       required
                       minlength="1"
-                      maxlength="25"
+                      maxlength="100"
                       #auth="ngModel"
                       [ngClass]="{ 'is-invalid': f.submitted && auth.errors }"
                     />
@@ -321,7 +321,7 @@
           <button ngbAccordionButton>Update Book</button>
         </h2>
         <div ngbAccordionCollapse>
-          <div ngbAccordionBody>
+          <div ngbAccordionBody id="accBody">
             <ng-template>
               
               <!-- Reads user input for book id -->
@@ -331,8 +331,8 @@
                 <br>
               </div>
               <div class="form-group">
-                <button class="btn btn-danger btn-block" (click)="getBookById(idNum)">Get Book</button>
-                <button class="btn btn-danger btn-block" style="margin-left: 15px;" (click)="clear()">Clear</button>
+                <button class="btn btn-danger btn-block" (click)="getBookById(2,idNum)">Get Book</button>
+                <button class="btn btn-danger btn-block" style="margin-left: 15px;" (click)="clear2()">Clear</button>
               </div>
               
               <!-- Displays requested book info -->
@@ -352,26 +352,26 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{{ bookData.id }}</td>
-                        <td>{{ bookData.isbn }}</td>
-                        <td>{{ bookData.name }}</td>
-                        <td>{{ bookData.auth }}</td>
-                        <td>{{ bookData.year }}</td>
-                        <td>{{ bookData.publisher }}</td>
-                        <td>{{ bookData.image }}</td>
-                        <td>{{ bookData.price }}</td>
-                        <td>{{ bookData.qty }}</td>
+                        <td>{{ bookData2.id }}</td>
+                        <td>{{ bookData2.isbn }}</td>
+                        <td>{{ bookData2.name }}</td>
+                        <td>{{ bookData2.auth }}</td>
+                        <td>{{ bookData2.year }}</td>
+                        <td>{{ bookData2.publisher }}</td>
+                        <td>{{ bookData2.image }}</td>
+                        <td>{{ bookData2.price }}</td>
+                        <td>{{ bookData2.qty }}</td>
                     </tr>
                 </tbody>
             </table>
 
 
             <form
-            *ngIf="!successfulUpdate"
+            
             name="form"
-            (ngSubmit)="f.form.valid && onSubmitUpdate()"
+            (ngSubmit)="f.form.valid && onSubmitUpdate(f)"
             #f="ngForm"
-            novalidate
+            novalidate            
           >
           <div class="form-group">
             <label for="isbn">isbn</label>
@@ -380,7 +380,7 @@
               value="hello"
               class="form-control"
               name="isbn"
-              [(ngModel)]="form.isbn"
+              [(ngModel)]="form2.isbn"
               required
               minlength="10"
               maxlength="10"
@@ -404,10 +404,10 @@
               type="text"
               class="form-control"
               name="name"
-              [(ngModel)]="form.name"
+              [(ngModel)]="form2.name"
               required
               minlength="1"
-              maxlength="30"
+              maxlength="100"
               #name="ngModel"
               [ngClass]="{ 'is-invalid': f.submitted && name.errors }"
             />
@@ -428,10 +428,10 @@
               type="text"
               class="form-control"
               name="auth"
-              [(ngModel)]="form.auth"
+              [(ngModel)]="form2.auth"
               required
               minlength="1"
-              maxlength="25"
+              maxlength="100"
               #auth="ngModel"
               [ngClass]="{ 'is-invalid': f.submitted && auth.errors }"
             />
@@ -452,7 +452,7 @@
               type="number"
               class="form-control"
               name="year"
-              [(ngModel)]="form.year"
+              [(ngModel)]="form2.year"
               required
               minlength="1"
               maxlength="4"
@@ -476,7 +476,7 @@
               type="text"
               class="form-control"
               name="publisher"
-              [(ngModel)]="form.publisher"
+              [(ngModel)]="form2.publisher"
               required
               minlength="1"
               maxlength="100"
@@ -500,7 +500,7 @@
               type="text"
               class="form-control"
               name="image"
-              [(ngModel)]="form.image"
+              [(ngModel)]="form2.image"
               required
               minlength="1"
               maxlength="100"
@@ -524,7 +524,7 @@
               type="number"
               class="form-control"
               name="price"
-              [(ngModel)]="form.price"
+              [(ngModel)]="form2.price"
               required
               min="1"
               max="100"
@@ -549,7 +549,7 @@
               type="text"
               class="form-control"
               name="qty"
-              [(ngModel)]="form.qty"
+              [(ngModel)]="form2.qty"
               required
               minlength="1"
               maxlength="5"
@@ -591,7 +591,7 @@
           <button ngbAccordionButton>Delete Book</button>
         </h2>
         <div ngbAccordionCollapse>
-          <div ngbAccordionBody>
+          <div ngbAccordionBody id="accBody">
             <ng-template>
               <!-- Reads user input for book id -->
               <div class="=form-group">
@@ -600,8 +600,8 @@
                 <br>
               </div>
               <div class="form-group">
-                <button class="btn btn-danger btn-block" (click)="getBookById(idNumDelete)">Get Book</button>
-                <button class="btn btn-danger btn-block" style="margin-left: 15px;" (click)="clear()">Clear</button>
+                <button class="btn btn-danger btn-block" (click)="getBookById(3,idNumDelete)">Get Book</button>
+                <button class="btn btn-danger btn-block" style="margin-left: 15px;" (click)="clear3()">Clear</button>
               </div>
 
               <!-- Displays requested book info -->
@@ -621,22 +621,21 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>{{ bookData.id }}</td>
-                    <td>{{ bookData.isbn }}</td>
-                    <td>{{bookData.name}}</td>
-                    <td>{{ bookData.auth }}</td>
-                    <td>{{ bookData.year }}</td>
-                    <td>{{ bookData.publisher }}</td>
-                    <td>{{ bookData.image }}</td>
-                    <td>{{ bookData.price }}</td>
-                    <td>{{ bookData.qty }}</td>
+                    <td>{{ bookData3.id }}</td>
+                    <td>{{ bookData3.isbn }}</td>
+                    <td>{{ bookData3.name }}</td>
+                    <td>{{ bookData3.auth }}</td>
+                    <td>{{ bookData3.year }}</td>
+                    <td>{{ bookData3.publisher }}</td>
+                    <td>{{ bookData3.image }}</td>
+                    <td>{{ bookData3.price }}</td>
+                    <td>{{ bookData3.qty }}</td>
                 </tr>
                 </tbody>
             </table>
   
   
-              <form
-              *ngIf="!successDelete"
+              <form              
               name="form"
               (ngSubmit)="f.form.valid && onSubmitDelete()"
               #f="ngForm"

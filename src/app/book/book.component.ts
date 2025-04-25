@@ -2,6 +2,8 @@ import { Component, ContentChild, ElementRef, ViewChild, Input } from '@angular/
 import { CartService } from '../Services/cart.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DetailsComponent } from '../details/details.component';
+import { StorageService } from '../authentication/Services/storage.service';
+import { DBService } from '../Services/db.service';
 
 @Component({
   selector: 'app-book',
@@ -9,7 +11,7 @@ import { DetailsComponent } from '../details/details.component';
   styleUrls: ['./book.component.css']
 })
 export class BookComponent {
-  constructor(private cartService: CartService,private modalService: NgbModal){}
+  constructor(private cartService: CartService,private modalService: NgbModal, private storageService: StorageService, private dbService: DBService){}
 
   @Input() book: any;
   @Input() i: any
@@ -53,8 +55,18 @@ export class BookComponent {
   heartAnimation(heartID: any,bookID: any){
     // console.log(id)
     // console.log(book)
-    let temp = sessionStorage.getItem("favorites") ? JSON.parse(sessionStorage.getItem("favorites")!) : {}
-    temp[bookID] ? delete temp[bookID] : temp[bookID] = true
+    let logged = this.storageService.isLoggedIn()
+    let user = this.storageService.getUser()
+    let temp = sessionStorage.getItem("favorites") ? JSON.parse(sessionStorage.getItem("favorites")!) : {}      
+
+    if (temp[bookID]){
+      logged && this.dbService.deleteFavorites(user.id,bookID).subscribe();
+      delete temp[bookID];
+    }
+    else{
+      logged && this.dbService.addFavorites(user.id,bookID).subscribe();
+      temp[bookID] = true;
+    }
     sessionStorage.setItem("favorites",JSON.stringify(temp))
     document.getElementById(heartID)!.classList.toggle("is-active")        
   }

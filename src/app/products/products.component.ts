@@ -105,13 +105,13 @@ export class ProductsComponent implements OnInit, OnDestroy{
 
   //Radio filter functionality///////////////////
   returnAllProd(){
-    return this.books.length;
+    return this.books.filter(book => book.name?.toLowerCase().includes(this.searchText) || book.auth?.toLowerCase().includes(this.searchText)).length;
   }
   returnAvailProd(){
-    return this.books.filter(book => book.qty != '0').length;
+    return this.books.filter(book => book.name?.toLowerCase().includes(this.searchText) || book.auth?.toLowerCase().includes(this.searchText)).filter(book => book.qty != '0').length;
   }
   returnUnavailProd(){    
-    return this.books.filter(book => book.qty === '0').length;        
+    return this.books.filter(book => book.name?.toLowerCase().includes(this.searchText) || book.auth?.toLowerCase().includes(this.searchText)).filter(book => book.qty === '0').length;        
   }
   
   productsCountRadioButton: string = 'All';

@@ -27,8 +27,7 @@ export class DetailsComponent implements OnInit {
   async openScrollableContent(book: any) {
     this.modalRef = this.modalService.open(this.detailsContent, { scrollable: true });             
     this.book = book    
-    this.book.quantity = 1
-    console.log(this.book)
+    this.book.quantity = 1    
 
     let bookMetaData = await this.db.bookDesc(book.isbn)
     let temp: any
@@ -56,8 +55,7 @@ export class DetailsComponent implements OnInit {
       width < 2 && (evt.target.src = '../../assets/bookcoffee.jpg')     
     }    
   }
-  addToCart(item: any){
-    console.log(item)
+  addToCart(item: any){  
     this.cartService.addToCart(item);
   }
 }

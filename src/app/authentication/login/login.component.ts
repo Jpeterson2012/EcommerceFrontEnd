@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../Services/auth.service';
 import { StorageService } from '../Services/storage.service';
+import { DBService } from 'src/app/Services/db.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
 
-  constructor(private authService: AuthService, private storageService: StorageService) { }
+  constructor(private authService: AuthService, private storageService: StorageService, private dbService: DBService) { }
 
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
@@ -31,11 +32,12 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(username, password).subscribe({
       next: data => {
+        let temp: any = {}
         this.storageService.saveUser(data);
-
+        this.dbService.getFavorites(data.id).subscribe(v =>  {v.map((w: any) => temp[w] = true), sessionStorage.setItem("favorites",JSON.stringify(temp)) })
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.storageService.getUser().roles;        
+        this.roles = this.storageService.getUser().roles;                
         this.reloadPage();
       },
       error: err => {

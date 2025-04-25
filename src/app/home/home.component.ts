@@ -20,9 +20,11 @@ export class HomeComponent implements OnInit{
   bookLink = ''
   bookLink2 = ''
   ngOnInit(): void {
-    
+    let temp = JSON.parse(localStorage.getItem("popularBooks")!)
+    temp ? (this.books = temp.slice(0,20),this.books2 = temp.slice(20,40)) :
     this.db.getBooks(0,40).subscribe(
       v => {
+        localStorage.setItem("popularBooks",JSON.stringify(v))        
         this.books = v.slice(0,20);
         this.books = [...this.books,...this.books]        
         this.books2 = v.slice(20,40)
@@ -43,31 +45,7 @@ export class HomeComponent implements OnInit{
 		this.modalService.open(longContent, { scrollable: true });
 	}
 
-  @ContentChild('longContent') longContent2?: ElementRef
-  async openScrollableContent2(longContent: any, isbn: any) {
-		this.modalService.open(longContent, { scrollable: true });             
-
-    let bookMetaData = await this.db.bookDesc(isbn)
-    let temp: any
-
-    bookMetaData.subscribe(v => {temp = v})        
-    this.bookLink2 = temp.openLibrary.key === undefined ? '' : "https://openlibrary.org/" + temp.openLibrary.key
-    this.bookLink = temp.google.totalItems === 0 ? '' : temp.google.items[0]!.volumeInfo.canonicalVolumeLink
-    this.bookDes = temp.google.totalItems === 0 ? 'Sorry, No Description Found' :temp.google.items[0]!.volumeInfo.description
-	}
-
-  @ContentChild('longContent') longContent3?: ElementRef
-  async openScrollableContent3(longContent: any, isbn: any) {
-		this.modalService.open(longContent, { scrollable: true });          
-
-    let bookMetaData = await this.db.bookDesc(isbn)
-    let temp: any
-
-    bookMetaData.subscribe(v => {temp = v})        
-    this.bookLink2 = temp.openLibrary.key === undefined ? '' : "https://openlibrary.org/" + temp.openLibrary.key
-    this.bookLink = temp.google.totalItems === 0 ? '' : temp.google.items[0]!.volumeInfo.canonicalVolumeLink
-    this.bookDes = temp.google.totalItems === 0 ? 'Sorry, No Description Found' :temp.google.items[0]!.volumeInfo.description
-	}
+  
 
 
   

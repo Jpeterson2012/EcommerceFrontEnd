@@ -18,20 +18,20 @@
 
 
     
-    <div class="card" style="width: 38rem; margin-top: 15px" *ngIf="products.length != 0">        
+    <div class="card" style="width: 42rem; margin-top: 15px; margin-bottom: 280px;" *ngIf="products.length != 0">        
         <div class="prodcard" *ngFor="let p of products">
             <img src="{{ p.image }}" style="width: 50px; height: 70px;" (load)="onImageLoad($event)">
             <div class="middle">
-                <h5>{{ p.name }}</h5>
+                <h5 style="max-width: 95%;" >{{ p.name }}</h5>
                 <h6>{{ p.auth }}</h6>
             </div>
             <div class="right">
                 <p>${{ p.price }}</p>
-                <p>Quantity: {{ p.quantity }}</p>
+                <p style="text-wrap: nowrap;" >Quantity: {{ p.quantity }}</p>
                 <button  class="btn btn-danger"  (click)="removeItem(p)">Remove</button>
             </div>
         </div>
-        <ul class="list-group list-group-flush">
+        <ul class="list-group list-group-flush" id="checkoutContainer">
 
             <li class="list-group-item"><p>Subtotal</p><p>${{ grandTotal }}</p></li>
             <li class="list-group-item"><p>Tax</p><p>$0.00</p></li>

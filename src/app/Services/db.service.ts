@@ -57,6 +57,29 @@ export class DBService{
         return myObservable$
     }
     
+    addFavorites(user: number, book: number): Observable<any>{    
+        let params =  new HttpParams()
+        .set('user_id', user)
+        .set('book_id', book)
+        return this.http.get(environment.apiURL + 'books/favorites', {params});
+    }
+
+    deleteFavorites(user: number, book: number): Observable<any>{
+        let params =  new HttpParams()
+        .set('user_id', user)
+        .set('book_id', book)
+        return this.http.delete(environment.apiURL + 'books/favorites', {params});
+    }
+
+    getFavorites(user: number): Observable<any>{
+        return this.http.get(environment.apiURL + 'books/favorites/'+user);
+    }
+
+    getUserBooks(ubooks: string): Observable<any>{
+        let params = new HttpParams()        
+        .set('ubooks', ubooks)
+        return this.http.get(environment.apiURL + 'books/ubooks', {params});
+    }
 
     
 }

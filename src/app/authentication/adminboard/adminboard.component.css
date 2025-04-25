@@ -25,3 +25,14 @@ img{
     background-color: burlywood;
   }
 
+@media(max-width: 700px) or (max-height: 500px){
+  .container{
+    width: 99vw;
+  }
+  .wrapper{
+    width: 99vw !important;
+  }
+  #accBody{
+    overflow-x: auto;
+  }
+}

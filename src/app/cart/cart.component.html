@@ -9,7 +9,7 @@
                             <th>Title</th>
                             <th>Author</th>
                             <th>Price</th>
-                            <th>Quantity</th>
+                            <th class="quantity">Quantity</th>
                             <th>Total</th>
                         </tr>
                     </thead>
@@ -25,8 +25,8 @@
                                 <button (click)="removeItem(item)" class="btn btn-light"><img src="../../assets/trash.png"></button>
                             </td>
                         </tr>
-                        <tr>
-                            <td colspan="4" style="text-align: center; vertical-align: middle; font-size: 20px;"><strong>Grand Total: ${{ grandTotal }}</strong></td>                            
+                        <tr class="tableFooter">
+                            <td id="grandTotal" colspan="4" style="text-align: center; vertical-align: middle; font-size: 20px;"><strong>Grand Total: ${{ grandTotal }}</strong></td>                            
                             <td ><button id="bottomButtons" (click)="emptyCart()" class="btn btn-danger">Empty Cart</button></td>
                             <td ><button id="bottomButtons" [routerLink]="['/products']" class="btn btn-primary">Continue Shopping</button></td>
                             <td ><button id="bottomButtons" [routerLink]="['/checkout']"  class="btn btn-success">Checkout</button></td>

@@ -89,6 +89,9 @@ form{
 .modalForm, .modal-header, .modal-body, .modal-footer{
     background-color: burlywood;
 }
+#mobileCart2{
+    display: none;
+}
 
 @media(max-width: 700px) or (max-height: 500px){
     .footer{
@@ -114,6 +117,12 @@ form{
     }
     #tableContainer{
         overflow-x: auto;
+    }
+    #mobileCart1{
+        display: none;
+    }
+    #mobileCart2{
+        display: contents;
     }
     
 }

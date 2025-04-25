@@ -50,7 +50,7 @@ input[type=checkbox]
 }
 .prodcard{
     display: flex;
-    margin-bottom: 15px;
+    /* margin-bottom: 15px; */
     border-bottom: 4px solid burlywood;
 }
 .middle,.right{
@@ -72,7 +72,12 @@ input[type=checkbox]
     display: flex;
     justify-content: space-between;
 }
-
+#checkoutContainer{
+    position: fixed;
+    bottom: 37px;
+    width: 42rem;
+    border-radius: 10px;
+}
 
 
 /* css for when cart is empty */
@@ -94,7 +99,7 @@ label{
     font-weight: bolder;
 }
 @media(min-height: 1200px){
-    .card{
+    .card,#checkoutContainer{
         width: 60rem !important;
     }
     .center{
@@ -126,6 +131,7 @@ label{
     }
     .card{
         width: 100vw;
+        margin-bottom: 50px !important;
     }
     input[type=checkbox]{
   /* Double-sized Checkboxes */
@@ -141,4 +147,8 @@ label{
     .center img,.center button{
         width: 100%;
     }    
+    #checkoutContainer{
+        position: initial;
+        width: 100%;
+    }
 }
