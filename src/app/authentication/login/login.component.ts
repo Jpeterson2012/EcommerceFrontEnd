@@ -34,11 +34,11 @@ export class LoginComponent implements OnInit {
       next: data => {
         let temp: any = {}
         this.storageService.saveUser(data);
-        this.dbService.getFavorites(data.id).subscribe(v =>  {v.map((w: any) => temp[w] = true), sessionStorage.setItem("favorites",JSON.stringify(temp)) })
+        this.dbService.getFavorites(data.id).subscribe(v =>  {console.log(v),v.map((w: any) => temp[w] = true), sessionStorage.setItem("favorites",JSON.stringify(temp)) })
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.storageService.getUser().roles;                
-        this.reloadPage();
+        // this.reloadPage();
       },
       error: err => {
         this.errorMessage = err.error.message;

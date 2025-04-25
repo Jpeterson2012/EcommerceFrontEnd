@@ -169,6 +169,7 @@ export class AdminBoardComponent implements OnInit {
     this.form2.price = null
     this.form2.qty = null
     this.bookData2 = []  
+    setTimeout(()=>{this.successfulUpdate = false},2500)
   }
   clear3(){
     this.idNum = null
@@ -181,12 +182,12 @@ export class AdminBoardComponent implements OnInit {
     this.form3.price = null
     this.form3.qty = null
     this.bookData3 = []  
+    setTimeout(()=>{this.successDelete = false},2500)
   }
 
   //Method for post request to books entity
   onSubmitUpdate(f: any): void {
-    const { isbn, name, auth, year, publisher, image, price, qty } = this.form2;
-    console.log(this.form2.isbn)
+    const { isbn, name, auth, year, publisher, image, price, qty } = this.form2;    
 
     this.authService.updateBook(this.idNum, isbn, name, auth, year, publisher, image, price, qty).subscribe({
       next: data => {

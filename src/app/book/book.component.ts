@@ -59,13 +59,23 @@ export class BookComponent {
     let user = this.storageService.getUser()
     let temp = sessionStorage.getItem("favorites") ? JSON.parse(sessionStorage.getItem("favorites")!) : {}      
 
-    if (temp[bookID]){
-      logged && this.dbService.deleteFavorites(user.id,bookID).subscribe();
+    if (temp[bookID]){      
       delete temp[bookID];
+      logged && this.dbService.deleteFavorites(user.id,bookID).subscribe({
+        error: err => {
+          console.log(err.error.message);
+          temp[bookID] = true
+        }
+      });
     }
     else{
-      logged && this.dbService.addFavorites(user.id,bookID).subscribe();
       temp[bookID] = true;
+      logged && this.dbService.addFavorites(user.id,bookID).subscribe({
+        error: err => {
+          console.log(err.error.message);
+          delete temp[bookID]
+        }
+      });
     }
     sessionStorage.setItem("favorites",JSON.stringify(temp))
     document.getElementById(heartID)!.classList.toggle("is-active")        

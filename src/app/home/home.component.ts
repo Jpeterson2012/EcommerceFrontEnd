@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit{
   bookLink2 = ''
   ngOnInit(): void {
     let temp = JSON.parse(localStorage.getItem("popularBooks")!)
-    temp ? (this.books = temp.slice(0,20),this.books2 = temp.slice(20,40)) :
+    temp ? (this.books = temp.slice(0,20), this.books = [...this.books,...this.books],this.books2 = temp.slice(20,40), this.books2 = [...this.books2,...this.books2]) :
     this.db.getBooks(0,40).subscribe(
       v => {
         localStorage.setItem("popularBooks",JSON.stringify(v))        
