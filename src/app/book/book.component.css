@@ -4,6 +4,10 @@
     justify-content: center;
     margin-bottom: 20px;    
 }
+#bookButton{
+  width: 10rem;
+  border-radius: 0;
+}
 img{
     max-height: 500px;
     min-height: 500px;
@@ -59,7 +63,7 @@ img{
     height: 20rem !important;
   }
   #bookButton{
-    width: fit-content;
+    width: 6rem;
     height: 30px;
     font-size: 13px;
   }
