@@ -1,4 +1,4 @@
-let local = true
+let local = false;
 export const environment = local ? {
     production: false,
     
