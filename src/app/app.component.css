@@ -92,6 +92,12 @@ form{
 #mobileCart2{
     display: none;
 }
+#profileName{
+    margin-right: 25px;
+}
+#logoutButton{
+    margin-right: 11px;
+}
 
 @media(max-width: 700px) or (max-height: 500px){
     .footer{
@@ -123,6 +129,34 @@ form{
     }
     #mobileCart2{
         display: contents;
+    }
+    .navbar-brand{
+        font-size: 15px;
+    }
+    .container-fluid{
+        margin: 0;
+        padding: 0;        
+    }
+    #profileName{
+        font-size: 13px;
+        margin-right: 4.5vw;
+    }
+    .counter{
+        
+        margin: 0;
+        padding: 0;
+    }
+    #mobileCartImg{
+        width: 26px !important;
+        margin: 0;
+        padding: 0;
+    }
+    #navLinkCart{
+        margin: 0;
+        padding: 0;
+    }
+    .navbar-toggler{        
+        margin-left: 5vw;
     }
     
 }

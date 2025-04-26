@@ -1,20 +1,96 @@
+<ng-template #mobileProd>
+  <div class="wrapper2" *ngFor="let b of chunk; let i = index">    
+    
+    
+
+        <div  class="row" style="display: flex; flex-wrap: nowrap; overflow-x: auto; padding-left: 28px;">
+          <ng-container *ngFor="let subBook of b; let j = index" class="col">
+            <ng-container *ngIf="getFavorites(subBook.id)">
+              
+
+
+                <div class="bookContainer">
+                  <ng-template #content let-modal class="lol">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Get notified when this product is back in stock</h4>
+                      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+                    </div>
+                    <div class="modal-body">
+                  
+                      <form class="modalForm">
+                        <div class="mb-3">
+                          <label for="email">Email address</label>
+                          <div class="input-group">
+                            <input id="email" class="form-control" placeholder="someone@example.com" name="email" />
+                          </div>
+                        </div>
+                      </form>
+                  
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Submit</button>
+                    </div>
+                  </ng-template>
+                
+                          <div class="card-header">
+                            <ul class="nav nav-pills card-header-pills" style="display: flex; justify-content: center;">
+                              <li class="nav-item">
+                                <button id="bookButton" class="btn btn-success" *ngIf="subBook.qty != 0; else notifyme" (click)="addToCart(subBook)">Add To
+                                  Cart</button>
+                                <!-- Modal function call here -->
+                                <ng-template #notifyme><button id="bookButton" class="btn btn-danger" (click)="openLg(content)">Notify
+                                    Me</button></ng-template>
+                              </li>                            
+                            </ul>
+                          </div>
+                          <div class="card text-white bg-dark">
+                            <div class="stage">
+                              <div [ngClass]="getFavorites(subBook.id) ? 'heart is-active' : 'heart'" id="{{'heart' + (i + j)}}" (click)="heartAnimation('heart' + (i + j),subBook)"></div>
+                            </div>
+                            <div class="zoom">                                         
+                              <img class="card-img-top" src={{subBook.image}} alt="Card image cap" (load)="onImageLoad($event)">
+                            </div>
+                            <p class="card-text">Stock: {{subBook.qty}}</p>
+                            <p class="card-text">${{subBook.price}}</p>
+                          </div>
+                
+                </div>
+            
+
+
+
+            
+    </ng-container>
+          </ng-container>
+        </div>
+
+      
+
+  </div>
+</ng-template>
+
+
+
+
+
 <div class="container" *ngIf="currentUser; else loggedOut">
 
   <div class="userContainer">
-    <header class="jumbotron"><h3>{{ currentUser.username }}</h3></header>
+    <header class="jumbotron" style="padding-left: 10px;"><h3>{{ currentUser.username }}</h3></header>
 
-    <p>{{ currentUser.email }}</p>    
+    <p style="padding-left: 10px;">{{ currentUser.email }}</p>    
 
-    <p>Status: {{ currentUser.roles[0].slice(5,currentUser.roles[0].length) }}</p>
+    <p style="padding-left: 10px;">Status: {{ currentUser.roles[0].slice(5,currentUser.roles[0].length) }}</p>
 
-    <p style="font-size: 30px;" >Your Favorites</p>
+    <p style="font-size: 30px; border-top: 4px solid black; width: 100vw; text-align: center;" >Your Favorites</p>
   </div>
 
 
     
-    <div class="wrapper">       
+    <div class="wrapper" *ngIf="getViewWidth() > 500; else mobileProd">       
 
       <ng-container *ngFor="let book of books; let i = index">
+      <ng-container *ngIf="getFavorites(book.id)">
             <div class="transition">
 
 
@@ -55,7 +131,7 @@
                         </div>
                         <div class="card text-white bg-dark">
                           <div class="stage">
-                            <div [ngClass]="getFavorites(book.id) ? 'heart is-active' : 'heart'" id="{{'heart' + i}}" (click)="heartAnimation('heart' + i,book.id)"></div>
+                            <div [ngClass]="getFavorites(book.id) ? 'heart is-active' : 'heart'" id="{{'heart' + i}}" (click)="heartAnimation('heart' + i,book)"></div>
                           </div>
                           <div class="zoom">                                         
                             <img class="card-img-top" src={{book.image}} alt="Card image cap" (load)="onImageLoad($event)">
@@ -68,7 +144,8 @@
 
 
 
-          </div>          
+          </div>         
+        </ng-container> 
       </ng-container>
                       
     </div>
@@ -76,8 +153,8 @@
     <div class="orders">
       <p>Previous Orders</p>
     </div>
-    <div class="card2" style="width: 100vw; margin-top: 15px; margin-bottom: 50px;">        
-      <div class="prodcard">
+    <div class="card2" style="width: 100vw;">        
+      <div class="prodcard" style="border-top: 4px solid black">
           <img src="https://m.media-amazon.com/images/I/71xldfB4L4L._SY466_.jpg" style="width: 50px; height: 70px;">
           <div class="middle">
               <h5 style="max-width: 95%;" >Everything is F*cked</h5>
@@ -101,11 +178,11 @@
     </div>
       <ul class="list-group list-group-flush">          
           <li class="list-group-item"><p>Date</p><p>2/23/24</p></li>
-          <li class="list-group-item"><p><strong>Total</strong></p><p>$56.97</p></li>
+          <li class="list-group-item" style="border-bottom: 4px solid black"><p><strong>Total</strong></p><p>$56.97</p></li>
       </ul>
   </div>
 
-  <div class="card2" style="width: 100vw; margin-top: 15px;">        
+  <div class="card2" style="width: 100vw;">        
     <div class="prodcard">
         <img src="https://m.media-amazon.com/images/I/A1hq4eDmTGL._SY466_.jpg" style="width: 50px; height: 70px;">
         <div class="middle">
@@ -121,7 +198,11 @@
         <li class="list-group-item"><p>Date</p><p>1/4/25</p></li>
         <li class="list-group-item"><p><strong>Total</strong></p><p>$18.99</p></li>
     </ul>
-</div>
+  </div>
+
+  <div style="width: 100vw; background-color: black; height: 200px; display: flex; justify-content: center; align-items: center;">
+    <button style="height: 60px; background-color: darkred; color: white; font-family: Verdana, Geneva, Tahoma, sans-serif; border-radius: 10px; padding: 0px 10px;" (click)="deleteAccount()" >Delete Account</button>
+  </div>
 
 
 </div>

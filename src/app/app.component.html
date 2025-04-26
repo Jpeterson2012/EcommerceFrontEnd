@@ -51,9 +51,9 @@
           </ul>
 
           <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a (click)="offcanvas.close('Close click')" href="/profile" class="nav-link" [routerLink]="['profile']">[ {{ username }} ]</a>
-            </li>
+            </li> -->
             <li class="nav-item">
               <button (click)="offcanvas.close('Close click')" class="btn btn-danger" (click)="logout()">LogOut</button>
             </li>
@@ -164,13 +164,19 @@
     <div class="container-fluid">
       <a class="navbar-brand" [routerLink]="['/']"><img class="navicon" src="/assets/booklogo.png">{{ sitename }}</a>
 
+      <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn" id="mobileCart2">
+        <li class="nav-item">
+          <a href="/profile" class="nav-link" id="profileName" [routerLink]="['profile']">[ {{ username }} ]</a>
+        </li>
+      </ul>
+
       <form class="form-inline my-2 my-lg-0" id="mobileCart2">
         <div class="nav-cart">
           <p class="counter">({{ totalItem }})</p>
-          <a class="nav-link" [routerLink]="['cart']"><img src="../assets/cart.png"
+          <a class="nav-link" id="navLinkCart" [routerLink]="['cart']"><img id="mobileCartImg" src="../assets/cart.png"
               style="width: 32px;height: auto;"></a>
         </div>
-      </form>
+      </form>      
 
       <button (click)="openCustomPanelClass(content)" class="navbar-toggler" type="button" data-bs-toggle="collapse"
         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -210,11 +216,11 @@
           </ul>
 
           <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
-            <li class="nav-item">
-              <a href="/profile" class="nav-link" [routerLink]="['profile']">[ {{ username }} ]</a>
+            <li class="nav-item" id="mobileCart1">
+              <a href="/profile" class="nav-link" id="profileName" [routerLink]="['profile']">[ {{ username }} ]</a>
             </li>
             <li class="nav-item">
-              <button class="btn btn-danger" (click)="logout()">LogOut</button>
+              <button class="btn btn-danger" id="logoutButton" (click)="logout()">LogOut</button>
             </li>
           </ul>
           <div style="height: 35px; margin-left: 20px;">

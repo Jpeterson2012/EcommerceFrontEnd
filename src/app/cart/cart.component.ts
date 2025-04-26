@@ -51,6 +51,7 @@ export class CartComponent implements OnInit{
   onRemoveQuantity(book: any){
     this.cartService.removeQuantity(book);
   }
+  
 
   
 }

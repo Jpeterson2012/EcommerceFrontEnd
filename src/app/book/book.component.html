@@ -38,7 +38,7 @@
           </div>
           <div class="card text-white bg-dark" style="width: 20rem; height: 28rem">
             <div class="stage">
-              <div [ngClass]="getFavorites(book.id) ? 'heart is-active' : 'heart'" id="{{'heart' + i}}" (click)="heartAnimation('heart' + i,book.id)"></div>
+              <div [ngClass]="getFavorites(book.id) ? 'heart is-active' : 'heart'" id="{{'heart' + i}}" (click)="heartAnimation('heart' + i,book)"></div>
             </div>
             <div class="zoom">
               <!-- Custom image mapping function -->

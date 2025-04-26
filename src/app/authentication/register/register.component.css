@@ -16,6 +16,8 @@
 }
 label{
     font-size: 20px;    
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
 }
 input{
     border: 2px solid burlywood;

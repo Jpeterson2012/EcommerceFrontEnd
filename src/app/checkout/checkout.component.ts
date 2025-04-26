@@ -15,6 +15,10 @@ export class CheckoutComponent implements OnInit{
   public grandTotal!: string;
 
   ngOnInit(): void {
+    
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    
     this.cartService.getProducts().subscribe(v=>{
       this.products = v;
       this.grandTotal = this.cartService.getTotalPrice(this.products).toFixed(2);

@@ -16,18 +16,33 @@ export class ProfileComponent implements OnInit {
   constructor(private modalService: NgbModal, private cartService: CartService,  private storageService: StorageService, private userService: UserService, private dbService: DBService) { }
 
   books: any = []
+  chunk: any = []
   ngOnInit(): void {
+
     this.currentUser = this.storageService.getUser();    
     let temp = JSON.parse(sessionStorage.getItem("favorites")!)
-    temp = Object.keys(temp)    
+    let temp2: any = {}
+    temp = Object.keys(temp)      
+
     if (temp.length > 0){      
-      this.dbService.getUserBooks(temp).subscribe(v => {console.log(v),this.books = v})
+
+      sessionStorage.getItem("fbooks") && ( this.books = Object.values(JSON.parse(sessionStorage.getItem("fbooks")!)), this.chunk = this.displayWrap() )
+      // this.dbService.getUserBooks(temp).subscribe(v => {
+      //   // console.log(v),
+      //   this.books = v,
+      //   this.books.forEach((a:any)=>{
+      //      Object.assign(a,{quantity:1,total:a.price});
+      //      temp2[a.id] = a
+      //   }),
+
+      //   sessionStorage.setItem("fbooks",JSON.stringify(temp2))
+      //   this.chunk = this.displayWrap()
+      // })
     }
   }
 
   @ContentChild('content') content?: ElementRef;
-      openLg(content: any) {
-        console.log('hello')
+      openLg(content: any) {        
         this.modalService.open(content, { size: 'lg' });
   }
 
@@ -49,26 +64,32 @@ export class ProfileComponent implements OnInit {
     let logged = this.storageService.isLoggedIn()
     let user = this.storageService.getUser()
     let temp = sessionStorage.getItem("favorites") ? JSON.parse(sessionStorage.getItem("favorites")!) : {}      
+    let temp2 = sessionStorage.getItem("fbooks") ? JSON.parse(sessionStorage.getItem("fbooks")!) : {}
 
-    if (temp[bookID]){      
-      delete temp[bookID];
-      logged && this.dbService.deleteFavorites(user.id,bookID).subscribe({
-        error: err => {
-          console.log(err.error.message);
-          temp[bookID] = true
-        }
-      });
+    if (temp[bookID.id]){      
+      delete temp[bookID.id];
+      logged && (delete temp2[bookID.id], this.dbService.deleteFavorites(user.id,bookID.id).subscribe({
+          error: err => {
+            console.log(err.error.message);
+            temp[bookID.id] = true
+            temp2[bookID.id] = bookID
+          }
+        })
+      )
     }
     else{
-      temp[bookID] = true;
-      logged && this.dbService.addFavorites(user.id,bookID).subscribe({
-        error: err => {
-          console.log(err.error.message);
-          delete temp[bookID]
-        }
-      });
+      temp[bookID.id] = true;
+      logged && (temp2[bookID.id] = bookID, this.dbService.addFavorites(user.id,bookID.id).subscribe({
+          error: err => {
+            console.log(err.error.message);
+            delete temp[bookID.id]
+            delete temp2[bookID.id]
+          }
+        })
+      )
     }
     sessionStorage.setItem("favorites",JSON.stringify(temp))
+    sessionStorage.setItem("fbooks", JSON.stringify(temp2))
     document.getElementById(heartID)!.classList.toggle("is-active")        
   }
   //Get favorites from session storage
@@ -79,4 +100,21 @@ export class ProfileComponent implements OnInit {
     if (temp[bookID]) return true
     else return false
   }
+
+  deleteAccount(){
+    window.alert("Sorry, you're not allowed to leave us just yet...")
+  }
+
+  getViewWidth(){
+    return window.innerWidth
+  }
+
+  displayWrap(){
+    const chunkedArray = [];
+    for (let i = 0; i < this.books.length; i += 10) {
+      chunkedArray.push(this.books.slice(i, i + 10));
+    }    
+    return chunkedArray
+  }
+  
 }

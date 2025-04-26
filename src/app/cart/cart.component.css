@@ -63,10 +63,11 @@ tbody tr {
     margin-bottom: 65px;
 }
 .quantity{
-    text-align: center;
+    padding-left: 45px;
 }
 th,td{
     font-family: Verdana, Geneva, Tahoma, sans-serif;    
+    font-weight: bold;
 }
 .tableFooter{
     position: fixed;

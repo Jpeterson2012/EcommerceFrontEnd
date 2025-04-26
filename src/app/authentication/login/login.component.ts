@@ -33,8 +33,26 @@ export class LoginComponent implements OnInit {
     this.authService.login(username, password).subscribe({
       next: data => {
         let temp: any = {}
+        let temp2: any = {}
         this.storageService.saveUser(data);
-        this.dbService.getFavorites(data.id).subscribe(v =>  {console.log(v),v.map((w: any) => temp[w] = true), sessionStorage.setItem("favorites",JSON.stringify(temp)) })
+
+        this.dbService.getFavorites(data.id).subscribe(v =>  {
+          v.map((w: any) => temp[w] = true), 
+          sessionStorage.setItem("favorites",JSON.stringify(temp)),
+          temp = Object.keys(temp),
+          
+          temp.length > 0 &&
+            this.dbService.getUserBooks(temp).subscribe(v => {
+              v.forEach((a:any)=>{
+                Object.assign(a,{quantity:1,total:a.price});
+                temp2[a.id] = a                
+                sessionStorage.setItem("fbooks",JSON.stringify(temp2))
+              })
+            })
+
+        })
+        
+        
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.storageService.getUser().roles;                

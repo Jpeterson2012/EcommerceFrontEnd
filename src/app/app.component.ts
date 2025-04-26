@@ -44,7 +44,7 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
         const user = this.storageService.getUser();
         this.roles = user.roles;
         
-        this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+        this.showAdminBoard = this.roles.includes('ROLE_ADMIN') || this.roles.includes('ROLE_MODERATOR');
         // this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
   
         this.username = user.username;
@@ -60,7 +60,7 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
       if(this.status === false){
 
       if (this.storageService.isLoggedIn() === true)
-      {
+      {        
         this.storageService.getUser().roles.includes('ROLE_ADMIN') && (this.boardName = 'Admin Board')
         this.storageService.getUser().roles.includes('ROLE_MODERATOR') && (this.boardName = 'Mod Board')
         this.isLoggedIn = true;
@@ -124,8 +124,7 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
         this.searchBooks = [],
         this.query = '',        
         this.searched = false,
-        this.totalSearch = 0,
-        console.log(this.selectedOption)
+        this.totalSearch = 0,        
       )
     }
   searchDB(){
@@ -137,7 +136,7 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
         this.searchBooks.forEach((a:any)=>{
           Object.assign(a,{quantity:1});
           })
-         console.log(v),this.searched = true;}
+         this.searched = true;}
     )    
   }
 
@@ -146,8 +145,7 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   closeModal() {      
-    // this.searchBooks = []
-    console.log(this.selectedOption)
+    // this.searchBooks = []    
     this.modalRef.close();
   }
   onImageLoad(evt:any) {

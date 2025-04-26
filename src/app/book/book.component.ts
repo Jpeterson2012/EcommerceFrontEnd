@@ -19,8 +19,7 @@ export class BookComponent {
   @Input() searchText: any
 
   @ContentChild('content') content?: ElementRef;
-    openLg(content: any) {
-      console.log('hello')
+    openLg(content: any) {      
       this.modalService.open(content, { size: 'lg' });
     }
   @ViewChild('details') private detailsComponent: DetailsComponent | undefined
@@ -58,26 +57,32 @@ export class BookComponent {
     let logged = this.storageService.isLoggedIn()
     let user = this.storageService.getUser()
     let temp = sessionStorage.getItem("favorites") ? JSON.parse(sessionStorage.getItem("favorites")!) : {}      
+    let temp2 = sessionStorage.getItem("fbooks") ? JSON.parse(sessionStorage.getItem("fbooks")!) : {}
 
-    if (temp[bookID]){      
-      delete temp[bookID];
-      logged && this.dbService.deleteFavorites(user.id,bookID).subscribe({
-        error: err => {
-          console.log(err.error.message);
-          temp[bookID] = true
-        }
-      });
+    if (temp[bookID.id]){      
+      delete temp[bookID.id];
+      logged && (delete temp2[bookID.id], this.dbService.deleteFavorites(user.id,bookID.id).subscribe({
+          error: err => {
+            console.log(err.error.message);
+            temp[bookID.id] = true
+            temp2[bookID.id] = bookID
+          }
+        })
+      )
     }
     else{
-      temp[bookID] = true;
-      logged && this.dbService.addFavorites(user.id,bookID).subscribe({
-        error: err => {
-          console.log(err.error.message);
-          delete temp[bookID]
-        }
-      });
+      temp[bookID.id] = true;
+      logged && (temp2[bookID.id] = bookID, this.dbService.addFavorites(user.id,bookID.id).subscribe({
+          error: err => {
+            console.log(err.error.message);
+            delete temp[bookID.id]
+            delete temp2[bookID.id]
+          }
+        })
+      )
     }
     sessionStorage.setItem("favorites",JSON.stringify(temp))
+    sessionStorage.setItem("fbooks", JSON.stringify(temp2))
     document.getElementById(heartID)!.classList.toggle("is-active")        
   }
   //Get favorites from session storage

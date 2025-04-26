@@ -9,8 +9,8 @@
                             <th>Title</th>
                             <th>Author</th>
                             <th>Price</th>
-                            <th class="quantity">Quantity</th>
-                            <th>Total</th>
+                            <th style="min-width: 175px !important; max-width: 175px !important" class="quantity">Quantity</th>
+                            <th style="min-width: 175px !important; max-width: 175px !important">Total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -19,8 +19,8 @@
                             <td>{{item.name}}</td>
                             <td>{{ item.auth }}</td>
                             <td>${{ item.price }}</td> 
-                            <td class="plusminus"><button (click)="onRemoveQuantity(item)"><h4 style="font-size: 35px;">-</h4></button><p>{{ item.quantity }}</p><button (click)="onAddQuantity(item)"><h4 style="font-size: 22px;">+</h4></button></td>
-                            <td >${{ totalMult(item) }}</td>
+                            <td style="min-width: 175px !important; max-width: 175px !important" class="plusminus"><button (click)="onRemoveQuantity(item)"><h4 style="font-size: 35px;">-</h4></button><p>{{ item.quantity }}</p><button (click)="onAddQuantity(item)"><h4 style="font-size: 22px;">+</h4></button></td>
+                            <td  style="min-width: 175px !important; max-width: 175px !important">${{ totalMult(item) }}</td>
                             <td>
                                 <button (click)="removeItem(item)" class="btn btn-light"><img src="../../assets/trash.png"></button>
                             </td>
