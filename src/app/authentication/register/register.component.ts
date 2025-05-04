@@ -15,6 +15,10 @@ export class RegisterComponent implements OnInit {
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
+  showPassword = false;
+  togglePW(){
+    this.showPassword = !this.showPassword;
+  }
 
   constructor(private authService: AuthService) { }
 
@@ -24,7 +28,7 @@ export class RegisterComponent implements OnInit {
   onSubmit(): void {
     const { username, email, password } = this.form;
 
-    this.authService.register(username, email, password).subscribe({
+    this.authService.register(username.trim(), email.trim(), password.trim()).subscribe({
       next: data => {
         console.log(data);
         this.isSuccessful = true;

@@ -17,6 +17,10 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
+  showPassword = false;
+  togglePW(){
+    this.showPassword = !this.showPassword;
+  }
 
   constructor(private authService: AuthService, private storageService: StorageService, private dbService: DBService) { }
 
@@ -30,7 +34,7 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     const { username, password } = this.form;
 
-    this.authService.login(username, password).subscribe({
+    this.authService.login(username.trim(), password.trim()).subscribe({
       next: data => {
         let temp: any = {}
         let temp2: any = {}

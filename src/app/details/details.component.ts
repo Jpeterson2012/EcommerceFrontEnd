@@ -33,19 +33,31 @@ export class DetailsComponent implements OnInit {
     let temp: any
 
     bookMetaData.subscribe(v => {temp = v})        
+    if (temp.openLibrary === "No description found"){      
+      this.bookLink = temp.google.totalItems = 'Sorry, No Description Found'
+      this.bookDes = temp.google.totalItems = 'Sorry, No Description Found'
+    }
+    else{
     this.bookLink2 = temp.openLibrary.key === undefined ? '' : "https://openlibrary.org/" + temp.openLibrary.key
     this.bookLink = temp.google.totalItems === 0 ? '' : temp.google.items[0]!.volumeInfo.canonicalVolumeLink
     this.bookDes = temp.google.totalItems === 0 ? 'Sorry, No Description Found' :temp.google.items[0]!.volumeInfo.description
+    }
 
     //this.modalRef.result.then()
 
   }
   
   async close(){
+    this.bookDes = ''
+    this.bookLink = ''
+    this.bookLink2 = ''
     this.modalRef!.close()
   }
 
   async dismiss(){
+    this.bookDes = ''
+    this.bookLink = ''
+    this.bookLink2 = ''
     this.modalRef!.dismiss()
   }
 

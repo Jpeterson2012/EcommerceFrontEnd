@@ -47,7 +47,10 @@ export class DBService{
           const data2 = await resp2.json()
           return {"google": data, "openLibrary": data2}
         }
-        catch (error) {console.error(error)}
+        catch (error) {
+            console.error(error)
+            return {"google": "No description found", "openLibrary": "No description found"}
+        }
       }
     
     //https://openlibrary.org/isbn/01951534481.json
