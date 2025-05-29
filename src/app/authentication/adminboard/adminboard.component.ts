@@ -192,6 +192,11 @@ export class AdminBoardComponent implements OnInit {
     this.authService.updateBook(this.idNum, isbn, name, auth, year, publisher, image, price, qty).subscribe({
       next: data => {
         // console.log(data);        
+        let temp = sessionStorage.getItem("fbooks")! ? JSON.parse(sessionStorage.getItem("fbooks")!) : null;
+        temp ? temp[this.idNum] = {id: this.idNum, ...this.form2} : null;
+        console.log(temp)
+        sessionStorage.setItem("fbooks", JSON.stringify(temp));
+
         this.successfulUpdate = true;
         this.notsuccessfulUpdate = false;
         f.resetForm()

@@ -34,9 +34,10 @@ export class DBService{
         return this.http.get(environment.apiURL + 'books/'+id);
     }
 
-    searchBooks(type: string, query: string): Observable<any>{
+    searchBooks(type: string, query: string, page: number): Observable<any>{
         let params = new HttpParams()        
         .set('query', query)
+        .set('page', page)        
         return this.http.get(environment.apiURL + 'books/search/' +type, {params});
     }
     async fetchDesc(isbn: string){

@@ -1,3 +1,7 @@
+<ng-template #bookLoader>
+  <app-loader></app-loader>
+</ng-template>
+
 <ng-template #details>
     <div class="modal-header">
       <h3 class="modal-title">{{ book.name }}</h3>
@@ -9,7 +13,7 @@
         <h3>{{book.auth}}</h3>
         <h3>ISBN: {{book.isbn}}</h3>
       </div>
-      <div class="descContainer">
+      <div class="descContainer" *ngIf="bookLink2 !== ''; else bookLoader">
         <a [href]="bookLink2" target=”_blank”><p>{{bookLink2}}</p></a>
         <a [href]="bookLink" target=”_blank”><p>{{bookLink}}</p></a>
         <hr style="color: burlywood; border: 2px solid;">

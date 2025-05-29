@@ -108,6 +108,8 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
   searchBooks: any[] = []
   searched = false;
   totalSearch = 0
+  page = 0  
+  current = {}
 
   selectedOption = '';  
   options = [
@@ -125,19 +127,30 @@ export class AppComponent implements OnInit, DoCheck, OnDestroy {
         this.query = '',        
         this.searched = false,
         this.totalSearch = 0,        
+        this.page = 0,        
       )
     }
+  goFunction(){
+    this.searched = false
+    this.totalSearch = 0
+    this.page = 0
+    this.searchBooks = []
+    this.searchDB()
+  }
   searchDB(){
+    
     // console.log(`${this.selectedOption}, ${this.query}`)
     this.dbService.getTotalSearch(this.selectedOption, this.query).subscribe(v => {this.totalSearch = v})
     
-    this.dbService.searchBooks(this.selectedOption,this.query).subscribe(
-      v => {this.searchBooks = v,
+    this.dbService.searchBooks(this.selectedOption,this.query,this.page).subscribe(
+      v => {this.searchBooks = [...this.searchBooks, ...v],
         this.searchBooks.forEach((a:any)=>{
           Object.assign(a,{quantity:1});
           })
          this.searched = true;}
-    )    
+    )
+    
+    this.page += 20        
   }
 
   addToCart(item: any){    
